@@ -3,7 +3,6 @@ import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { AppConfig } from '../utils/AppConfig';
 import { addTrailingSlash } from '../utils/Url';
 
 type IMetaProps = {
@@ -15,6 +14,7 @@ type IMetaProps = {
     date: string;
     modified_date: string;
   };
+  config: Record<string, string>;
 };
 
 const Meta = (props: IMetaProps) => {
@@ -53,34 +53,38 @@ const Meta = (props: IMetaProps) => {
           href={`${router.basePath}/favicon.ico`}
           key="favicon"
         />
-        <title>{`${props.title} | ${AppConfig.site_name}`}</title>
+        <title>{`${props.title} | ${props.config.site_name}`}</title>
         <meta
           name="description"
           content={
-            props.description ? props.description : AppConfig.description
+            props.description ? props.description : props.config.description
           }
           key="description"
         />
-        <meta name="author" content={AppConfig.author} key="author" />
+        <meta name="author" content={props.config.author} key="author" />
         {props.canonical && (
           <link rel="canonical" href={props.canonical} key="canonical" />
         )}
         <meta
           property="og:title"
-          content={`${props.title} | ${AppConfig.site_name}`}
+          content={`${props.title} | ${props.config.site_name}`}
           key="og:title"
         />
         <meta
           property="og:description"
           content={
-            props.description ? props.description : AppConfig.description
+            props.description ? props.description : props.config.description
           }
           key="og:description"
         />
-        <meta property="og:locale" content={AppConfig.locale} key="og:locale" />
+        <meta
+          property="og:locale"
+          content={props.config.locale}
+          key="og:locale"
+        />
         <meta
           property="og:site_name"
-          content={AppConfig.site_name}
+          content={props.config.site_name}
           key="og:site_name"
         />
         {props.post && (
@@ -88,7 +92,7 @@ const Meta = (props: IMetaProps) => {
             <meta property="og:type" content="article" key="og:type" />
             <meta
               property="og:image"
-              content={`${AppConfig.url}${router.basePath}${props.post.image}`}
+              content={`${props.config.url}${router.basePath}${props.post.image}`}
               key="og:image"
             />
             <meta
@@ -113,35 +117,37 @@ const Meta = (props: IMetaProps) => {
                 __html: `
           {
             "description": "${
-              props.description ? props.description : AppConfig.description
+              props.description ? props.description : props.config.description
             }",
             "author": {
               "@type": "Person",
-              "name": "${AppConfig.author}"
+              "name": "${props.config.author}"
             },
             "@type": "BlogPosting",
-            "url": "${AppConfig.url}${router.basePath}${addTrailingSlash(
+            "url": "${props.config.url}${router.basePath}${addTrailingSlash(
                   router.asPath
                 )}",
             "publisher": {
               "@type": "Organization",
               "logo": {
                 "@type": "ImageObject",
-                "url": "${AppConfig.url}${
+                "url": "${props.config.url}${
                   router.basePath
                 }/assets/images/logo.png"
               },
-              "name": "${AppConfig.author}"
+              "name": "${props.config.author}"
             },
-            "headline": "${props.title} | ${AppConfig.site_name}",
-            "image": ["${AppConfig.url}${router.basePath}${props.post.image}"],
+            "headline": "${props.title} | ${props.config.site_name}",
+            "image": ["${props.config.url}${router.basePath}${
+                  props.post.image
+                }"],
             "datePublished": "${new Date(props.post.date).toISOString()}",
             "dateModified": "${new Date(
               props.post.modified_date
             ).toISOString()}",
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "${AppConfig.url}${router.basePath}${addTrailingSlash(
+              "@id": "${props.config.url}${router.basePath}${addTrailingSlash(
                   router.asPath
                 )}"
             },

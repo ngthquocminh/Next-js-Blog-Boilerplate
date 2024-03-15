@@ -3,6 +3,12 @@ import { join } from 'path';
 
 import matter from 'gray-matter';
 
+export function getDataConfig() {
+  const configDir = join(process.cwd(), '_data/config.json');
+  const file = fs.readFileSync(configDir, 'utf8');
+  return JSON.parse(file);
+}
+
 const postsDirectory = join(process.cwd(), '_posts');
 
 export type PostItems = {

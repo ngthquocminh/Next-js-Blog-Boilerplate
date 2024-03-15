@@ -9,6 +9,7 @@ import { PostItems } from '../utils/Content';
 export type IBlogGalleryProps = {
   posts: PostItems[];
   pagination: IPaginationProps;
+  dataConfig: Record<string, string>;
 };
 
 const BlogGallery = (props: IBlogGalleryProps) => (
