@@ -1,8 +1,7 @@
 import React from 'react';
-
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-
+import { IAppConfig } from '../utils/Content';
 import { addTrailingSlash } from '../utils/Url';
 
 type IMetaProps = {
@@ -14,7 +13,7 @@ type IMetaProps = {
     date: string;
     modified_date: string;
   };
-  config: Record<string, string>;
+  config: IAppConfig;
 };
 
 const Meta = (props: IMetaProps) => {
@@ -53,7 +52,7 @@ const Meta = (props: IMetaProps) => {
           href={`${router.basePath}/favicon.ico`}
           key="favicon"
         />
-        <title>{`${props.title} | ${props.config.site_name}`}</title>
+        <title>{`${props.config.title} | ${props.config.site_name}`}</title>
         <meta
           name="description"
           content={
@@ -162,5 +161,13 @@ const Meta = (props: IMetaProps) => {
     </>
   );
 };
+
+
+// export const getStaticProps: GetStaticProps<IAppConfig> = async () => {
+//   const ccfig = getDataConfig();
+//   return {
+//     ccfig
+//   }
+// }
 
 export { Meta };

@@ -10,11 +10,11 @@ export type IPaginationProps = {
 };
 
 const Pagination = (props: IPaginationProps) => (
-  <div className="text-sm flex justify-between">
+  <div className="my-20 max-w-screen-lg mx-auto text-sm flex justify-between">
     {props.previous && (
-      <div>
+      <div className="text-left ml-auto bg-blue-600">
         <Link href={convertUrlToLinkHref(props.previous)} as={props.previous}>
-          <a>← Newer Posts</a>
+          <a className='text-white bg-blue-600 px-4 py-3 rounded'>← Newer Posts</a>
         </Link>
       </div>
     )}
@@ -22,7 +22,7 @@ const Pagination = (props: IPaginationProps) => (
     {props.next && (
       <div className="text-right ml-auto">
         <Link href={convertUrlToLinkHref(props.next)} as={props.next}>
-          <a>Older Posts →</a>
+          <a className='text-white bg-blue-600 px-4 py-3 rounded'>Older Posts →</a>
         </Link>
       </div>
     )}

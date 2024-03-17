@@ -6,8 +6,7 @@ import { BlogGallery, IBlogGalleryProps } from '../blog/BlogGallery';
 import { Meta } from '../layout/Meta';
 import { IPaginationProps } from '../pagination/Pagination';
 import { Main } from '../templates/Main';
-import { AppConfig } from '../utils/AppConfig';
-import { getAllPosts } from '../utils/Content';
+import { getAllPosts, getDataConfig } from '../utils/Content';
 import { convertTo2D } from '../utils/Pagination';
 
 type IPageUrl = {
@@ -15,15 +14,15 @@ type IPageUrl = {
 };
 
 const PaginatePosts = (props: IBlogGalleryProps) => (
-  <Main meta={<Meta title="Lorem ipsum" description="Lorem ipsum" />}>
-    <BlogGallery posts={props.posts} pagination={props.pagination} />
+  <Main config={props.config} meta={<Meta title="Lorem ipsum" description="Lorem ipsum" config={props.config}/>}>
+    <BlogGallery posts={props.posts} pagination={props.pagination} config={props.config}/>
   </Main>
 );
 
 export const getStaticPaths: GetStaticPaths<IPageUrl> = async () => {
   const posts = getAllPosts(['slug']);
-
-  const pages = convertTo2D(posts, AppConfig.pagination_size);
+  const config = getDataConfig();
+  const pages = convertTo2D(posts, config.pagination_size);
 
   return {
     paths: pages.slice(1).map((_, index) => ({
@@ -43,8 +42,8 @@ export const getStaticProps: GetStaticProps<
   IPageUrl
 > = async ({ params }) => {
   const posts = getAllPosts(['title', 'date', 'slug']);
-
-  const pages = convertTo2D(posts, AppConfig.pagination_size);
+  const config = getDataConfig();
+  const pages = convertTo2D(posts, config.pagination_size);
   const currentPage = Number(params!.page.replace('page', ''));
   const currentIndex = currentPage - 1;
 
@@ -64,6 +63,7 @@ export const getStaticProps: GetStaticProps<
     props: {
       posts: pages[currentIndex],
       pagination,
+      config
     },
   };
 };

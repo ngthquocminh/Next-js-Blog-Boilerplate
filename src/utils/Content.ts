@@ -1,12 +1,24 @@
 import fs from 'fs';
 import { join } from 'path';
-
 import matter from 'gray-matter';
 
-export function getDataConfig() {
+export interface IAppConfig {
+  site_name: string,
+  header_tile: string,
+  caption: string;
+  title: string,
+  description: string,
+  url: string,
+  locale: string,
+  author: string,
+  pagination_size: number
+}
+
+export function getDataConfig(): IAppConfig {
   const configDir = join(process.cwd(), '_data/config.json');
   const file = fs.readFileSync(configDir, 'utf8');
-  return JSON.parse(file);
+  const cfg_dict = JSON.parse(file)
+  return cfg_dict;
 }
 
 const postsDirectory = join(process.cwd(), '_posts');

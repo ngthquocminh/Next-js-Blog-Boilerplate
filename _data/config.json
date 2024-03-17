@@ -1,7 +1,9 @@
 {
-  "site_name": "Starter",
-  "title": "Next.js Boilerplate XsX",
-  "description": "Hello, Starter code for your Next.js blog Boilerplate with Tailwind CSS",
+  "site_name": "TN7 Solutions",
+  "caption": "Giải pháp định cư Canada & Hoa Kỳ",
+  "header_tile": "TN7 Solutions - Giải pháp định cư Canada & Hoa Kỳ",
+  "title": "Giải pháp định cư Canada & Hoa Kỳ qua du học hoặc đầu tư",
+  "description": "Những chuyên gia, luật sư hàng đầu về di trú sẽ đánh giá hồ sơ của bạn thật chi tiết và đưa ra những giải pháp tốt nhất, hiệu quả nhất cả về thời gian và tài chính.",
   "url": "https://example.com",
   "locale": "en",
   "author": "Anonymous",
