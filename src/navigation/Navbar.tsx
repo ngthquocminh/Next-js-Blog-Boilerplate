@@ -1,9 +1,6 @@
 import React from "react";
 
-type INavbarProps = {
-};
-
-const Navbar = (props: INavbarProps) => (
+const Navbar = () => (
     <header className="relative top-nav border-b flex flex-row items-center justify-center w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out bg-white py-4">
       <div className="h-10 shrink-0 ml-8 md:absolute md:left-4 md:top-1/2 md:-translate-y-2/4 flex items-center">
         <a className="block" aria-label="Cruip" href="/">
