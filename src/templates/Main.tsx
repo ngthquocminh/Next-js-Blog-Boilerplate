@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import Link from 'next/link';
 import { IAppConfig } from '../utils/Content';
 import { Navbar } from '../navigation/Navbar';
 
