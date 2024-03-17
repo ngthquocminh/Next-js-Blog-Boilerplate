@@ -1,5 +1,4 @@
-import { title } from "process";
-import React, { ReactNode } from "react";
+import React from "react";
 
 type INavbarProps = {
 };
