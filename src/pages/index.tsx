@@ -9,7 +9,6 @@ import Liberty from "../svg/Liberty";
 import Canada from "../svg/Canada";
 import { format } from "date-fns";
 import Link from "next/link";
-import { title } from "process";
 
 interface IhomeProps {
   config: IAppConfig;
