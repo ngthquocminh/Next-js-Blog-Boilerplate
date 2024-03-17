@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { GetStaticProps } from 'next';
+
 import { BlogGallery, IBlogGalleryProps } from '../blog/BlogGallery';
 import { Meta } from '../layout/Meta';
 import { IPaginationProps } from '../pagination/Pagination';
@@ -39,7 +41,7 @@ export const getStaticProps: GetStaticProps<IBlogGalleryProps> = async () => {
     props: {
       posts: posts.slice(0, config.pagination_size),
       pagination,
-      config: config,
+      config,
     },
   };
 };

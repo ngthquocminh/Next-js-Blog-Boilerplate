@@ -6,7 +6,12 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { Content } from '../../content/Content';
 import { Meta } from '../../layout/Meta';
 import { Main } from '../../templates/Main';
-import { IAppConfig, getAllPosts, getDataConfig, getPostBySlug } from '../../utils/Content';
+import {
+  IAppConfig,
+  getAllPosts,
+  getDataConfig,
+  getPostBySlug,
+} from '../../utils/Content';
 import { markdownToHtml } from '../../utils/Markdown';
 
 type IPostUrl = {
@@ -39,7 +44,7 @@ const DisplayPost = (props: IPostProps) => (
       />
     }
   >
-    <div className='max-w-screen-lg mx-auto pt-20 pb-36'>
+    <div className="max-w-screen-lg mx-auto pt-20 pb-36">
       <h1 className="text-center font-bold text-3xl text-gray-900">
         {props.title}
       </h1>
@@ -91,7 +96,7 @@ export const getStaticProps: GetStaticProps<IPostProps, IPostUrl> = async ({
       modified_date: post.modified_date,
       image: post.image,
       content,
-      config
+      config,
     },
   };
 };

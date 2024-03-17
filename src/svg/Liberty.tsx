@@ -1,5 +1,6 @@
-import * as React from "react"
-const Liberty = (props:any) => (
+import * as React from 'react';
+
+const Liberty = (props: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     id="Layer_2"
@@ -8,7 +9,7 @@ const Liberty = (props:any) => (
     {...props}
   >
     <defs>
-      <style>{".cls-2{fill:#c2d3e2}.cls-4{fill:#466d71}"}</style>
+      <style>{'.cls-2{fill:#c2d3e2}.cls-4{fill:#466d71}'}</style>
     </defs>
     <g id="Background">
       <path
@@ -51,7 +52,7 @@ const Liberty = (props:any) => (
       <path
         d="M4.83 9.14C2 4.86 5.86 5.08 7.81 2.07 8.11.72 7.12.22 7.27.08c4.88-1.06 6.4 8.15 2.44 9.06H4.82Z"
         style={{
-          fill: "#cd6c00",
+          fill: '#cd6c00',
         }}
       />
       <path
@@ -69,7 +70,7 @@ const Liberty = (props:any) => (
       <path
         d="M18.4 65.26c3.8 2.57 8.9 11.49 13.47 14.67 2.4 1.08 5.72-1.08 7.54-.75 1.82.33 5.96 1.57 7.79 5.38 1.34 5.89 12.58 72.53 6.63 72.97 0 1.08.91 19.96.58 20.29-.33.33-2.07.83-2.07 1.16s1.82 17.15 1.08 17.15H7.77c6.47-11.1 3.42-15.82 3.81-30.56 1.55-12.96 2.73-11.92 1.83-24.35-.15-4.13-2.85-5.8-2.9-9.86-.06-3.85 2.51-10.15 2.73-11.68.24-1.64-4.43-.04-4.64-4.14-.33-6.38 5.13-12.38 5.24-15.15.27-6.51-4.15-4.83-4.66-7.38.85-7.07 3.29-12.33-2.07-17.97l11.29-9.78Z"
         style={{
-          fill: "#a6bcc5",
+          fill: '#a6bcc5',
         }}
       />
       <path
@@ -134,5 +135,5 @@ const Liberty = (props:any) => (
       />
     </g>
   </svg>
-)
-export default Liberty
+);
+export default Liberty;

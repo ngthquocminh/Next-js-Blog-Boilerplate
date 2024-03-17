@@ -14,7 +14,9 @@ const Pagination = (props: IPaginationProps) => (
     {props.previous && (
       <div className="text-left ml-auto bg-blue-600">
         <Link href={convertUrlToLinkHref(props.previous)} as={props.previous}>
-          <a className='text-white bg-blue-600 px-4 py-3 rounded'>← Newer Posts</a>
+          <a className="text-white bg-blue-600 px-4 py-3 rounded">
+            ← Newer Posts
+          </a>
         </Link>
       </div>
     )}
@@ -22,7 +24,9 @@ const Pagination = (props: IPaginationProps) => (
     {props.next && (
       <div className="text-right ml-auto">
         <Link href={convertUrlToLinkHref(props.next)} as={props.next}>
-          <a className='text-white bg-blue-600 px-4 py-3 rounded'>Older Posts →</a>
+          <a className="text-white bg-blue-600 px-4 py-3 rounded">
+            Older Posts →
+          </a>
         </Link>
       </div>
     )}

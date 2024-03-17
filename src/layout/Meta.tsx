@@ -1,6 +1,8 @@
 import React from 'react';
+
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+
 import { IAppConfig } from '../utils/Content';
 import { addTrailingSlash } from '../utils/Url';
 
@@ -161,7 +163,6 @@ const Meta = (props: IMetaProps) => {
     </>
   );
 };
-
 
 // export const getStaticProps: GetStaticProps<IAppConfig> = async () => {
 //   const ccfig = getDataConfig();

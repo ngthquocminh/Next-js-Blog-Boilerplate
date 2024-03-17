@@ -25,6 +25,7 @@ const BlogGallery = (props: IBlogGalleryProps) => (
               role="presentation"
               className="object-cover w-full rounded h-44 dark:bg-gray-500"
               src="https://source.unsplash.com/random/480x360?1"
+              alt="blog"
             />
             <div className="p-6 space-y-2">
               <h3 className="text-xl font-semibold group-hover:underline group-focus:underline">

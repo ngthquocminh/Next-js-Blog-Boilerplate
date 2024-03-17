@@ -1,16 +1,17 @@
-import * as React from "react"
-const Canada = (props:any) => (
+import * as React from 'react';
+
+const Canada = (props: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 1249.68 1869.44"
     {...props}
   >
     <defs>
-      <style>{".cls-5{fill:#ee3041}"}</style>
+      <style>{'.cls-5{fill:#ee3041}'}</style>
     </defs>
     <g
       style={{
-        isolation: "isolate",
+        isolation: 'isolate',
       }}
     >
       <g id="Layer_2" data-name="Layer 2">
@@ -18,7 +19,7 @@ const Canada = (props:any) => (
           <path
             d="M255.02 234.48h25.8v1671.09h-25.8z"
             style={{
-              fill: "#808285",
+              fill: '#808285',
             }}
             transform="rotate(-17.78 268.035 1070.308)"
           />
@@ -29,7 +30,7 @@ const Canada = (props:any) => (
           <path
             d="M1034.77 792.6c-186.97 52.52-406.16 4.62-593.13 57.13-70.27-219.03-140.53-438.05-210.79-657.08 186.97-52.51 406.16-4.61 593.13-57.13 70.26 219.02 140.53 438.06 210.79 657.08Z"
             style={{
-              fill: "#fff",
+              fill: '#fff',
             }}
           />
           <path
@@ -39,13 +40,13 @@ const Canada = (props:any) => (
           <path
             d="M232.2 871.68c-67.11-209.2-129.05-356.17-196.17-565.37-6.8 6.98-13.52 14.19-20.09 21.86C86.2 547.19 156.47 766.21 226.73 985.25c273.53-319.65 749.42-8.52 1022.95-328.17-3.15-9.82-6.3-19.66-9.45-29.48C964 910.69 499.15 559.7 232.2 871.68Z"
             style={{
-              fill: "#d1d3d4",
-              mixBlendMode: "multiply",
+              fill: '#d1d3d4',
+              mixBlendMode: 'multiply',
             }}
           />
         </g>
       </g>
     </g>
   </svg>
-)
-export default Canada
+);
+export default Canada;

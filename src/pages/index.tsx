@@ -1,14 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import { Content } from "../content/Content";
-import { Meta } from "../layout/Meta";
-import { Main } from "../templates/Main";
-import { GetStaticProps } from "next";
-import { IAppConfig, getDataConfig } from "../utils/Content";
-import Liberty from "../svg/Liberty";
-import Canada from "../svg/Canada";
-import { format } from "date-fns";
-import Link from "next/link";
+import { format } from 'date-fns';
+import { GetStaticProps } from 'next';
+import Link from 'next/link';
+
+import { Content } from '../content/Content';
+import { Meta } from '../layout/Meta';
+import Canada from '../svg/Canada';
+import Liberty from '../svg/Liberty';
+import { Main } from '../templates/Main';
+import { IAppConfig, getDataConfig } from '../utils/Content';
 
 interface IhomeProps {
   config: IAppConfig;
@@ -48,7 +49,7 @@ const Home = (props: IhomeProps) => (
           </span>
           <br />
           <span className="text-4xl md:text-6xl bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text text-transparent font-extrabold leading-none">
-            Canada & Hoa Kỳ{" "}
+            Canada & Hoa Kỳ{' '}
           </span>
           <br />
           <span className="text-xl md:text-3xl">qua du học hoặc đầu tư</span>
@@ -150,6 +151,7 @@ const Home = (props: IhomeProps) => (
               <img
                 className="my-auto"
                 src="/assets/images/passport-5288914_640.png"
+                alt="TN7 Solutions"
               />
             </div>
           </div>
@@ -572,9 +574,9 @@ const Home = (props: IhomeProps) => (
         </h4>
         <div className="pt-20 max-w-screen-lg mx-auto grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            ["slug-01", "Blog 01 Title", "Feb 2, 2024"],
-            ["slug-02", "Blog 02 Title", "Feb 2, 2024"],
-            ["slug-03", "Blog 03 Title", "Feb 2, 2024"],
+            ['slug-01', 'Blog 01 Title', 'Feb 2, 2024'],
+            ['slug-02', 'Blog 02 Title', 'Feb 2, 2024'],
+            ['slug-03', 'Blog 03 Title', 'Feb 2, 2024'],
           ].map(([slug, title, date]) => (
             <Link href="/posts/[slug]" as={`/posts/${slug}`} key={slug}>
               <a
@@ -583,6 +585,7 @@ const Home = (props: IhomeProps) => (
               >
                 <img
                   role="presentation"
+                  alt="blog"
                   className="object-cover w-full rounded h-44 dark:bg-gray-500"
                   src="https://source.unsplash.com/random/480x360?1"
                 />
@@ -591,7 +594,7 @@ const Home = (props: IhomeProps) => (
                     {title}
                   </h3>
                   <span className="text-xs dark:text-gray-400">
-                    {format(new Date(date), "LLL d, yyyy")}
+                    {format(new Date(date), 'LLL d, yyyy')}
                   </span>
                   <p className="text-base text-gray-700">
                     1Mei ex aliquid eleifend forensibus, quo ad dicta apeirian
