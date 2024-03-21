@@ -4,7 +4,6 @@ import { format } from 'date-fns';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 
-import { Content } from '../content/Content';
 import Booking from '../layout/Booking';
 import { Meta } from '../layout/Meta';
 import Canada from '../svg/Canada';
@@ -28,7 +27,6 @@ const Home = (props: IhomeProps) => {
         />
       }
     >
-      <Content>
         {/* Into */}
         <div className="pt-16 pb-8 relative mt-12 mb-6">
           <div className="absolute left-1/2 -translate-y-1/2 -translate-x-1/2 top-1/2 pointer-events-none -z-1">
@@ -591,7 +589,6 @@ const Home = (props: IhomeProps) => {
             ))}
           </div>
         </div>
-      </Content>
     </Main>
   );
 };
