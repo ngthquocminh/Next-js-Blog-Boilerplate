@@ -5,9 +5,7 @@ type IContentProps = {
 };
 
 const Content = (props: IContentProps) => (
-  <div className="content sun-editor-editable">
-    {props.children}
-  </div>
+  <div className="content sun-editor-editable">{props.children}</div>
 );
 
 export { Content };
