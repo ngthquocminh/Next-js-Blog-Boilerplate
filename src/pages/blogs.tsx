@@ -8,14 +8,16 @@ import { IPaginationProps } from '../pagination/Pagination';
 import { Main } from '../templates/Main';
 import { getAllPosts, getDataConfig } from '../utils/Content';
 
+const pagination_size = 10;
+
 const Blogs = (props: IBlogGalleryProps) => {
   return (
     <Main
       config={props.config}
       meta={
         <Meta
-          title="TN7 Solutions - Giải pháp định cư Canada hoặc Hoa Kỳ qua du học hoặc đầu tư"
-          description={props.config.description}
+          title="Giải pháp định cư Canada hoặc Hoa Kỳ qua du học hoặc đầu tư"
+          description={props.config.header.description}
           config={props.config}
         />
       }
@@ -30,16 +32,16 @@ const Blogs = (props: IBlogGalleryProps) => {
 };
 
 export const getStaticProps: GetStaticProps<IBlogGalleryProps> = async () => {
-  const posts = getAllPosts(['title', 'date', 'slug']);
+  const posts = getAllPosts(['title', 'date', 'slug','image','description']);
   const pagination: IPaginationProps = {};
   const config = getDataConfig();
-  if (posts.length > config.pagination_size) {
+  if (posts.length > pagination_size) {
     pagination.next = '/page2';
   }
 
   return {
     props: {
-      posts: posts.slice(0, config.pagination_size),
+      posts: posts.slice(0, pagination_size),
       pagination,
       config,
     },

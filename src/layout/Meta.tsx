@@ -20,7 +20,7 @@ type IMetaProps = {
 
 const Meta = (props: IMetaProps) => {
   const router = useRouter();
-
+  console.log("{router.basePath}",router.basePath)
   return (
     <>
       <Head>
@@ -54,38 +54,38 @@ const Meta = (props: IMetaProps) => {
           href={`${router.basePath}/favicon.ico`}
           key="favicon"
         />
-        <title>{`${props.config.title} | ${props.config.site_name}`}</title>
+        <title>{`${props.title} | ${props.config.seo.site_name}`}</title>
         <meta
           name="description"
           content={
-            props.description ? props.description : props.config.description
+            props.description ? props.description : props.config.seo.site_description
           }
           key="description"
         />
-        <meta name="author" content={props.config.author} key="author" />
+        <meta name="author" content={props.config.seo.author} key="author" />
         {props.canonical && (
           <link rel="canonical" href={props.canonical} key="canonical" />
         )}
         <meta
           property="og:title"
-          content={`${props.title} | ${props.config.site_name}`}
+          content={`${props.title} | ${props.config.seo.site_name}`}
           key="og:title"
         />
         <meta
           property="og:description"
           content={
-            props.description ? props.description : props.config.description
+            props.description ? props.description : props.config.seo.site_description
           }
           key="og:description"
         />
         <meta
           property="og:locale"
-          content={props.config.locale}
+          content={'vi'}
           key="og:locale"
         />
         <meta
           property="og:site_name"
-          content={props.config.site_name}
+          content={props.config.seo.site_name}
           key="og:site_name"
         />
         {props.post && (
@@ -93,7 +93,7 @@ const Meta = (props: IMetaProps) => {
             <meta property="og:type" content="article" key="og:type" />
             <meta
               property="og:image"
-              content={`${props.config.url}${router.basePath}${props.post.image}`}
+              content={`${props.config.seo.url}${router.basePath}${props.post.image}`}
               key="og:image"
             />
             <meta
@@ -118,28 +118,28 @@ const Meta = (props: IMetaProps) => {
                 __html: `
           {
             "description": "${
-              props.description ? props.description : props.config.description
+              props.description ? props.description : props.config.header.description
             }",
             "author": {
               "@type": "Person",
-              "name": "${props.config.author}"
+              "name": "${props.config.seo.author}"
             },
             "@type": "BlogPosting",
-            "url": "${props.config.url}${router.basePath}${addTrailingSlash(
+            "url": "${props.config.seo.url}${router.basePath}${addTrailingSlash(
                   router.asPath
                 )}",
             "publisher": {
               "@type": "Organization",
               "logo": {
                 "@type": "ImageObject",
-                "url": "${props.config.url}${
+                "url": "${props.config.seo.url}${
                   router.basePath
                 }/assets/images/logo.png"
               },
-              "name": "${props.config.author}"
+              "name": "${props.config.seo.author}"
             },
-            "headline": "${props.title} | ${props.config.site_name}",
-            "image": ["${props.config.url}${router.basePath}${
+            "headline": "${props.title} | ${props.config.seo.site_name}",
+            "image": ["${props.config.seo.url}${router.basePath}${
                   props.post.image
                 }"],
             "datePublished": "${new Date(props.post.date).toISOString()}",
@@ -148,7 +148,7 @@ const Meta = (props: IMetaProps) => {
             ).toISOString()}",
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "${props.config.url}${router.basePath}${addTrailingSlash(
+              "@id": "${props.config.seo.url}${router.basePath}${addTrailingSlash(
                   router.asPath
                 )}"
             },

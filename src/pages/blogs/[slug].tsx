@@ -85,7 +85,7 @@ export const getStaticProps: GetStaticProps<IPostProps, IPostUrl> = async ({
     'content',
     'slug',
   ]);
-  const content = await markdownToHtml(post.content || '');
+  const content = post.content; //await markdownToHtml(post.content || '');
   const config = getDataConfig();
 
   return {

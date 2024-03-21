@@ -1,12 +1,16 @@
 import React from 'react';
 
 import Link from 'next/link';
+import { IAppConfig } from '../utils/Content';
 
-const Navbar = () => (
-  <header className="relative top-nav border-b flex flex-row items-center justify-center w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out bg-white py-4">
+interface INavbarProps {
+  config: IAppConfig
+}
+const Navbar = (props:INavbarProps) => (
+  <header className="fixed top-nav shadow-lg flex flex-row items-center justify-center w-full z-30 transition duration-300 ease-in-out bg-blue-600 py-4 md:py-6">
     <div className="h-10 shrink-0 ml-8 md:absolute md:left-4 md:top-1/2 md:-translate-y-2/4 flex items-center">
       <Link className="block" aria-label="Cruip" href="/">
-        <img src="/logo_dark.png" className="md:h-8 h-10" alt="TN7 Solutions" />
+        <a><img src="/logo_light.png" className="md:h-8 h-10" alt="TN7 Solutions" /></a>
       </Link>
     </div>
     <input id="menu-toggle" className="hidden" type="checkbox" />
@@ -20,34 +24,25 @@ const Navbar = () => (
       ></div>
     </label>
 
-    <ul className="menu list-none md:max-w-sm w-full text-center">
-      {[
-        ['Trang chủ', '/'],
-        ['Câu chuyện thành công', '/#'],
-        ['Du học', '/#'],
-        ['Định cư', '/#'],
-        ['Hỏi đáp', '/#'],
-        ['Tư vấn', '/#'],
-        ['Học bổng & Khuyến mãi', '/#'],
-        ['Bài viết', '/blogs'],
-      ].map(([title, url]) => (
+    <ul className="menu list-none md:mx-80 w-full text-center shadow-lg md:shadow-none">
+      { props.config.navbar.links.map(({name,url}) => (
         <li
-          key={title}
-          className="mx-1 whitespace-nowrap md:inline-block overflow-hidden md:text-xs text:sm"
+          key={name}
+          className="mx-2 whitespace-nowrap md:inline-block overflow-hidden md:text-xs font-bold text-base"
         >
-          <a href={url} className="text-gray-800 w-full">
-            {title}
+          <a href={url} className="text-gray-600 md:text-white w-full">
+            {name}
           </a>
         </li>
-      ))}
+      )) }
     </ul>
-    <div className="z-10 w0-hidden md:absolute md:right-4 md:top-1/2 md:-translate-y-2/4 text-sm font-bold md:flex flex-row">
+    <div className="z-10 w0-hidden md:absolute md:right-4 md:top-1/2 md:-translate-y-2/4 text-xs font-bold md:flex flex-row">
       <a
         href="tel:0763771191"
-        className="hover:no-underline text-white bg-blue-600 p-3 flex flex-row items-center gap-2 rounded-tl-full rounded-bl-full pl-5"
+        className="hover:no-underline text-white bg-blue-600 border-l border-t border-b border-white p-2 flex flex-row items-center gap-2 rounded-tl-full rounded-bl-full pl-4"
       >
         <svg
-          className="w-4 h-4"
+          className="w-3 h-3"
           fill="rgba(255,255,255,1)"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 512 512"
@@ -58,11 +53,11 @@ const Navbar = () => (
       </a>
       <a
         href="#booking"
-        className="hover:cursor-pointer text-white bg-red-400 p-3 flex flex-row items-center gap-2 rounded-tr-full rounded-br-full pr-5"
+        className="hover:cursor-pointer text-white bg-red-400 p-2 flex flex-row items-center gap-2 rounded-tr-full rounded-br-full pr-5 border-red-400"
       >
         <p>Đặt lịch hẹn</p>
         <svg
-          className="w-4 h-4"
+          className="w-3 h-3"
           fill="rgba(255,255,255,1)"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 448 512"

@@ -4,15 +4,42 @@ import { join } from 'path';
 import matter from 'gray-matter';
 
 export interface IAppConfig {
+  seo: IAppConfigSEO
+  header: IAppConfigHeader;
+  contact: IAppConfigContact;
+  footer: IAppConfigFooter;
+  navbar: IAppConfigNavbar;
+}
+export interface  IAppConfigSEO {
   site_name: string;
-  header_tile: string;
-  caption: string;
-  title: string;
-  description: string;
+  site_title: string;
+  site_description: string;
   url: string;
-  locale: string;
   author: string;
   pagination_size: number;
+}
+export interface IAppConfigHeader {
+  title: string;
+  description: string;
+}
+
+export interface IAppConfigLink {
+  name: string;
+  url: string;
+}
+
+export interface IAppConfigFooter {
+  links: Array<IAppConfigLink>;
+}
+
+export interface IAppConfigNavbar {
+  links: Array<IAppConfigLink>;
+}
+
+export interface IAppConfigContact {
+  phone: string;
+  email: string;
+  address: string;
 }
 
 export function getDataConfig(): IAppConfig {
