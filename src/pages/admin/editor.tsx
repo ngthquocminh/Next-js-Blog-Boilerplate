@@ -1,11 +1,13 @@
-import React from 'react'
-import BlogEditor2 from '../../admin/components/BlogEditor2'
+import React from 'react';
 
+import BlogEditor2 from '../../admin/components/BlogEditor2';
 
 const editor = () => {
   return (
-    <div><BlogEditor2></BlogEditor2></div>
-  )
-}
+    <div>
+      <BlogEditor2></BlogEditor2>
+    </div>
+  );
+};
 
-export default editor
+export default editor;

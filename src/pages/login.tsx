@@ -1,11 +1,9 @@
-import React from 'react'
-import Login from '../admin/components/Login'
+import React from 'react';
+
+import Login from '../admin/components/Login';
 
 const login = () => {
+  return <Login></Login>;
+};
 
-  return (
-    <Login></Login>
-  )
-}
-
-export default login
+export default login;

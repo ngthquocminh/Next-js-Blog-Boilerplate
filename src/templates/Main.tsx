@@ -10,14 +10,13 @@ type IMainProps = {
 };
 
 const Main = (props: IMainProps) => {
-
   return (
     <div className="antialiased w-full">
-      <Navbar config={ props.config }></Navbar>
+      <Navbar config={props.config}></Navbar>
       <div className="w-full text-gray-700 px-3 md:px-0">
         {props.meta}
         <div className="mx-auto">
-          <div className="text-xl py-5">{ props.children }</div>
+          <div className="text-xl py-5">{props.children}</div>
         </div>
       </div>
 
@@ -40,26 +39,28 @@ const Main = (props: IMainProps) => {
                 <b>
                   <u>Địa chỉ:</u>
                 </b>{' '}
-                { props.config.contact.address }
+                {props.config.contact.address}
               </p>
               <p className="leading-6">
                 <b>
                   <u>Điện thoại:</u>
                 </b>{' '}
-                { props.config.contact.phone }
+                {props.config.contact.phone}
               </p>
               <p className="leading-6">
                 <b>
                   <u>E-mail:</u>
                 </b>{' '}
-                { props.config.contact.email }
+                {props.config.contact.email}
               </p>
             </div>
             <div className="my-6 text-center md:text-left justify-center flex flex-col">
               <p className="text-lg">Đường dẫn</p>
-              {props.config.footer.links.map(
-                ({name,url}) => (<a key={name} className="leading-6" href={url}>{name}</a>)
-                )}
+              {props.config.footer.links.map(({ name, url }) => (
+                <a key={name} className="leading-6" href={url}>
+                  {name}
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -174,5 +175,5 @@ const Main = (props: IMainProps) => {
       </div>
     </div>
   );
-}
+};
 export { Main };

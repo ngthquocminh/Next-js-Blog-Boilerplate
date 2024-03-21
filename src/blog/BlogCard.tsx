@@ -1,12 +1,15 @@
-import React from 'react'
-import { format } from 'date-fns'
+import React from 'react';
 
-const BlogCard = (props : { title:string; date:string; shortContent:string }) => {
+import { format } from 'date-fns';
+
+const BlogCard = (props: {
+  title: string;
+  date: string;
+  shortContent: string;
+}) => {
   const { title, date, shortContent } = props;
   return (
-    <a
-      className="rounded max-w-sm mx-auto group hover:no-underline focus:no-underline shadow-md duration-300 ease-in-out hover:shadow-xl"
-    >
+    <a className="rounded max-w-sm mx-auto group hover:no-underline focus:no-underline shadow-md duration-300 ease-in-out hover:shadow-xl">
       <img
         role="presentation"
         className="object-cover w-full rounded h-44 dark:bg-gray-500"
@@ -20,14 +23,12 @@ const BlogCard = (props : { title:string; date:string; shortContent:string }) =>
         <span className="text-xs dark:text-gray-400">
           {format(new Date(date), 'LLL d, yyyy')}
         </span>
-        <p className="text-base text-gray-700">
-          { shortContent }
-        </p>
+        <p className="text-base text-gray-700">{shortContent}</p>
       </div>
     </a>
-  )
-}
+  );
+};
 
 // BlogCard.propTypes = {}
 
-export default BlogCard
+export default BlogCard;

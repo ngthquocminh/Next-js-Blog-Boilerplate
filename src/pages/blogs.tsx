@@ -8,7 +8,7 @@ import { IPaginationProps } from '../pagination/Pagination';
 import { Main } from '../templates/Main';
 import { getAllPosts, getDataConfig } from '../utils/Content';
 
-const pagination_size = 10;
+const paginationSize = 10;
 
 const Blogs = (props: IBlogGalleryProps) => {
   return (
@@ -32,16 +32,16 @@ const Blogs = (props: IBlogGalleryProps) => {
 };
 
 export const getStaticProps: GetStaticProps<IBlogGalleryProps> = async () => {
-  const posts = getAllPosts(['title', 'date', 'slug','image','description']);
+  const posts = getAllPosts(['title', 'date', 'slug', 'image', 'description']);
   const pagination: IPaginationProps = {};
   const config = getDataConfig();
-  if (posts.length > pagination_size) {
+  if (posts.length > paginationSize) {
     pagination.next = '/page2';
   }
 
   return {
     props: {
-      posts: posts.slice(0, pagination_size),
+      posts: posts.slice(0, paginationSize),
       pagination,
       config,
     },

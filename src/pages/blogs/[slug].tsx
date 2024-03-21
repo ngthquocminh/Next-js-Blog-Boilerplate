@@ -12,7 +12,6 @@ import {
   getDataConfig,
   getPostBySlug,
 } from '../../utils/Content';
-import { markdownToHtml } from '../../utils/Markdown';
 
 type IPostUrl = {
   slug: string;
@@ -85,7 +84,7 @@ export const getStaticProps: GetStaticProps<IPostProps, IPostUrl> = async ({
     'content',
     'slug',
   ]);
-  const content = post.content; //await markdownToHtml(post.content || '');
+  const { content } = post; // await markdownToHtml(post.content || '');
   const config = getDataConfig();
 
   return {

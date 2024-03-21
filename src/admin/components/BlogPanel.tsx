@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const BlogPanel = () => {
-  return (
-    <div>BlogPanel</div>
-  )
-}
+  return <div>BlogPanel</div>;
+};
 
-export default BlogPanel
+export default BlogPanel;

@@ -1,4 +1,4 @@
-export const stringToSlug = (str:string) => {
+export const stringToSlug = (str: string) => {
   return str
     .trim()
     .toLowerCase()

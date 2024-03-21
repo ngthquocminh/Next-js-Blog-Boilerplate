@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
+
 import dynamic from 'next/dynamic';
 import SunEditorCore from 'suneditor/src/lib/core';
+
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import ImageUploader from './ImageUploader';
 
@@ -15,35 +17,38 @@ const BlogEditor2 = (props: any) => {
     editor.current = sunEditor;
   };
 
-  const onImageSelect = (image:any) => {
-
-  }
+  const onImageSelect = (image: any) => {
+    console.log(image, props);
+  };
 
   return (
-    <div className='w-full'>
-      <form className='w-2/3 px-20 py-32'>
-        <div className='mb-6'>
+    <div className="w-full">
+      <form className="w-2/3 px-20 py-32">
+        <div className="mb-6">
           <label
-            htmlFor='title'
-            className='block text-lg font-medium text-gray-800 mb-1'
+            htmlFor="title"
+            className="block text-lg font-medium text-gray-800 mb-1"
           >
             Title
           </label>
           <input
-            type='text'
-            id='title'
-            name='title'
-            className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500'
+            type="text"
+            id="title"
+            name="title"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
             required
           />
         </div>
-        <div className='mb-6'>
-          <ImageUploader lable={"Thumbnail"} onImage={onImageSelect}></ImageUploader>
+        <div className="mb-6">
+          <ImageUploader
+            lable={'Thumbnail'}
+            onImage={onImageSelect}
+          ></ImageUploader>
         </div>
-        <div className='mb-6'>
+        <div className="mb-6">
           <label
-            htmlFor=''
-            className='block text-lg font-medium text-gray-800 mb-1'
+            htmlFor=""
+            className="block text-lg font-medium text-gray-800 mb-1"
           >
             Content
           </label>
@@ -71,7 +76,7 @@ const BlogEditor2 = (props: any) => {
               ],
             }}
             getSunEditorInstance={getSunEditorInstance}
-            height='60vh'
+            height="60vh"
           />
         </div>
       </form>

@@ -1,8 +1,15 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react';
 
-
-const ImageUploader = ({ onImage, lable }: { onImage:(image:any)=>void; lable: string}) => {
-  const [thumbnailImage, setThumbnailImage] = useState<string | ArrayBuffer | null>(null);
+const ImageUploader = ({
+  onImage,
+  lable,
+}: {
+  onImage: (image: any) => void;
+  lable: string;
+}) => {
+  const [thumbnailImage, setThumbnailImage] = useState<
+    string | ArrayBuffer | null
+  >(null);
   const onInputImage = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files?.[0];
@@ -15,41 +22,48 @@ const ImageUploader = ({ onImage, lable }: { onImage:(image:any)=>void; lable: s
         reader.readAsDataURL(file);
       }
     }
-  }
+  };
   return (
-    <div className='flex gap-4'>
+    <div className="flex gap-4">
       <div>
-        <div className='block text-lg font-medium text-gray-800 mb-1'>
-          { lable }
+        <div className="block text-lg font-medium text-gray-800 mb-1">
+          {lable}
         </div>
-        <div className='rounded-md border border-indigo-500 bg-gray-50 p-1 shadow-md w-24'>
+        <div className="rounded-md border border-indigo-500 bg-gray-50 p-1 shadow-md w-24">
           <label
-            htmlFor='upload'
-            className='flex flex-col items-center gap-1 cursor-pointer'
+            htmlFor="upload"
+            className="flex flex-col items-center gap-1 cursor-pointer"
           >
             <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='h-8 w-8 fill-white stroke-indigo-500'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-              strokeWidth='2'
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 fill-white stroke-indigo-500"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
             >
               <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
               />
             </svg>
-            <span className='text-gray-600 text-sm'>Upload file</span>
+            <span className="text-gray-600 text-sm">Upload file</span>
           </label>
-          <input id='upload' type='file' className='hidden' onChange={onInputImage} />
+          <input
+            id="upload"
+            type="file"
+            className="hidden"
+            onChange={onInputImage}
+          />
         </div>
       </div>
-      { thumbnailImage && <img src={thumbnailImage.toString()} className='h-28'/> }
+      {thumbnailImage && (
+        <img src={thumbnailImage.toString()} className="h-28" />
+      )}
     </div>
-  )
-}
+  );
+};
 
-ImageUploader.propTypes = {}
+ImageUploader.propTypes = {};
 
-export default ImageUploader
+export default ImageUploader;

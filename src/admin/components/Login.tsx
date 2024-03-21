@@ -1,19 +1,19 @@
-'use client'
+'use client';
 
-import { useRouter } from "next/router";
-import React, { FormEvent, useState } from "react";
-import Cookies from "universal-cookie";
+import React, { FormEvent, useState } from 'react';
+
+import { useRouter } from 'next/router';
+import Cookies from 'universal-cookie';
 
 const Login = () => {
-
-  const [ loading, setLoading ] = useState(false);
-  const [ status, setStatus ] = useState(0);
-  const [ username, setUsername ] = useState('');
-  const [ password, setPassword ] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(0);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const router = useRouter();
-  
+
   const loginSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+    event.preventDefault();
     setLoading(true);
     // setError(null) // Clear previous errors when a new request starts
 
@@ -21,33 +21,30 @@ const Login = () => {
       const response = await fetch('/api/login', {
         method: 'POST',
         body: JSON.stringify({ username, password }),
-      })
+      });
 
-      setLoading(false)
+      setLoading(false);
 
       if (!response.ok) {
         // throw new Error('Failed to submit the data. Please try again.')
         setStatus(-1);
-      }
-      else {
-        const { success, token } = await response.json()
+      } else {
+        const { success, token } = await response.json();
         if (success) {
-          const cookies = new Cookies()
-          cookies.set("token",token,{path: '/'});
+          const cookies = new Cookies();
+          cookies.set('token', token, { path: '/' });
           setStatus(1);
           // console.log(router);
           if (router.query.next) router.replace(router.query.next.toString());
           else router.replace('/admin');
-        }
-        else setStatus(-1);
+        } else setStatus(-1);
       }
     } catch (error) {
-      setStatus(-1)
+      setStatus(-1);
       // console.error(error)
-    } finally {
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   return (
     <div className="mx-auto mt-12 flex flex-col max-w-md p-6 rounded-md sm:p-10 dark:bg-gray-900 dark:text-gray-100">
@@ -70,38 +67,46 @@ const Login = () => {
               placeholder="username"
               pattern="[a-zA-Z0-9_.]{5,20}"
               className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
-              onChange={e => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div>
-              <label htmlFor="password" className="block mb-2 text-sm">
-                Password
-              </label>
+            <label htmlFor="password" className="block mb-2 text-sm">
+              Password
+            </label>
             <input
               type="password"
               name="password"
               id="password"
               placeholder="*****"
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
             />
           </div>
-          <p
-            className="text-xs dark:text-red-500 h-2"
-          >
-            {  (status < 0) && "Incorrect username or password" }
+          <p className="text-xs dark:text-red-500 h-2">
+            {status < 0 && 'Incorrect username or password'}
           </p>
         </div>
         <div className="space-y-2">
           <div>
-            <label htmlFor="login-submit" className="text-center block w-full px-8 py-3 font-semibold rounded-md dark:bg-blue-400 dark:text-gray-900 flex items-center justify-center gap-2">
-              { loading ? <><div className="h-4 w-4 border-t-transparent border-solid animate-spin rounded-full border-gray-900 border-2"></div>Logging in</> : "Login"}
+            <label
+              htmlFor="login-submit"
+              className="text-center block w-full px-8 py-3 font-semibold rounded-md dark:bg-blue-400 dark:text-gray-900 flex items-center justify-center gap-2"
+            >
+              {loading ? (
+                <>
+                  <div className="h-4 w-4 border-t-transparent border-solid animate-spin rounded-full border-gray-900 border-2"></div>
+                  Logging in
+                </>
+              ) : (
+                'Login'
+              )}
             </label>
             <input
-              id = "login-submit"
+              id="login-submit"
               type="submit"
               hidden
-              disabled={loading==true}
+              disabled={loading === true}
             />
           </div>
           {/* <p className="px-6 text-sm text-center dark:text-gray-400">

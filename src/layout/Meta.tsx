@@ -20,7 +20,7 @@ type IMetaProps = {
 
 const Meta = (props: IMetaProps) => {
   const router = useRouter();
-  console.log("{router.basePath}",router.basePath)
+  console.log('{router.basePath}', router.basePath);
   return (
     <>
       <Head>
@@ -58,7 +58,9 @@ const Meta = (props: IMetaProps) => {
         <meta
           name="description"
           content={
-            props.description ? props.description : props.config.seo.site_description
+            props.description
+              ? props.description
+              : props.config.seo.site_description
           }
           key="description"
         />
@@ -74,15 +76,13 @@ const Meta = (props: IMetaProps) => {
         <meta
           property="og:description"
           content={
-            props.description ? props.description : props.config.seo.site_description
+            props.description
+              ? props.description
+              : props.config.seo.site_description
           }
           key="og:description"
         />
-        <meta
-          property="og:locale"
-          content={'vi'}
-          key="og:locale"
-        />
+        <meta property="og:locale" content={'vi'} key="og:locale" />
         <meta
           property="og:site_name"
           content={props.config.seo.site_name}
@@ -118,7 +118,9 @@ const Meta = (props: IMetaProps) => {
                 __html: `
           {
             "description": "${
-              props.description ? props.description : props.config.header.description
+              props.description
+                ? props.description
+                : props.config.header.description
             }",
             "author": {
               "@type": "Person",
@@ -148,9 +150,9 @@ const Meta = (props: IMetaProps) => {
             ).toISOString()}",
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "${props.config.seo.url}${router.basePath}${addTrailingSlash(
-                  router.asPath
-                )}"
+              "@id": "${props.config.seo.url}${
+                  router.basePath
+                }${addTrailingSlash(router.asPath)}"
             },
             "@context": "http://schema.org"
           }`,

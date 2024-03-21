@@ -5,20 +5,18 @@ import { GetStaticProps } from 'next';
 import Link from 'next/link';
 
 import { Content } from '../content/Content';
+import Booking from '../layout/Booking';
 import { Meta } from '../layout/Meta';
 import Canada from '../svg/Canada';
 import Liberty from '../svg/Liberty';
 import { Main } from '../templates/Main';
 import { IAppConfig, getDataConfig } from '../utils/Content';
-import Booking from '../layout/Booking';
-
 
 interface IhomeProps {
   config: IAppConfig;
 }
 
 const Home = (props: IhomeProps) => {
-
   return (
     <Main
       config={props.config}
@@ -47,16 +45,17 @@ const Home = (props: IhomeProps) => {
             </div>
           </div>
           <h1 className="font-bold text-center text-gray-900">
-            
             <span className="text-3xl md:text-5xl font-extrabold">
-            {props.config.header.title.split("|")[0]}
+              {props.config.header.title.split('|')[0]}
             </span>
             <br />
             <span className="text-4xl md:text-6xl bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text text-transparent font-extrabold leading-none">
-            {props.config.header.title.split("|")[1]}
+              {props.config.header.title.split('|')[1]}
             </span>
             <br />
-            <span className="text-xl md:text-3xl">{props.config.header.title.split("|")[2]}</span>
+            <span className="text-xl md:text-3xl">
+              {props.config.header.title.split('|')[2]}
+            </span>
           </h1>
           <div className="text-xl text-center max-w-lg mx-auto my-10">
             {props.config.header.description}
@@ -76,9 +75,9 @@ const Home = (props: IhomeProps) => {
                   </h3>
                   <p className="text-lg text-gray-600">
                     Ưu tiên tư vấn chọn ngành cho các học viên bởi hệ thống AI
-                    thông minh cua Hoa Kỳ cùng kinh nghiệm của các chuyên gia hàng
-                    đầu để cho ra những giải pháp tối ưu về định cư, du học cho
-                    học viên và gia đình.
+                    thông minh cua Hoa Kỳ cùng kinh nghiệm của các chuyên gia
+                    hàng đầu để cho ra những giải pháp tối ưu về định cư, du học
+                    cho học viên và gia đình.
                   </p>
                 </div>
                 <div className="mb-8 md:mb-0">
@@ -88,8 +87,8 @@ const Home = (props: IhomeProps) => {
                         Nhanh
                       </div>
                       <div className="text-gray-600 text-base">
-                        Hệ thống đánh giá nhanh nhu cầu, khả năng của từng trường
-                        hợp
+                        Hệ thống đánh giá nhanh nhu cầu, khả năng của từng
+                        trường hợp
                       </div>
                     </div>
                     <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
@@ -108,8 +107,9 @@ const Home = (props: IhomeProps) => {
                         Hiệu quả
                       </div>
                       <div className="text-gray-600 text-base">
-                        Từ kết quả đánh giá, đội ngũ giáo viên và luật sư có kinh
-                        nghiệm lâu năm sẽ tư vấn những giải pháp phù hợp nhất
+                        Từ kết quả đánh giá, đội ngũ giáo viên và luật sư có
+                        kinh nghiệm lâu năm sẽ tư vấn những giải pháp phù hợp
+                        nhất
                       </div>
                     </div>
                     <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
@@ -253,7 +253,8 @@ const Home = (props: IhomeProps) => {
                 Đội ngũ luật sư
               </h4>
               <p className="text-gray-600 text-center h-24 text-base">
-                Bạn sẽ được hỗ trợ bởi đội ngũ luận sư di trú đến từ Mỹ và Canada
+                Bạn sẽ được hỗ trợ bởi đội ngũ luận sư di trú đến từ Mỹ và
+                Canada
               </p>
             </div>
             <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
@@ -444,8 +445,8 @@ const Home = (props: IhomeProps) => {
                 Xây dựng lộ trình du học Mỹ
               </h4>
               <p className="text-gray-600 text-center h-32 text-base">
-                Hướng dẫn từng bước cách chuẩn bị lộ trình săn học bổng du học Mỹ
-                hiệu quả và chuẩn xác nhất từ các chuyên gia, cố vấn từ Mỹ.
+                Hướng dẫn từng bước cách chuẩn bị lộ trình săn học bổng du học
+                Mỹ hiệu quả và chuẩn xác nhất từ các chuyên gia, cố vấn từ Mỹ.
               </p>
             </div>
             <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-lg border duration-300 ease-in-out">
@@ -483,9 +484,9 @@ const Home = (props: IhomeProps) => {
                 Tham gia hoạt động ngoại khoá độc quyền
               </h4>
               <p className="text-gray-600 text-center h-32 text-base">
-                Học sinh được tham gia các hoạt động ngoại khoá: tình nguyện, khởi
-                nghiệp, lập trình,... giúp tạo ấn tượng tốt cho hồ sơ ứng tuyển
-                đại học Mỹ.
+                Học sinh được tham gia các hoạt động ngoại khoá: tình nguyện,
+                khởi nghiệp, lập trình,... giúp tạo ấn tượng tốt cho hồ sơ ứng
+                tuyển đại học Mỹ.
               </p>
             </div>
             <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-lg border duration-300 ease-in-out">
@@ -509,9 +510,9 @@ const Home = (props: IhomeProps) => {
                 Tham gia hoạt động ngoại khoá độc quyền
               </h4>
               <p className="text-gray-600 text-center h-32 text-base">
-                Học sinh được tham gia các hoạt động ngoại khoá: tình nguyện, khởi
-                nghiệp, lập trình,... giúp tạo ấn tượng tốt cho hồ sơ ứng tuyển
-                đại học Mỹ.
+                Học sinh được tham gia các hoạt động ngoại khoá: tình nguyện,
+                khởi nghiệp, lập trình,... giúp tạo ấn tượng tốt cho hồ sơ ứng
+                tuyển đại học Mỹ.
               </p>
             </div>
             <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-lg border duration-300 ease-in-out">
@@ -539,9 +540,9 @@ const Home = (props: IhomeProps) => {
                 Luyện thi chứng chỉ quốc tế
               </h4>
               <p className="text-gray-600 text-center h-32 text-base">
-                Đào tạo các chứng chỉ quốc tế như: IELTS, TOEFL, SAT, ACT, AP,...
-                với đội ngũ giáo viên người bản xứ, tốt nghiệp các trường đại học
-                top đầu Mỹ.
+                Đào tạo các chứng chỉ quốc tế như: IELTS, TOEFL, SAT, ACT,
+                AP,... với đội ngũ giáo viên người bản xứ, tốt nghiệp các trường
+                đại học top đầu Mỹ.
               </p>
             </div>
           </div>
@@ -580,9 +581,9 @@ const Home = (props: IhomeProps) => {
                     </span>
                     <p className="text-base text-gray-700">
                       1Mei ex aliquid eleifend forensibus, quo ad dicta apeirian
-                      neglegentur, ex has tantas percipit perfecto. At per tempor
-                      albucius perfecto, ei probatus consulatu patrioque mea, ei
-                      vocent delicata indoctum pri.
+                      neglegentur, ex has tantas percipit perfecto. At per
+                      tempor albucius perfecto, ei probatus consulatu patrioque
+                      mea, ei vocent delicata indoctum pri.
                     </p>
                   </div>
                 </a>
@@ -593,7 +594,7 @@ const Home = (props: IhomeProps) => {
       </Content>
     </Main>
   );
-}
+};
 
 export const getStaticProps: GetStaticProps<IhomeProps> = async () => {
   const config = getDataConfig();

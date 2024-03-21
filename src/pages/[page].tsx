@@ -12,7 +12,7 @@ import { convertTo2D } from '../utils/Pagination';
 type IPageUrl = {
   page: string;
 };
-const pagination_size = 10;
+const paginationSize = 10;
 
 const PaginatePosts = (props: IBlogGalleryProps) => (
   <Main
@@ -35,8 +35,8 @@ const PaginatePosts = (props: IBlogGalleryProps) => (
 
 export const getStaticPaths: GetStaticPaths<IPageUrl> = async () => {
   const posts = getAllPosts(['slug']);
-  const config = getDataConfig();
-  const pages = convertTo2D(posts, pagination_size);
+  // const config = getDataConfig();
+  const pages = convertTo2D(posts, paginationSize);
 
   return {
     paths: pages.slice(1).map((_, index) => ({
@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params }) => {
   const posts = getAllPosts(['title', 'date', 'slug']);
   const config = getDataConfig();
-  const pages = convertTo2D(posts, pagination_size);
+  const pages = convertTo2D(posts, paginationSize);
   const currentPage = Number(params!.page.replace('page', ''));
   const currentIndex = currentPage - 1;
 

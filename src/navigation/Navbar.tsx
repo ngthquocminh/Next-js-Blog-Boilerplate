@@ -1,16 +1,23 @@
 import React from 'react';
 
 import Link from 'next/link';
+
 import { IAppConfig } from '../utils/Content';
 
 interface INavbarProps {
-  config: IAppConfig
+  config: IAppConfig;
 }
-const Navbar = (props:INavbarProps) => (
+const Navbar = (props: INavbarProps) => (
   <header className="fixed top-nav shadow-lg flex flex-row items-center justify-center w-full z-30 transition duration-300 ease-in-out bg-blue-600 py-4 md:py-6">
     <div className="h-10 shrink-0 ml-8 md:absolute md:left-4 md:top-1/2 md:-translate-y-2/4 flex items-center">
       <Link className="block" aria-label="Cruip" href="/">
-        <a><img src="/logo_light.png" className="md:h-8 h-10" alt="TN7 Solutions" /></a>
+        <a>
+          <img
+            src="/logo_light.png"
+            className="md:h-8 h-10"
+            alt="TN7 Solutions"
+          />
+        </a>
       </Link>
     </div>
     <input id="menu-toggle" className="hidden" type="checkbox" />
@@ -25,7 +32,7 @@ const Navbar = (props:INavbarProps) => (
     </label>
 
     <ul className="menu list-none md:mx-80 w-full text-center shadow-lg md:shadow-none">
-      { props.config.navbar.links.map(({name,url}) => (
+      {props.config.navbar.links.map(({ name, url }) => (
         <li
           key={name}
           className="mx-2 whitespace-nowrap md:inline-block overflow-hidden md:text-xs font-bold text-base"
@@ -34,7 +41,7 @@ const Navbar = (props:INavbarProps) => (
             {name}
           </a>
         </li>
-      )) }
+      ))}
     </ul>
     <div className="z-10 w0-hidden md:absolute md:right-4 md:top-1/2 md:-translate-y-2/4 text-xs font-bold md:flex flex-row">
       <a

@@ -4,13 +4,13 @@ import { join } from 'path';
 import matter from 'gray-matter';
 
 export interface IAppConfig {
-  seo: IAppConfigSEO
+  seo: IAppConfigSEO;
   header: IAppConfigHeader;
   contact: IAppConfigContact;
   footer: IAppConfigFooter;
   navbar: IAppConfigNavbar;
 }
-export interface  IAppConfigSEO {
+export interface IAppConfigSEO {
   site_name: string;
   site_title: string;
   site_description: string;
