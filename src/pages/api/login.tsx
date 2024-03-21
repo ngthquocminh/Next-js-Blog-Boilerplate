@@ -10,7 +10,11 @@ export default async function handler(
   const { username, password } = JSON.parse(req.body);
   try {
     if (req.method === 'POST') {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise<void>((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 3000);
+      });
       if (username === 'admin' && password === process.env.ADMIN_PASSWORD) {
         const token = await new SignJWT({
           username,

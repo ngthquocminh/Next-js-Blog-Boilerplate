@@ -13,7 +13,11 @@ const handleFormInputAsync = async (
   email: string
 ) => {
   // const files = fs.readdirSync(postsDirectory);
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  await new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 3000);
+  });
   const dateStr = new Date().toISOString();
   const createdFile = `${stringToSlug(`${name}-${phone}-${dateStr}`)}.json`;
   fs.writeFileSync(
