@@ -1,49 +1,117 @@
 import React, { useEffect, useState } from 'react';
 
-import { PostItems } from '../../utils/Content';
+import { IBookingItem } from '../../pages/api/get-bookings';
 
 const PAGINATION = 20;
 
-enum BlogStatus {
-  Draft = 0,
-  Published = 1,
-}
+const BookingStatusToggle = ({
+  booking,
+  onToggle,
+}: {
+  booking: IBookingItem;
+  onToggle?: (value: boolean) => void;
+}) => {
+  const [value, setValue] = useState(booking.resolved);
+  const [showConfirm, setShowConfirm] = useState(false);
 
-const BlogPanel = () => {
-  const [blogs, setBlogs] = useState<Array<PostItems>>([]);
-  const [searchBlogs, setSearchBlogs] = useState<Array<PostItems>>([]);
+  const onToggleStatus = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    e.preventDefault();
+    setShowConfirm(true);
+  };
+
+  const setConfirmation = async () => {
+    const response = await fetch('/api/set-booking', {
+      method: 'POST',
+      body: JSON.stringify({ bookingId: booking.id, status: !value }),
+    });
+    if (response.ok) {
+      const { success } = await response.json();
+      if (success) {
+        if (onToggle) onToggle(!value);
+        setValue(!value);
+      }
+    }
+    setShowConfirm(false);
+  };
+
+  return (
+    <div className="relative">
+      <label
+        htmlFor={booking.id}
+        className="inline-flex items-center space-x-4 cursor-pointer dark:text-gray-100"
+      >
+        <span className="relative">
+          <input
+            id={booking.id}
+            type="checkbox"
+            onChange={(e) => onToggleStatus(e)}
+            disabled={showConfirm}
+            checked={value}
+            className="hidden peer"
+          />
+          <div className="w-10 h-6 rounded-full shadow-inner dark:bg-gray-400 peer-checked:dark:bg-green-500"></div>
+          <div className="absolute inset-y-0 left-0 w-4 h-4 m-1 rounded-full shadow peer-checked:right-0 peer-checked:left-auto dark:bg-gray-100"></div>
+        </span>
+      </label>
+      {showConfirm && (
+        <div className="z-40 rounded border border-gray-100 absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full bg-white shadow-lg py-2 px-4 flex gap-1">
+          <div
+            onClick={() => setShowConfirm(false)}
+            className="text-sm text-gray-500 hover:cursor-pointer hover:bg-gray-200 px-1 rounded border"
+          >
+            Cancel
+          </div>
+          <div
+            onClick={() => setConfirmation()}
+            className="text-sm text-green-500 hover:cursor-pointer hover:bg-gray-200 px-1 rounded border"
+          >
+            Confirm
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const BookingPanel = () => {
+  const [bookings, setBookins] = useState<Array<IBookingItem>>([]);
+  const [searchPosts, setSearchPosts] = useState<Array<IBookingItem>>([]);
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
-    setSearchBlogs([...blogs]);
-  }, [blogs]);
+    setSearchPosts([...bookings]);
+  }, [bookings]);
 
   useEffect(() => {
-    if (blogs.length === 0) {
+    if (bookings.length === 0) {
       (async () => {
-        const response = await fetch('/api/get-blogs', {
+        const response = await fetch('/api/get-bookings', {
           method: 'GET',
         });
         const body = await response.json();
-        setBlogs([...body.data]);
+        setBookins([...body.data]);
+        // console.log(body.data);
       })();
     }
   }, []);
+
   function onSearching(e: React.ChangeEvent<HTMLInputElement>): void {
-    setSearchBlogs(blogs?.filter((p) => p.title.includes(e.target.value)));
+    // if (e.target.value.length > 0)
+    setSearchPosts(
+      bookings?.filter((booking) => booking.date.includes(e.target.value))
+    );
+  }
+
+  function onToggleBookingStatus(booking: IBookingItem, value: boolean): void {
+    setBookins((posts) =>
+      posts?.map((p) => (p.id === booking.id ? { ...p, resolved: value } : p))
+    );
   }
 
   return (
     <div className="w-full px-20 py-10 overflow-y-scroll max-h-screen">
-      <div className="text-2xl font-bold mb-16">Bài viết</div>
+      <div className="text-2xl font-bold mb-16">Liện hệ</div>
       <div className="">
-        <div className="flex items-end">
-          <a className="ml-auto" href="new">
-            <div className="w-32 text-center py-2 bg-blue-600 text-white rounded right my-2">
-              Tạo mới
-            </div>
-          </a>
-        </div>
         <div className="bg-white pb-4 px-4 rounded-md w-full">
           <div className="flex justify-between w-full pt-6 ">
             <p className="ml-3"></p>
@@ -59,11 +127,12 @@ const BlogPanel = () => {
             <div className="w-full sm:w-64 inline-block relative ">
               <input
                 type=""
-                name=""
                 onChange={(e) => onSearching(e)}
+                name=""
                 className="leading-snug border border-gray-300 block w-full appearance-none bg-gray-100 text-sm text-gray-600 py-1 px-4 pl-8 rounded-lg"
-                placeholder="Search by Title"
+                placeholder="Search by Date"
               />
+
               <div className="pointer-events-none absolute pl-3 inset-y-0 left-0 flex items-center px-2 text-gray-300">
                 <svg
                   className="fill-current h-3 w-3"
@@ -79,30 +148,37 @@ const BlogPanel = () => {
             <table className="table-auto border-collapse w-full">
               <thead>
                 <tr className="rounded-lg text-sm font-medium text-gray-700 text-left">
-                  <th className="px-4 py-2 bg-gray-200 ">Title</th>
+                  <th className="px-4 py-2 bg-gray-200 ">Name</th>
+                  <th className="px-4 py-2 bg-gray-200 ">Email</th>
+                  <th className="px-4 py-2 bg-gray-200 ">Phone</th>
                   <th className="px-4 py-2 ">Date</th>
                   <th className="px-4 py-2 ">Status</th>
                 </tr>
               </thead>
               <tbody className="text-sm font-normal text-gray-700">
-                {searchBlogs
+                {searchPosts
                   ?.slice(
                     PAGINATION * currentPage,
                     PAGINATION * (currentPage + 1)
                   )
-                  .map((p) => (
+                  .map((booking) => (
                     <tr
-                      key={p.slug}
+                      key={`${booking.name}_${booking.phone}_${booking.date}`}
                       className="hover:bg-gray-100 border-b border-gray-200 py-10"
                     >
                       <td className="px-4 py-4">
-                        <a className="" key={p.slug} href={p.slug}>
-                          {p.title}
-                        </a>
+                        <p className="">{booking.name}</p>
                       </td>
-                      <td className="px-4 py-4">{p.date}</td>
+                      <td className="px-4 py-4">{booking.email}</td>
+                      <td className="px-4 py-4">{booking.phone}</td>
+                      <td className="px-4 py-4">{booking.date}</td>
                       <td className="px-4 py-4">
-                        {BlogStatus[parseInt(p.status, 2)].toString()}
+                        <BookingStatusToggle
+                          booking={booking}
+                          onToggle={(value) =>
+                            onToggleBookingStatus(booking, value)
+                          }
+                        ></BookingStatusToggle>
                       </td>
                     </tr>
                   ))}
@@ -120,7 +196,7 @@ const BlogPanel = () => {
             </svg> */}
             {[
               ...Array(
-                Math.ceil((searchBlogs?.length ?? 0) / PAGINATION)
+                Math.ceil((searchPosts?.length ?? 0) / PAGINATION)
               ).keys(),
             ].map((n) => (
               <div
@@ -144,4 +220,4 @@ const BlogPanel = () => {
   );
 };
 
-export default BlogPanel;
+export default BookingPanel;

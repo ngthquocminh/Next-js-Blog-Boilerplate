@@ -3,6 +3,17 @@ import { join } from 'path';
 
 import matter from 'gray-matter';
 
+export type IPostEditorProps = {
+  title: string;
+  description: string;
+  date?: string;
+  modified_date?: string;
+  image?: string;
+  content: string;
+  slug: string;
+  status: number;
+};
+
 export interface IAppConfig {
   seo: IAppConfigSEO;
   header: IAppConfigHeader;
@@ -16,7 +27,6 @@ export interface IAppConfigSEO {
   site_description: string;
   url: string;
   author: string;
-  pagination_size: number;
 }
 export interface IAppConfigHeader {
   title: string;
@@ -49,7 +59,7 @@ export function getDataConfig(): IAppConfig {
   return cfgDict;
 }
 
-const postsDirectory = join(process.cwd(), '_posts');
+const postsDirectory = join(process.cwd(), '_data/posts');
 
 export type PostItems = {
   [key: string]: string;
@@ -59,11 +69,22 @@ export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
 }
 
-export function getPostBySlug(slug: string, fields: string[] = []) {
+export function getPostBySlug(
+  slug: string,
+  fields: string[] = [],
+  onlyPublished = true
+) {
   const realSlug = slug.replace(/\.md$/, '');
   const fullPath = join(postsDirectory, `${realSlug}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  let fileContents = '';
+  try {
+    fileContents = fs.readFileSync(fullPath, 'utf8');
+  } catch (err) {
+    return null;
+  }
   const { data, content } = matter(fileContents);
+  if (data.status !== 1 && onlyPublished) return null;
+
   const items: PostItems = {};
 
   // Ensure only the minimal needed data is exposed
@@ -74,8 +95,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
     if (field === 'content') {
       items[field] = content;
     }
-
-    if (data[field]) {
+    if (data[field] !== undefined || data[field] != null) {
       items[field] = data[field];
     }
   });
@@ -83,11 +103,16 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   return items;
 }
 
-export function getAllPosts(fields: string[] = []) {
+export function getAllPosts(fields: string[] = [], onlyPublished = true) {
   const slugs = getPostSlugs();
   const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
+    .map((slug) => getPostBySlug(slug, fields, onlyPublished))
+    .filter((p) => p != null)
     // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+    .sort((post1, post2) => {
+      if (post1 && post2) return post1.date > post2.date ? -1 : 1;
+      if (post1) return -1;
+      return 1;
+    });
   return posts;
 }

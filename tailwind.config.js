@@ -1,5 +1,5 @@
 module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx}', './_posts/**/*.md'],
+  content: ['./src/**/*.{js,ts,jsx,tsx}', './_data/posts/**/*.md'],
   theme: {
     fontSize: {
       xs: '0.75rem',

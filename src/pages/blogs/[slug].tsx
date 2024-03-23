@@ -6,6 +6,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { Content } from '../../content/Content';
 import { Meta } from '../../layout/Meta';
 import { Main } from '../../templates/Main';
+import { parseDateString } from '../../utils/Common';
 import {
   IAppConfig,
   getAllPosts,
@@ -44,11 +45,12 @@ const DisplayPost = (props: IPostProps) => (
     }
   >
     <div className="max-w-screen-lg mx-auto pt-20 pb-36">
-      <h1 className="text-center font-bold text-3xl text-gray-900">
+      <img alt={props.title} src={props.image} className="w-full" />
+      <h1 className="text-center font-bold text-3xl text-gray-900 mt-10">
         {props.title}
       </h1>
       <div className="text-center text-sm mb-8">
-        {format(new Date(props.date), 'LLLL d, yyyy')}
+        {format(new Date(parseDateString(props.date)), 'LLL d, yyyy')}
       </div>
       <Content>
         <div
@@ -65,7 +67,7 @@ export const getStaticPaths: GetStaticPaths<IPostUrl> = async () => {
   return {
     paths: posts.map((post) => ({
       params: {
-        slug: post.slug,
+        slug: post?.slug ?? '',
       },
     })),
     fallback: false,
@@ -84,17 +86,16 @@ export const getStaticProps: GetStaticProps<IPostProps, IPostUrl> = async ({
     'content',
     'slug',
   ]);
-  const { content } = post; // await markdownToHtml(post.content || '');
   const config = getDataConfig();
 
   return {
     props: {
-      title: post.title,
-      description: post.description,
-      date: post.date,
-      modified_date: post.modified_date,
-      image: post.image,
-      content,
+      title: post?.title ?? '',
+      description: post?.description ?? '',
+      date: post?.date ?? '',
+      modified_date: post?.modified_date ?? '',
+      image: post?.image ?? '',
+      content: post?.content ?? '',
       config,
     },
   };

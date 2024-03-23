@@ -1,11 +1,7 @@
-import fs from 'fs';
-import { join } from 'path';
-
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { verifyJwtToken } from '../../../admin/auth';
-
-const settingFile = join(process.cwd(), '_data/config.json');
+import { verifyJwtToken } from '../../admin/auth';
+import { getAllPosts } from '../../utils/Content';
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,10 +13,12 @@ export default async function handler(
       const token = cookies.token ?? null;
       const hasVerifiedToken = token && (await verifyJwtToken(token));
       if (hasVerifiedToken) {
-        const configData = fs.readFileSync(settingFile, 'utf8');
-        const cfgDict = JSON.parse(configData);
-        res.status(200).json({ success: true, data: cfgDict });
-      }
+        const posts = getAllPosts(
+          ['slug', 'title', 'date', 'modified_date', 'status'],
+          false
+        );
+        res.status(200).json({ success: true, data: posts });
+      } else res.status(403).send({ error: 'Unauthorized' });
     } else res.status(500).send({ error: 'Unsuported method' });
   } catch (err) {
     res.status(500).send({ error: 'Failed to fetch data' });

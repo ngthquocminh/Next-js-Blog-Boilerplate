@@ -1,8 +1,10 @@
 import React from 'react';
 
+import { format } from 'date-fns';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+import { parseDateString } from '../utils/Common';
 import { IAppConfig } from '../utils/Content';
 import { addTrailingSlash } from '../utils/Url';
 
@@ -20,11 +22,11 @@ type IMetaProps = {
 
 const Meta = (props: IMetaProps) => {
   const router = useRouter();
-  console.log('{router.basePath}', router.basePath);
   return (
     <>
       <Head>
         <meta charSet="UTF-8" key="charset" />
+        <meta name="Language" content="vi" />
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1"
@@ -103,12 +105,12 @@ const Meta = (props: IMetaProps) => {
             />
             <meta
               property="article:published_time"
-              content={new Date(props.post.date).toISOString()}
+              content={format(parseDateString(props.post.date), 'LLL d, yyyy')}
               key="article:published_time"
             />
             <meta
               property="article:modified_time"
-              content={new Date(props.post.modified_date).toISOString()}
+              content={format(parseDateString(props.post.date), 'LLL d, yyyy')}
               key="article:modified_time"
             />
             <script
@@ -144,10 +146,13 @@ const Meta = (props: IMetaProps) => {
             "image": ["${props.config.seo.url}${router.basePath}${
                   props.post.image
                 }"],
-            "datePublished": "${new Date(props.post.date).toISOString()}",
-            "dateModified": "${new Date(
-              props.post.modified_date
+            "datePublished": "${parseDateString(
+              props.post.date
             ).toISOString()}",
+            "dateModified": "${format(
+              parseDateString(props.post.date),
+              'LLL d, yyyy'
+            )}",
             "mainEntityOfPage": {
               "@type": "WebPage",
               "@id": "${props.config.seo.url}${

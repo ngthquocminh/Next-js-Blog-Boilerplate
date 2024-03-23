@@ -1,15 +1,22 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
-const ImageUploader = ({
+const ImageInput = ({
   onImage,
   lable,
+  defaultSrc,
 }: {
   onImage: (image: any) => void;
   lable: string;
+  defaultSrc?: string;
 }) => {
-  const [thumbnailImage, setThumbnailImage] = useState<
-    string | ArrayBuffer | null
-  >(null);
+  const [thumbnailImage, setImageSrc] = useState<string | ArrayBuffer | null>(
+    null
+  );
+
+  useEffect(() => {
+    if (defaultSrc) setImageSrc(defaultSrc);
+  }, [defaultSrc]);
+
   const onInputImage = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files?.[0];
@@ -17,7 +24,7 @@ const ImageUploader = ({
         if (onImage) onImage(file);
         const reader = new FileReader();
         reader.onloadend = () => {
-          setThumbnailImage(reader.result);
+          setImageSrc(reader.result);
         };
         reader.readAsDataURL(file);
       }
@@ -64,6 +71,6 @@ const ImageUploader = ({
   );
 };
 
-ImageUploader.propTypes = {};
+ImageInput.propTypes = {};
 
-export default ImageUploader;
+export default ImageInput;
