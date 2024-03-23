@@ -20,6 +20,7 @@ export interface IAppConfig {
   contact: IAppConfigContact;
   footer: IAppConfigFooter;
   navbar: IAppConfigNavbar;
+  blogs: IAppConfigBlog;
 }
 export interface IAppConfigSEO {
   site_name: string;
@@ -44,6 +45,10 @@ export interface IAppConfigFooter {
 
 export interface IAppConfigNavbar {
   links: Array<IAppConfigLink>;
+}
+
+export interface IAppConfigBlog {
+  slugs: Array<string>;
 }
 
 export interface IAppConfigContact {

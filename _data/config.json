@@ -1,1 +1,32 @@
-{"seo":{"site_name":"TN7 Solutions","site_title":"Giải pháp định cư Canada & Hoa Kỳ","site_description":"TN7 Solutions - Giải pháp định cư Canada & Hoa Kỳ qua du học hoặc đầu tư.","url":"https://tn7solutions.com","author":"TN7 Solutions"},"header":{"title":"Giải pháp định cư | Canada & Hoa Kỳ | qua du học hoặc đầu tư.","description":"Những chuyên gia, luật sư hàng đầu về di trú sẽ đánh giá hồ sơ của bạn thật chi tiết và đưa ra những giải pháp tốt nhất, hiệu quả nhất cả về thời gian và tài chính."},"contact":{"phone":"0763-771-191","email":"support@tn7solutions.com","address":"Saigon Mall - 19 Cao Thắng, Phường 2, Quận 3, TPHCM"},"footer":{"links":[{"name":"Trang chủ","url":"/"}]},"navbar":{"links":[{"name":"Trang chủ","url":"/"},{"name":"Câu chuyện thành công","url":"/"},{"name":"Du học","url":"/"},{"name":"Định cư","url":"/"},{"name":"Hỏi đáp","url":"/"},{"name":"Tư vấn","url":"/"},{"name":"Học bổng & Khuyến mãi","url":"/"},{"name":"Bài viết","url":"/blogs"}]}}
+{
+  "seo": {
+    "site_name": "TN7 Solutions",
+    "site_title": "Giải pháp định cư Canada & Hoa Kỳ",
+    "site_description": "TN7 Solutions - Giải pháp định cư Canada & Hoa Kỳ qua du học hoặc đầu tư.",
+    "url": "https://tn7solutions.com",
+    "author": "TN7 Solutions"
+  },
+  "header": {
+    "title": "Giải pháp định cư | Canada & Hoa Kỳ | qua du học hoặc đầu tư.",
+    "description": "Những chuyên gia, luật sư hàng đầu về di trú sẽ đánh giá hồ sơ của bạn thật chi tiết và đưa ra những giải pháp tốt nhất, hiệu quả nhất cả về thời gian và tài chính."
+  },
+  "contact": {
+    "phone": "0763-771-191",
+    "email": "support@tn7solutions.com",
+    "address": "Saigon Mall - 19 Cao Thắng, Phường 2, Quận 3, TPHCM"
+  },
+  "footer": { "links": [{ "name": "Trang chủ", "url": "/" }] },
+  "navbar": {
+    "links": [
+      { "name": "Trang chủ", "url": "/" },
+      { "name": "Câu chuyện thành công", "url": "/" },
+      { "name": "Du học", "url": "/" },
+      { "name": "Định cư", "url": "/" },
+      { "name": "Hỏi đáp", "url": "/" },
+      { "name": "Tư vấn", "url": "/" },
+      { "name": "Học bổng & Khuyến mãi", "url": "/" },
+      { "name": "Bài viết", "url": "/blogs" }
+    ]
+  },
+  "blogs": { "slugs": ["2024-02-21-dinh-cu-canada-tay-nghe"] }
+}

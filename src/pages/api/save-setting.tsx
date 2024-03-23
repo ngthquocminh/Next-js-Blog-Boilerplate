@@ -5,6 +5,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { verifyJwtToken } from '../../admin/auth';
 import {
   IAppConfig,
+  IAppConfigBlog,
   IAppConfigContact,
   IAppConfigFooter,
   IAppConfigHeader,
@@ -51,12 +52,16 @@ function saveSetting(data: any) {
       }),
   };
 
+  const blogs: IAppConfigBlog = {
+    slugs: (data['blogs-slugs'] as string).split('\n'),
+  };
   const setting: IAppConfig = {
     seo,
     header,
     contact,
     footer,
     navbar,
+    blogs,
   };
   fs.writeFileSync(SETTING_FILE, JSON.stringify(setting));
   return true;

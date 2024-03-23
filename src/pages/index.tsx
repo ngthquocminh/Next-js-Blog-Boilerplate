@@ -9,10 +9,17 @@ import { Meta } from '../layout/Meta';
 import Canada from '../svg/Canada';
 import Liberty from '../svg/Liberty';
 import { Main } from '../templates/Main';
-import { IAppConfig, getDataConfig } from '../utils/Content';
+import { parseDateString } from '../utils/Common';
+import {
+  IAppConfig,
+  PostItems,
+  getDataConfig,
+  getPostBySlug,
+} from '../utils/Content';
 
 interface IhomeProps {
   config: IAppConfig;
+  blogs: PostItems[];
 }
 
 const Home = (props: IhomeProps) => {
@@ -549,15 +556,12 @@ const Home = (props: IhomeProps) => {
           Nội dung nổi bật
         </h4>
         <div className="pt-20 max-w-screen-lg mx-auto grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            ['slug-01', 'Blog 01 Title', 'Feb 2, 2024'],
-            ['slug-02', 'Blog 02 Title', 'Feb 2, 2024'],
-            ['slug-03', 'Blog 03 Title', 'Feb 2, 2024'],
-            ['slug-03', 'Blog 03 Title', 'Feb 2, 2024'],
-            ['slug-03', 'Blog 03 Title', 'Feb 2, 2024'],
-            ['slug-03', 'Blog 03 Title', 'Feb 2, 2024'],
-          ].map(([slug, title, date]) => (
-            <Link href="/posts/[slug]" as={`/posts/${slug}`} key={slug}>
+          {props.blogs.map((blog) => (
+            <Link
+              href="/blogs/[slug]"
+              as={`/blogs/${blog.slug}`}
+              key={blog.slug}
+            >
               <a
                 rel="noopener noreferrer"
                 className="rounded max-w-sm mx-auto group hover:no-underline focus:no-underline shadow-md duration-300 ease-in-out hover:shadow-xl"
@@ -566,21 +570,16 @@ const Home = (props: IhomeProps) => {
                   role="presentation"
                   alt="blog"
                   className="object-cover w-full rounded h-44 dark:bg-gray-500"
-                  src="https://source.unsplash.com/random/480x360?1"
+                  src={blog.image}
                 />
                 <div className="p-6 space-y-2">
                   <h3 className="text-xl font-semibold group-hover:underline group-focus:underline">
-                    {title}
+                    {blog.title}
                   </h3>
-                  <span className="text-xs dark:text-gray-400">
-                    {format(new Date(date), 'LLL d, yyyy')}
+                  <span className="text-xs dark:text-gray-600">
+                    {format(parseDateString(blog.date), 'LLL d, yyyy')}
                   </span>
-                  <p className="text-base text-gray-700">
-                    1Mei ex aliquid eleifend forensibus, quo ad dicta apeirian
-                    neglegentur, ex has tantas percipit perfecto. At per tempor
-                    albucius perfecto, ei probatus consulatu patrioque mea, ei
-                    vocent delicata indoctum pri.
-                  </p>
+                  <p className="text-base text-gray-700">{blog.description}</p>
                 </div>
               </a>
             </Link>
@@ -593,9 +592,15 @@ const Home = (props: IhomeProps) => {
 
 export const getStaticProps: GetStaticProps<IhomeProps> = async () => {
   const config = getDataConfig();
+  const posts = config.blogs.slugs
+    .map((slug) =>
+      getPostBySlug(slug, ['slug', 'title', 'description', 'date', 'image'])
+    )
+    .filter((p) => p !== null);
   return {
     props: {
       config,
+      blogs: posts,
     },
   };
 };

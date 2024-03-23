@@ -281,6 +281,26 @@ const SiteSettings = () => {
               ></textarea>
             </div>
           </div>
+          <div>
+            <div className="text-lg font-bold my-4">Footer</div>
+            <div className="mb-6">
+              <label
+                htmlFor="blogs-slugs"
+                className="block text-base text-gray-800 mb-1"
+              >
+                blogs
+              </label>
+              <textarea
+                onFocus={(e) => textAreaInit(e)}
+                onKeyDown={(e) => textAreaAdjust(e)}
+                id="blogs-slugs"
+                name="blogs-slugs"
+                defaultValue={(config?.blogs.slugs ?? []).join('\n')}
+                className="overflow-hidden w-full px-4 py-2 border text-sm text-gray-800 border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                required
+              ></textarea>
+            </div>
+          </div>
           <p className="text-sm text-red-500">{errorMessage}</p>
           <label
             htmlFor="form-submit"
