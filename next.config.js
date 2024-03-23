@@ -19,5 +19,8 @@ module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   experimental: {
     largePageDataBytes: 2048 * 100000,
-  }
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 });

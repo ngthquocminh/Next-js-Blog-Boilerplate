@@ -75,7 +75,7 @@ export const getStaticProps: GetStaticProps<
 
   return {
     props: {
-      posts: pages[currentIndex],
+      posts: pages[currentIndex].filter((p) => p !== null),
       pagination,
       config,
     },
