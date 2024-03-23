@@ -77,7 +77,7 @@ const BlogEditor2 = (props: IPostEditorProps) => {
     if (title) body.append('title', title);
     if (description) body.append('description', description);
     if (content) body.append('content', content);
-    if (publishStatus != undefined)
+    if (publishStatus !== undefined)
       body.append('status', publishStatus.toString());
 
     const isEmpty = body.entries().next().done;
