@@ -44,7 +44,7 @@ const DisplayPost = (props: IPostProps) => (
       />
     }
   >
-    <div className="max-w-screen-lg mx-auto pt-20 pb-36">
+    <div className="max-w-screen-lg mx-auto pb-36">
       <img alt={props.title} src={props.image} className="w-full" />
       <h1 className="text-center font-bold text-3xl text-gray-900 mt-10">
         {props.title}

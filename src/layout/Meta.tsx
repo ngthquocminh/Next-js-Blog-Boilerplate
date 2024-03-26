@@ -34,28 +34,31 @@ const Meta = (props: IMetaProps) => {
         />
         <link
           rel="apple-touch-icon"
-          href={`${router.basePath}/apple-touch-icon.png`}
+          href="/apple-touch-icon-180x180.png"
+          sizes="180x180"
+          key="apple"
+        />
+        <link
+          rel="apple-touch-icon"
+          href="/apple-touch-icon-57x57.png"
+          sizes="57x57"
           key="apple"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href={`${router.basePath}/favicon-32x32.png`}
+          href="/favicon-32x32.png"
           key="icon32"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href={`${router.basePath}/favicon-16x16.png`}
+          href="/favicon-16x16.png"
           key="icon16"
         />
-        <link
-          rel="icon"
-          href={`${router.basePath}/favicon.ico`}
-          key="favicon"
-        />
+        <link rel="icon" href="/favicon.ico" key="favicon" />
         <title>{`${props.title} | ${props.config.seo.site_name}`}</title>
         <meta
           name="description"

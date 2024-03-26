@@ -11,9 +11,9 @@ type IMainProps = {
 
 const Main = (props: IMainProps) => {
   return (
-    <div className="antialiased w-full">
+    <div className="antialiased w-full relative">
       <Navbar config={props.config}></Navbar>
-      <div className="w-full text-gray-700 px-3 md:px-0">
+      <div className="w-full text-gray-700 px-3 md:px-0 pt-20">
         {props.meta}
         <div className="mx-auto">
           <div className="text-xl py-5">{props.children}</div>

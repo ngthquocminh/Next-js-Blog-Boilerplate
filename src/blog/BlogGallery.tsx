@@ -17,6 +17,9 @@ export type IBlogGalleryProps = {
 const BlogGallery = (props: IBlogGalleryProps) => {
   return (
     <>
+      <h2 className="mx-auto max-w-screen-lg text-3xl font-bold text-center">
+        Bài viết
+      </h2>
       <div className="pt-20 max-w-screen-lg mx-auto grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {props.posts.map((post) => (
           <Link
