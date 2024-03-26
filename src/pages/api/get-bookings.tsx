@@ -18,7 +18,7 @@ const loadBooking = (file: string): IBookingItem | null => {
   const fullPath = join('_data/booking/', `${file}`);
   try {
     const data = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
-    data.id = file;
+    data.id = file.replace('.json', '');
     return data;
   } catch (err) {
     return null;

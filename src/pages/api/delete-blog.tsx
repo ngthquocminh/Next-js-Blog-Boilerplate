@@ -14,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { cookies } = req;
     const token = cookies.token ?? null;
     const hasVerifiedToken = token && (await verifyJwtToken(token));
-    console.log('handler');
+    // console.log('handler');
 
     if (!hasVerifiedToken) {
       res.status(403).send({ error: 'Unauthorized' });
@@ -25,7 +25,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (post) {
       try {
         fs.rmSync(join(BLOG_DIRECTORY, `${slug}.md`));
-        console.log('delete file compelte');
+        // console.log('delete file compelte');
       } catch (e) {
         console.log(e);
         res.status(400).json({ error: 'Failed' });

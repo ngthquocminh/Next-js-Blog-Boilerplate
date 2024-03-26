@@ -4,6 +4,63 @@ import { IBookingItem } from '../../pages/api/get-bookings';
 
 const PAGINATION = 20;
 
+const BookingDeleteButton = ({
+  booking,
+  onDelete,
+}: {
+  booking: IBookingItem;
+  onDelete: () => void;
+}) => {
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const setConfirmation = async () => {
+    const response = await fetch('/api/delete-booking', {
+      method: 'POST',
+      body: JSON.stringify({ id: booking.id }),
+    });
+    if (response.ok) {
+      const { success } = await response.json();
+      if (success) {
+        onDelete();
+      }
+    }
+    setShowConfirm(false);
+  };
+
+  return (
+    <div className="relative">
+      <div
+        className="inline-flex items-center space-x-4 cursor-pointer dark:text-gray-100 hover:cursor-pointer"
+        onClick={() => setShowConfirm(true)}
+      >
+        <svg
+          className="w-4 h-4 fill-current text-red-600"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+        >
+          <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+        </svg>
+      </div>
+      {showConfirm && (
+        <div className="z-40 rounded border border-gray-100 absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full bg-white shadow-lg py-2 px-4 flex gap-1">
+          <div
+            onClick={() => setShowConfirm(false)}
+            className="text-xs text-gray-900 hover:cursor-pointer bg-gray-400 hover:bg-gray-500 px-3 py-1 rounded border"
+          >
+            Cancel
+          </div>
+          <div
+            onClick={() => setConfirmation()}
+            className="text-xs text-white hover:cursor-pointer bg-red-400 hover:bg-red-500 px-3 py-1 rounded border"
+          >
+            Confirm
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const BookingStatusToggle = ({
   booking,
   onToggle,
@@ -54,16 +111,16 @@ const BookingStatusToggle = ({
         </span>
       </label>
       {showConfirm && (
-        <div className="z-40 rounded border border-gray-100 absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full bg-white shadow-lg py-2 px-4 flex gap-1">
+        <div className="z-40 rounded border border-gray-400 absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full bg-white shadow-lg py-2 px-4 flex gap-1">
           <div
             onClick={() => setShowConfirm(false)}
-            className="text-sm text-gray-500 hover:cursor-pointer hover:bg-gray-200 px-1 rounded border"
+            className="text-xs text-gray-900 hover:cursor-pointer bg-gray-400 hover:bg-gray-500 px-3 py-1 rounded border"
           >
             Cancel
           </div>
           <div
             onClick={() => setConfirmation()}
-            className="text-sm text-green-500 hover:cursor-pointer hover:bg-gray-200 px-1 rounded border"
+            className="text-xs text-white hover:cursor-pointer bg-red-400 hover:bg-red-500 px-3 py-1 rounded border"
           >
             Confirm
           </div>
@@ -74,7 +131,7 @@ const BookingStatusToggle = ({
 };
 
 const BookingPanel = () => {
-  const [bookings, setBookins] = useState<Array<IBookingItem>>([]);
+  const [bookings, setBookings] = useState<Array<IBookingItem>>([]);
   const [searchPosts, setSearchPosts] = useState<Array<IBookingItem>>([]);
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -89,7 +146,7 @@ const BookingPanel = () => {
           method: 'GET',
         });
         const body = await response.json();
-        setBookins([...body.data]);
+        setBookings([...body.data]);
         // console.log(body.data);
       })();
     }
@@ -97,15 +154,21 @@ const BookingPanel = () => {
 
   function onSearching(e: React.ChangeEvent<HTMLInputElement>): void {
     // if (e.target.value.length > 0)
-    setSearchPosts(
-      bookings?.filter((booking) => booking.date.includes(e.target.value))
+    setSearchPosts((_bookings) =>
+      _bookings?.filter((b) => b.date.includes(e.target.value))
     );
   }
 
   function onToggleBookingStatus(booking: IBookingItem, value: boolean): void {
-    setBookins((posts) =>
-      posts?.map((p) => (p.id === booking.id ? { ...p, resolved: value } : p))
+    setBookings((_bookings) =>
+      _bookings?.map((b) =>
+        b.id === booking.id ? { ...b, resolved: value } : b
+      )
     );
+  }
+
+  function onRemoveBooking(booking: IBookingItem): void {
+    setBookings((_bookings) => _bookings?.filter((b) => b.id !== booking.id));
   }
 
   return (
@@ -153,6 +216,7 @@ const BookingPanel = () => {
                   <th className="px-4 py-2 bg-gray-200 ">Phone</th>
                   <th className="px-4 py-2 ">Date</th>
                   <th className="px-4 py-2 ">Status</th>
+                  <th className="px-4 py-2 "></th>
                 </tr>
               </thead>
               <tbody className="text-sm font-normal text-gray-700">
@@ -179,6 +243,12 @@ const BookingPanel = () => {
                             onToggleBookingStatus(booking, value)
                           }
                         ></BookingStatusToggle>
+                      </td>
+                      <td className="px-4 py-4">
+                        <BookingDeleteButton
+                          booking={booking}
+                          onDelete={() => onRemoveBooking(booking)}
+                        ></BookingDeleteButton>
                       </td>
                     </tr>
                   ))}

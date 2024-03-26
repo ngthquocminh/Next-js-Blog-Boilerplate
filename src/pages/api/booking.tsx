@@ -24,7 +24,7 @@ const handleFormInputAsync = async (
     const createdFile = `${slugify(name)}_${slugify(phone, {
       strict: true,
     })}_${slugify(dateStr)}.json`;
-    console.log('createdFile', createdFile);
+    // console.log('createdFile', createdFile);
     fs.writeFileSync(
       join(bookingsDirectory, createdFile),
       JSON.stringify({ name, phone, email, date: dateStr })
