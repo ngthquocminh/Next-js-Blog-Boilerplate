@@ -5,8 +5,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { verifyJwtToken } from '../../admin/auth';
 
-const loadBooking = (file: string): IBookingItem | null => {
-  const fullPath = join('_data/booking/', `${file}`);
+const loadBooking = (id: string): IBookingItem | null => {
+  const fullPath = join('_data/booking/', `${id}.json`);
   try {
     return JSON.parse(fs.readFileSync(fullPath, 'utf8'));
   } catch (err) {
@@ -14,8 +14,8 @@ const loadBooking = (file: string): IBookingItem | null => {
   }
 };
 
-const saveBooking = (file: string, data: string) => {
-  fs.writeFileSync(join('_data/booking/', file), data);
+const saveBooking = (id: string, data: string) => {
+  fs.writeFileSync(join('_data/booking/', `${id}.json`), data);
 };
 
 const setBookingStatusById = (booking_id: string, value: boolean) => {
@@ -49,7 +49,6 @@ export default async function handler(
       if (hasVerifiedToken) {
         const { bookingId, status } = JSON.parse(req.body);
         const done = setBookingStatusById(bookingId, status);
-        // console.log(bookings);
         res.status(200).json({ success: done });
       } else res.status(403).send({ error: 'Unauthorized' });
     } else res.status(500).send({ error: 'Unsuported method' });
