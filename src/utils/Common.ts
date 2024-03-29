@@ -34,3 +34,15 @@ export function cvt2RelativePath(absolutePath: string) {
   if (ppath.startsWith('/public')) ppath = ppath.replace('/public', '');
   return ppath;
 }
+
+export const imageKitExtract = (s: string) => {
+  try {
+    const ss = s.split('||');
+    return { id: ss[0], url: ss[1] };
+  } catch {
+    return { id: '', url: s };
+  }
+};
+export const imageKitCombine = (id: string, url: string) => {
+  return `${id}||${url}`;
+};

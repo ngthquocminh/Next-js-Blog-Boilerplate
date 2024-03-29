@@ -59,7 +59,7 @@ const Navbar = (props: INavbarProps) => (
         <p>Gọi tư vấn</p>
       </a>
       <a
-        href="#booking"
+        href={`${props.config.seo.url}/#booking`}
         className="hover:cursor-pointer text-white bg-red-400 p-2 flex flex-row items-center gap-2 rounded-tr-full rounded-br-full pr-5 border-red-400"
       >
         <p>Đặt lịch hẹn</p>

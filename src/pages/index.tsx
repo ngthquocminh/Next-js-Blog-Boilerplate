@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { format } from 'date-fns';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 
 import Booking from '../layout/Booking';
@@ -9,7 +9,7 @@ import { Meta } from '../layout/Meta';
 import Canada from '../svg/Canada';
 import Liberty from '../svg/Liberty';
 import { Main } from '../templates/Main';
-import { parseDateString } from '../utils/Common';
+import { imageKitExtract, parseDateString } from '../utils/Common';
 import {
   IAppConfig,
   PostItems,
@@ -570,7 +570,7 @@ const Home = (props: IhomeProps) => {
                   role="presentation"
                   alt="blog"
                   className="object-cover w-full rounded h-44 dark:bg-gray-500"
-                  src={blog.image}
+                  src={imageKitExtract(blog.image)?.url ?? ''}
                 />
                 <div className="p-6 space-y-2">
                   <h3 className="text-xl font-semibold group-hover:underline group-focus:underline">
@@ -590,7 +590,7 @@ const Home = (props: IhomeProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<IhomeProps> = async () => {
+export const getServerSideProps: GetServerSideProps<IhomeProps> = async () => {
   const config = getDataConfig();
   const posts = config.blogs.slugs
     .map((slug) =>

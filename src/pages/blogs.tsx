@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GetStaticProps } from 'next';
+import type { GetServerSideProps } from 'next';
 
 import { BlogGallery, IBlogGalleryProps } from '../blog/BlogGallery';
 import { Meta } from '../layout/Meta';
@@ -31,12 +31,15 @@ const Blogs = (props: IBlogGalleryProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<IBlogGalleryProps> = async () => {
+export const getServerSideProps: GetServerSideProps<
+  IBlogGalleryProps
+> = async () => {
   const posts = getAllPosts(['title', 'date', 'slug', 'image', 'description']);
+  console.log('>>>>>>>> Total posts', posts.length);
   const pagination: IPaginationProps = {};
   const config = getDataConfig();
   if (posts.length > paginationSize) {
-    pagination.next = '/page2';
+    pagination.next = '/page-2';
   }
 
   return {

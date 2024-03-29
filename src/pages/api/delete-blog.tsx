@@ -1,13 +1,20 @@
 import fs from 'fs';
 import path, { join } from 'path';
 
+import ImageKit from 'imagekit';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { verifyJwtToken } from '../../admin/auth';
+import { imageKitExtract } from '../../utils/Common';
 import { getPostBySlug } from '../../utils/Content';
 
-const BLOG_IMAGE_DIRECTORY = path.join(process.cwd(), 'public/uploads/blog');
 const BLOG_DIRECTORY = path.join(process.cwd(), '_data/posts');
+
+const imageKit = new ImageKit({
+  publicKey: process.env.IMAGEKIT_PUBLIC_KEY!,
+  privateKey: process.env.IMAGEKIT_PRIVATE_KEY!,
+  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT!,
+});
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
@@ -32,7 +39,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return;
       }
       try {
-        fs.rmSync(join(BLOG_IMAGE_DIRECTORY, `${post.image}`));
+        const imageId = imageKitExtract(post.image).id ?? '';
+        imageKit.deleteFile(imageId);
       } catch (e) {
         console.log(e);
       }

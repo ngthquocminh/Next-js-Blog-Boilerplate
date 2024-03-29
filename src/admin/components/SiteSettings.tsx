@@ -152,7 +152,7 @@ const SiteSettings = () => {
             </div>
           </div>
           <div>
-            <div className="text-lg font-bold my-4">header</div>
+            <div className="text-lg font-bold my-4">Header</div>
             <div className="mb-6">
               <label
                 htmlFor="header-title"
@@ -282,7 +282,7 @@ const SiteSettings = () => {
             </div>
           </div>
           <div>
-            <div className="text-lg font-bold my-4">Footer</div>
+            <div className="text-lg font-bold my-4">Blog</div>
             <div className="mb-6">
               <label
                 htmlFor="blogs-slugs"

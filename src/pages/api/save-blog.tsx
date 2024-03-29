@@ -2,20 +2,15 @@ import fs from 'fs';
 import path, { join } from 'path';
 
 import formidable, { IncomingForm } from 'formidable';
+import ImageKit from 'imagekit';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { verifyJwtToken } from '../../admin/auth';
-import { cvt2RelativePath } from '../../utils/Common';
+import { imageKitCombine, imageKitExtract } from '../../utils/Common';
 import { getPostBySlug, PostItems } from '../../utils/Content';
 
-const BLOG_DIRECTORY = '_data/posts';
-const BLOG_IMAGE_DIRECTORY = path.join(process.cwd(), 'public/uploads/blog');
-
-const ensureDirectoryExists = (directory: string) => {
-  if (!fs.existsSync(directory)) {
-    fs.mkdirSync(directory, { recursive: true });
-  }
-};
+const BLOG_DIRECTORY = path.join(process.cwd(), '_data/posts');
+const BLOG_IMAGE_DIRECTORY = path.join(process.cwd(), '_data/temp');
 
 export const config = {
   api: {
@@ -23,18 +18,51 @@ export const config = {
   },
 };
 
-function saveImage(imageFile: formidable.File) {
-  const oldPath = imageFile.filepath;
-  const newPath = path.join(BLOG_IMAGE_DIRECTORY, imageFile.newFilename);
-  fs.renameSync(oldPath, newPath);
-  return newPath;
-}
+const imageKit = new ImageKit({
+  publicKey: process.env.IMAGEKIT_PUBLIC_KEY!,
+  privateKey: process.env.IMAGEKIT_PRIVATE_KEY!,
+  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT!,
+});
+
+const saveImage = async (imageFile: formidable.File) => {
+  try {
+    const buffer = fs.readFileSync(imageFile.filepath);
+    const response = await imageKit.upload({
+      file: buffer,
+      fileName: imageFile.originalFilename ?? imageFile.newFilename,
+    });
+    const str = imageKitCombine(
+      response.fileId,
+      `${process.env.IMAGEKIT_URL_ENDPOINT}${response.filePath}`
+    );
+    fs.rmSync(imageFile.filepath);
+    return str;
+  } catch {
+    return null;
+  }
+};
+
+const changeImage = async (
+  imageFile: formidable.File,
+  oldImage: {
+    id: string;
+    url: string;
+  }
+) => {
+  const newFileStr = await saveImage(imageFile);
+  if (newFileStr != null) {
+    console.log('delete', oldImage.id);
+    imageKit.deleteFile(oldImage.id);
+    return newFileStr;
+  }
+  return imageKitCombine(oldImage.id, oldImage.url);
+};
 
 function savePost(
   slug: string,
   fields: formidable.Fields<string>,
   post: PostItems,
-  thumbnailPath: string
+  imageStr: string
 ) {
   const title = fields.title ? fields.title[0] : post.title;
   const description = fields.description
@@ -50,7 +78,7 @@ title: ${title}
 description: ${description}
 date: ${date}
 modified_date: ${modifiedDate}
-image: ${thumbnailPath}
+image: ${imageStr}
 status: ${status}
 ---
 ${content}`;
@@ -72,8 +100,6 @@ const postFieldsGet = [
 ];
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  ensureDirectoryExists(BLOG_IMAGE_DIRECTORY);
-
   if (req.method === 'POST') {
     const { cookies } = req;
     const token = cookies.token ?? null;
@@ -106,9 +132,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(400).json({ error: 'Unacceptable' });
         return;
       }
-      const imagePath = imageFile ? saveImage(imageFile) : post.image;
-      const relativePath = cvt2RelativePath(imagePath);
-      const status = savePost(slug, fields, post, relativePath);
+      const oldImage = imageKitExtract(post.image);
+      const imageStr = imageFile
+        ? await changeImage(imageFile, oldImage)
+        : post.image;
+      // const relativePath = cvt2RelativePath(imagePath);
+      const status = savePost(slug, fields, post, imageStr);
       if (status) {
         res.status(200).json({ message: 'OK' });
         return;

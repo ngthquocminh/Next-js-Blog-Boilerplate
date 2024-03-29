@@ -1,18 +1,13 @@
 import React from 'react';
 
 import { format } from 'date-fns';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 
 import { Content } from '../../content/Content';
 import { Meta } from '../../layout/Meta';
 import { Main } from '../../templates/Main';
-import { parseDateString } from '../../utils/Common';
-import {
-  IAppConfig,
-  getAllPosts,
-  getDataConfig,
-  getPostBySlug,
-} from '../../utils/Content';
+import { imageKitExtract, parseDateString } from '../../utils/Common';
+import { IAppConfig, getDataConfig, getPostBySlug } from '../../utils/Content';
 
 type IPostUrl = {
   slug: string;
@@ -45,7 +40,11 @@ const DisplayPost = (props: IPostProps) => (
     }
   >
     <div className="max-w-screen-lg mx-auto pb-36">
-      <img alt={props.title} src={props.image} className="w-full" />
+      <img
+        alt={props.title}
+        src={imageKitExtract(props.image)?.url}
+        className="w-full"
+      />
       <h1 className="text-center font-bold text-3xl text-gray-900 mt-10">
         {props.title}
       </h1>
@@ -62,21 +61,10 @@ const DisplayPost = (props: IPostProps) => (
   </Main>
 );
 
-export const getStaticPaths: GetStaticPaths<IPostUrl> = async () => {
-  const posts = getAllPosts(['slug']);
-  return {
-    paths: posts.map((post) => ({
-      params: {
-        slug: post?.slug ?? '',
-      },
-    })),
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps<IPostProps, IPostUrl> = async ({
-  params,
-}) => {
+export const getServerSideProps: GetServerSideProps<
+  IPostProps,
+  IPostUrl
+> = async ({ params }) => {
   const post = getPostBySlug(params!.slug, [
     'title',
     'description',
@@ -86,6 +74,13 @@ export const getStaticProps: GetStaticProps<IPostProps, IPostUrl> = async ({
     'content',
     'slug',
   ]);
+
+  if (!post) {
+    return {
+      notFound: true,
+    };
+  }
+
   const config = getDataConfig();
 
   return {

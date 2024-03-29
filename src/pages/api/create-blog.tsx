@@ -2,20 +2,21 @@ import fs from 'fs';
 import path, { join } from 'path';
 
 import formidable, { IncomingForm } from 'formidable';
+import ImageKit from 'imagekit';
 import { NextApiRequest, NextApiResponse } from 'next';
 import slugify from 'slugify';
 
-import { cvt2RelativePath } from '../../utils/Common';
+import { cvt2RelativePath, imageKitCombine } from '../../utils/Common';
 import { getPostBySlug } from '../../utils/Content';
 
-const BLOG_DIRECTORY = '_data/posts';
-const BLOG_IMAGE_DIRECTORY = path.join(process.cwd(), 'public/uploads/blog');
+const BLOG_DIRECTORY = path.join(process.cwd(), '_data/posts');
+const BLOG_IMAGE_DIRECTORY = path.join(process.cwd(), '_data/temp');
 
-const ensureDirectoryExists = (directory: string) => {
-  if (!fs.existsSync(directory)) {
-    fs.mkdirSync(directory, { recursive: true });
-  }
-};
+const imageKit = new ImageKit({
+  publicKey: process.env.IMAGEKIT_PUBLIC_KEY!,
+  privateKey: process.env.IMAGEKIT_PRIVATE_KEY!,
+  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT!,
+});
 
 export const config = {
   api: {
@@ -23,13 +24,23 @@ export const config = {
   },
 };
 
-function saveImage(imageFile: formidable.File) {
-  const oldPath = imageFile.filepath;
-  const newPath = path.join(BLOG_IMAGE_DIRECTORY, imageFile.newFilename);
-  fs.renameSync(oldPath, newPath);
-  return newPath;
-}
-
+const saveImage = async (imageFile: formidable.File) => {
+  try {
+    const buffer = fs.readFileSync(imageFile.filepath);
+    const response = await imageKit.upload({
+      file: buffer,
+      fileName: imageFile.originalFilename ?? imageFile.newFilename,
+    });
+    const str = imageKitCombine(
+      response.fileId,
+      `${process.env.IMAGEKIT_URL_ENDPOINT}${response.filePath}`
+    );
+    fs.rmSync(imageFile.filepath);
+    return str;
+  } catch {
+    return null;
+  }
+};
 function createPost(
   fields: formidable.Fields<string>,
   preSlug: string,
@@ -63,8 +74,6 @@ status: ${status}
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  ensureDirectoryExists(BLOG_IMAGE_DIRECTORY);
-
   if (req.method === 'POST') {
     const form = new IncomingForm({
       uploadDir: BLOG_IMAGE_DIRECTORY,
@@ -77,22 +86,27 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(500).json({ error: 'Error uploading file' });
         return;
       }
-      console.log(fields);
+      // console.log(fields);
       const imageFile = Array.isArray(files?.image)
         ? files.image[0]
         : files?.image;
       const post = getPostBySlug(fields.slug ? fields.slug[0] : '');
       if (!post) {
-        console.log(post);
+        // console.log(post);
         const title = fields.title ? fields.title[0] : '';
-        const preSlug = slugify(title);
+        const preSlug = slugify(title, {
+          strict: true,
+          lower: true,
+          trim: true,
+          locale: 'vi',
+        });
         const isValidSlug = preSlug.length >= 16;
         if (!isValidSlug) {
           res.status(400).json({ error: 'Unacceptable' });
           return;
         }
 
-        const imagePath = imageFile ? saveImage(imageFile) : '';
+        const imagePath = imageFile ? (await saveImage(imageFile)) ?? '' : '';
         const relativePath = cvt2RelativePath(imagePath);
         const fullSlug = createPost(fields, preSlug, relativePath);
 

@@ -7,6 +7,7 @@ import SunEditorCore from 'suneditor/src/lib/core';
 
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import ImageInput from './ImageInput';
+import { imageKitExtract } from '../../utils/Common';
 import { IPostEditorProps } from '../../utils/Content';
 
 enum SavingStatus {
@@ -73,6 +74,7 @@ const BlogEditor2 = (props: IPostEditorProps) => {
     setSaving(true);
     const body = new FormData();
     // console.log("file", image)
+
     if (thumbnail) body.append('image', thumbnail);
     if (title) body.append('title', title);
     if (description) body.append('description', description);
@@ -206,7 +208,7 @@ const BlogEditor2 = (props: IPostEditorProps) => {
             <ImageInput
               lable={'Thumbnail'}
               onImage={onImageSelect}
-              defaultSrc={props.image}
+              defaultSrc={imageKitExtract(props?.image ?? '')?.url ?? ''}
             ></ImageInput>
           </div>
           <div className="mb-6">
@@ -275,48 +277,50 @@ const BlogEditor2 = (props: IPostEditorProps) => {
             />
           </div>
         </form>
-        <div className="my-40 flex">
-          <div className="w-[200px]">
-            <p className="my-2">Xóa bài biết</p>
-            <div
-              onClick={onClickDelete}
-              className="hover:cursor-pointer w-20 bg-red-500 text-white py-2 px-4 rounded text-center"
-            >
-              Xóa
+        {!isCreateNew() && (
+          <div className="my-40 flex">
+            <div className="w-[200px]">
+              <p className="my-2">Xóa bài biết</p>
+              <div
+                onClick={onClickDelete}
+                className="hover:cursor-pointer w-20 bg-red-500 text-white py-2 px-4 rounded text-center"
+              >
+                Xóa
+              </div>
             </div>
-          </div>
-          {deleteConfirm && (
-            <form
-              className="flex items center gap-2 items-center"
-              onSubmit={(e) => onDeleteConfirm(e)}
-            >
-              <div className="flex flex-col">
-                <label htmlFor="slug-confirm-removing" className="text-sm">
-                  Vui lòng nhập slug bài biết vào ô bên dưới đễ xác nhận xóa:{' '}
-                  <br /> <b>{props.slug}</b>
-                </label>
-                <input
-                  id="slug-confirm-removing"
-                  name="slug-confirm-removing"
-                  className="text-sm w-full px-4 py-1 border border-gray-600 rounded-md focus:outline-none focus:border-gray-800"
-                  type="text"
-                />
-              </div>
-              <div className="flex gap-2 flex-col">
-                <input
-                  type="submit"
-                  className="hover:cursor-pointer bg-red-500 text-white py-2 px-4 rounded text-center"
-                />
-                <div
-                  onClick={cancelDelete}
-                  className="hover:cursor-pointer border border-red-500 text-red-500 py-2 px-4 rounded text-center"
-                >
-                  Hủy
+            {deleteConfirm && (
+              <form
+                className="flex items center gap-2 items-center"
+                onSubmit={(e) => onDeleteConfirm(e)}
+              >
+                <div className="flex flex-col">
+                  <label htmlFor="slug-confirm-removing" className="text-sm">
+                    Vui lòng nhập slug bài biết vào ô bên dưới đễ xác nhận xóa:{' '}
+                    <br /> <b>{props.slug}</b>
+                  </label>
+                  <input
+                    id="slug-confirm-removing"
+                    name="slug-confirm-removing"
+                    className="text-sm w-full px-4 py-1 border border-gray-600 rounded-md focus:outline-none focus:border-gray-800"
+                    type="text"
+                  />
                 </div>
-              </div>
-            </form>
-          )}
-        </div>
+                <div className="flex gap-2 flex-col">
+                  <input
+                    type="submit"
+                    className="hover:cursor-pointer bg-red-500 text-white py-2 px-4 rounded text-center"
+                  />
+                  <div
+                    onClick={cancelDelete}
+                    className="hover:cursor-pointer border border-red-500 text-red-500 py-2 px-4 rounded text-center"
+                  >
+                    Hủy
+                  </div>
+                </div>
+              </form>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

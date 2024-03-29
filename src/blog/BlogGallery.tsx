@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import Link from 'next/link';
 
 import { Pagination, IPaginationProps } from '../pagination/Pagination';
-import { parseDateString } from '../utils/Common';
+import { imageKitExtract, parseDateString } from '../utils/Common';
 import { IAppConfig, PostItems } from '../utils/Content';
 // import BlogCard from './BlogCard';
 
@@ -32,7 +32,7 @@ const BlogGallery = (props: IBlogGalleryProps) => {
               <img
                 role="presentation"
                 className="object-cover w-full rounded h-44 dark:bg-gray-500"
-                src={post.image}
+                src={imageKitExtract(post.image)?.url ?? ''}
                 alt="blog"
               />
               <div className="p-6 space-y-2">

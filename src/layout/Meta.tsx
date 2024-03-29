@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { parseDateString } from '../utils/Common';
+import { imageKitExtract, parseDateString } from '../utils/Common';
 import { IAppConfig } from '../utils/Content';
 import { addTrailingSlash } from '../utils/Url';
 
@@ -98,7 +98,7 @@ const Meta = (props: IMetaProps) => {
             <meta property="og:type" content="article" key="og:type" />
             <meta
               property="og:image"
-              content={`${props.config.seo.url}${router.basePath}${props.post.image}`}
+              content={imageKitExtract(props.post.image)?.url ?? ''}
               key="og:image"
             />
             <meta
@@ -146,9 +146,7 @@ const Meta = (props: IMetaProps) => {
               "name": "${props.config.seo.author}"
             },
             "headline": "${props.title} | ${props.config.seo.site_name}",
-            "image": ["${props.config.seo.url}${router.basePath}${
-                  props.post.image
-                }"],
+            "image": ["${imageKitExtract(props.post.image)?.url ?? ''}"],
             "datePublished": "${parseDateString(
               props.post.date
             ).toISOString()}",
@@ -173,12 +171,5 @@ const Meta = (props: IMetaProps) => {
     </>
   );
 };
-
-// export const getStaticProps: GetStaticProps<IAppConfig> = async () => {
-//   const ccfig = getDataConfig();
-//   return {
-//     ccfig
-//   }
-// }
 
 export { Meta };

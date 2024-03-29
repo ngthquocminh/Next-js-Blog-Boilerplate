@@ -1,13 +1,9 @@
 import React from 'react';
 
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 
 import BlogEditor2 from '../../../admin/components/BlogEditor2';
-import {
-  getAllPosts,
-  getPostBySlug,
-  IPostEditorProps,
-} from '../../../utils/Content';
+import { getPostBySlug, IPostEditorProps } from '../../../utils/Content';
 
 type IPostUrl = {
   slug: string;
@@ -17,20 +13,7 @@ const blogEditing = (props: IPostEditorProps) => {
   return <BlogEditor2 {...props}></BlogEditor2>;
 };
 
-export const getStaticPaths: GetStaticPaths<IPostUrl> = async () => {
-  const posts = getAllPosts(['slug'], false);
-
-  return {
-    paths: posts.map((post) => ({
-      params: {
-        slug: post?.slug ?? '',
-      },
-    })),
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps<
+export const getServerSideProps: GetServerSideProps<
   IPostEditorProps,
   IPostUrl
 > = async ({ params }) => {
@@ -48,6 +31,12 @@ export const getStaticProps: GetStaticProps<
     ],
     false
   );
+
+  if (!post) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {

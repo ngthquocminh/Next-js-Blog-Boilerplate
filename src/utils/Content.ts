@@ -11,7 +11,7 @@ export type IPostEditorProps = {
   image?: string;
   content: string;
   slug: string;
-  status: number;
+  status?: number;
 };
 
 export interface IAppConfig {

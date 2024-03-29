@@ -18,7 +18,7 @@ module.exports = withBundleAnalyzer({
   // You can remove `basePath` if you don't need it.
   reactStrictMode: true,
   experimental: {
-    largePageDataBytes: 2048 * 100000,
+    largePageDataBytes: 3072 * 100000,
   },
   typescript: {
     ignoreBuildErrors: true,
