@@ -10,7 +10,6 @@ export async function middleware(request: NextRequest) {
   const token = cookies.get('token') ?? null;
   const hasVerifiedToken = token && (await verifyJwtToken(token));
   const isAuthPageRequested = nextUrl.pathname.startsWith('/admin');
-  // console.log("middleware>>>",nextUrl.pathname, hasVerifiedToken);
 
   if (isAuthPageRequested) {
     if (!hasVerifiedToken) {

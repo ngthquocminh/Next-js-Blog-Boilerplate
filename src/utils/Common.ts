@@ -22,19 +22,6 @@ export function parseDateString(dateString: string) {
   return new Date(year, month, day);
 }
 
-export function cvt2RelativePath(absolutePath: string) {
-  if (
-    absolutePath === undefined ||
-    absolutePath === null ||
-    absolutePath.length === 0
-  )
-    return '';
-  let ppath = absolutePath.replace(process.cwd(), '');
-  if (ppath.startsWith('\\public')) ppath = ppath.replace('\\public', '');
-  if (ppath.startsWith('/public')) ppath = ppath.replace('/public', '');
-  return ppath;
-}
-
 export const imageKitExtract = (s: string) => {
   try {
     const ss = s.split('||');

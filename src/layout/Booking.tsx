@@ -14,7 +14,7 @@ const Booking = () => {
       formData.forEach((value, key) => {
         formDict[key] = value;
       });
-      const response = await fetch('/api/booking', {
+      const response = await fetch('/api/booking/add', {
         method: 'POST',
         body: JSON.stringify(formDict),
       });
@@ -25,7 +25,6 @@ const Booking = () => {
       }
       // Handle response if necessary
       // const data = await response.json()
-      // console.log(">>>",data)
       setStatus(1);
     } catch (error) {
       setStatus(-1);

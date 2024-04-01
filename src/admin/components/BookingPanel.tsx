@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { IBookingItem } from '../../pages/api/get-bookings';
+import { IBookingItem } from '../../pages/api/booking/get-all';
 
 const PAGINATION = 20;
 
@@ -14,7 +14,7 @@ const BookingDeleteButton = ({
   const [showConfirm, setShowConfirm] = useState(false);
 
   const setConfirmation = async () => {
-    const response = await fetch('/api/delete-booking', {
+    const response = await fetch('/api/booking/delete', {
       method: 'POST',
       body: JSON.stringify({ id: booking.id }),
     });
@@ -77,7 +77,7 @@ const BookingStatusToggle = ({
   };
 
   const setConfirmation = async () => {
-    const response = await fetch('/api/set-booking', {
+    const response = await fetch('/api/booking/update', {
       method: 'POST',
       body: JSON.stringify({ bookingId: booking.id, status: !value }),
     });
@@ -140,16 +140,14 @@ const BookingPanel = () => {
   }, [bookings]);
 
   useEffect(() => {
-    if (bookings.length === 0) {
-      (async () => {
-        const response = await fetch('/api/get-bookings', {
-          method: 'GET',
-        });
-        const body = await response.json();
-        setBookings([...body.data]);
-        // console.log(body.data);
-      })();
-    }
+    (async () => {
+      const response = await fetch('/api/booking/get-all', {
+        method: 'GET',
+      });
+      const body = await response.json();
+      setBookings([...body.data]);
+      // console.log(body.data);
+    })();
   }, []);
 
   function onSearching(e: React.ChangeEvent<HTMLInputElement>): void {

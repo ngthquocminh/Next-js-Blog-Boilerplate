@@ -41,6 +41,7 @@ const BlogEditor2 = (props: IPostEditorProps) => {
   const editor = useRef<SunEditorCore>();
   const [thumbnail, setThumbnail] = useState<File>();
   const [title, setTitle] = useState<string>();
+  const [category, setCategory] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [content, setContent] = useState<string>();
   const [saving, setSaving] = useState(false);
@@ -48,6 +49,7 @@ const BlogEditor2 = (props: IPostEditorProps) => {
     undefined
   );
   const [saveStatus, setSaveStatus] = useState<SavingStatus>(SavingStatus.None);
+
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const router = useRouter();
 
@@ -76,6 +78,7 @@ const BlogEditor2 = (props: IPostEditorProps) => {
     // console.log("file", image)
 
     if (thumbnail) body.append('image', thumbnail);
+    if (category) body.append('category', category);
     if (title) body.append('title', title);
     if (description) body.append('description', description);
     if (content) body.append('content', content);
@@ -85,7 +88,7 @@ const BlogEditor2 = (props: IPostEditorProps) => {
     const isEmpty = body.entries().next().done;
     if (!isEmpty) {
       if (isCreateNew()) {
-        const response = await fetch('/api/create-blog', {
+        const response = await fetch('/api/blog/create', {
           method: 'POST',
           body,
         });
@@ -100,7 +103,7 @@ const BlogEditor2 = (props: IPostEditorProps) => {
         setSaveStatus(SavingStatus.Failed);
       } else {
         body.append('slug', props.slug);
-        const response = await fetch('/api/save-blog', {
+        const response = await fetch('/api/blog/update', {
           method: 'POST',
           body,
         });
@@ -148,7 +151,7 @@ const BlogEditor2 = (props: IPostEditorProps) => {
       formDict[key] = value.toString();
     });
     if (formDict['slug-confirm-removing'] === props.slug) {
-      const response = await fetch('/api/delete-blog', {
+      const response = await fetch('/api/blog/delete', {
         method: 'POST',
         body: JSON.stringify({ slug: props.slug }),
       });
@@ -170,6 +173,30 @@ const BlogEditor2 = (props: IPostEditorProps) => {
           </Link>
         </div>
         <form onSubmit={(e) => onClickSave(e)}>
+          <div className="mb-6">
+            <label
+              htmlFor="category"
+              className="block text-lg font-medium text-gray-800 mb-1"
+            >
+              Category
+            </label>
+            <select
+              className="border-2 border-gray-300 border-r p-2 min-w-[200px]"
+              onChange={(e) => setCategory(e.target.value)}
+              // onSelect={(e) => onChangeStatus(e)}
+              defaultValue={props.category ?? 'None'}
+              name="category"
+              id="category"
+            >
+              {[{ slug: 'none', name: 'None' }, ...props.listCategory].map(
+                (c) => (
+                  <option key={c.slug} value={c.slug}>
+                    {c.name}
+                  </option>
+                )
+              )}
+            </select>
+          </div>
           <div className="mb-6">
             <label
               htmlFor="title"
@@ -258,7 +285,7 @@ const BlogEditor2 = (props: IPostEditorProps) => {
             </select>
             <label
               htmlFor="save-submit"
-              className="flex gap-2 w-40 items-center justify-center hover:cursor-pointer hover:shadow-form rounded-md bg-indigo-600 py-3 px-8 text-center text-base font-semibold text-white outline-none"
+              className="flex gap-2 w-40 items-center justify-center hover:cursor-pointer hover:shadow-form rounded-md bg-blue-600 py-3 px-8 text-center text-base font-semibold text-white outline-none"
             >
               {saving ? (
                 <>
@@ -292,6 +319,7 @@ const BlogEditor2 = (props: IPostEditorProps) => {
               <form
                 className="flex items center gap-2 items-center"
                 onSubmit={(e) => onDeleteConfirm(e)}
+                autoComplete="off"
               >
                 <div className="flex flex-col">
                   <label htmlFor="slug-confirm-removing" className="text-sm">

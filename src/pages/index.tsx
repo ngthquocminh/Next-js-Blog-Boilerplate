@@ -594,7 +594,7 @@ export const getServerSideProps: GetServerSideProps<IhomeProps> = async () => {
   const config = getDataConfig();
   const posts = config.blogs.slugs
     .map((slug) =>
-      getPostBySlug(slug, ['slug', 'title', 'description', 'date', 'image'])
+      getPostBySlug({ slug }, ['slug', 'title', 'description', 'date', 'image'])
     )
     .filter((p) => p !== null);
   return {

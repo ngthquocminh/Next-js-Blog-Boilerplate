@@ -3,7 +3,11 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 
 import BlogEditor2 from '../../../admin/components/BlogEditor2';
-import { getPostBySlug, IPostEditorProps } from '../../../utils/Content';
+import {
+  getAllCategories,
+  getPostBySlug,
+  IPostEditorProps,
+} from '../../../utils/Content';
 
 type IPostUrl = {
   slug: string;
@@ -18,7 +22,7 @@ export const getServerSideProps: GetServerSideProps<
   IPostUrl
 > = async ({ params }) => {
   const post = getPostBySlug(
-    params!.slug,
+    { slug: params!.slug },
     [
       'title',
       'description',
@@ -32,23 +36,30 @@ export const getServerSideProps: GetServerSideProps<
     false
   );
 
+  const listCategory = getAllCategories();
+
   if (!post) {
     return {
       notFound: true,
     };
   }
 
+  let props: IPostEditorProps = {
+    listCategory,
+    title: post?.title ?? '',
+    description: post?.description ?? '',
+    date: post?.date ?? '',
+    modified_date: post?.modified_date ?? '',
+    image: post?.image ?? '',
+    content: post?.content ?? '',
+    slug: params?.slug ?? '',
+    status: parseInt(post?.status ?? '0', 2),
+  };
+
+  if (post?.category) props = { ...props, category: post?.category };
+
   return {
-    props: {
-      title: post?.title ?? '',
-      description: post?.description ?? '',
-      date: post?.date ?? '',
-      modified_date: post?.modified_date ?? '',
-      image: post?.image ?? '',
-      content: post?.content ?? '',
-      slug: params?.slug ?? '',
-      status: parseInt(post?.status ?? '0', 2),
-    },
+    props,
   };
 };
 

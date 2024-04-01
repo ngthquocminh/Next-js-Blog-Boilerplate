@@ -3,7 +3,7 @@ import { join } from 'path';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { verifyJwtToken } from '../../admin/auth';
+import { verifyJwtToken } from '../../../admin/auth';
 
 export interface IBookingItem {
   id: string;

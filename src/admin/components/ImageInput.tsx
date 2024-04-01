@@ -65,7 +65,7 @@ const ImageInput = ({
         </div>
       </div>
       {thumbnailImage && (
-        <img src={thumbnailImage.toString()} className="h-28" />
+        <img src={thumbnailImage.toString()} alt="" className="h-28" />
       )}
     </div>
   );

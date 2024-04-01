@@ -2,7 +2,7 @@ import fs from 'fs';
 
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { verifyJwtToken } from '../../admin/auth';
+import { verifyJwtToken } from '../../../admin/auth';
 import {
   IAppConfig,
   IAppConfigBlog,
@@ -11,7 +11,7 @@ import {
   IAppConfigHeader,
   IAppConfigNavbar,
   IAppConfigSEO,
-} from '../../utils/Content';
+} from '../../../utils/Content';
 
 const SETTING_FILE = '_data/config.json';
 
@@ -68,29 +68,23 @@ function saveSetting(data: any) {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === 'POST') {
-    const { cookies } = req;
-    const token = cookies.token ?? null;
-    const hasVerifiedToken = token && (await verifyJwtToken(token));
-    if (!hasVerifiedToken) {
-      res.status(403).send({ error: 'Unauthorized' });
-      return;
-    }
-    const data = JSON.parse(req.body);
-
-    try {
-      const status = saveSetting(data);
-      if (status) {
-        res.status(200).json({ message: 'OK' });
-        return;
-      }
-      res.status(400).json({ error: 'Failed' });
-    } catch (e) {
-      res.status(400).json({ error: e });
-    }
-  } else {
+  if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST']);
-    res.status(405).json({ error: `Method ${req.method} not allowed` });
+    return res.status(405).json({ error: `Method ${req.method} not allowed` });
+  }
+  const { cookies } = req;
+  const token = cookies.token ?? null;
+  const hasVerifiedToken = token && (await verifyJwtToken(token));
+  if (!hasVerifiedToken) return res.status(403).send({ error: 'Unauthorized' });
+
+  const data = JSON.parse(req.body);
+
+  try {
+    const status = saveSetting(data);
+    if (status) return res.status(200).json({ message: 'OK' });
+    return res.status(400).json({ error: 'Failed' });
+  } catch (e) {
+    return res.status(400).json({ error: e });
   }
 };
 

@@ -3,7 +3,45 @@ import { join } from 'path';
 
 import matter from 'gray-matter';
 
+export const POSTS_DIRECTORY = join(process.cwd(), '_data/posts');
+
+export const getAllCategoryIds = (): string[] => {
+  const dirs = fs.readdirSync(POSTS_DIRECTORY, { withFileTypes: true });
+  const catsInfo = dirs
+    .filter((folder) => !folder.isFile()) // only get folder
+    .map((folder) => folder.name);
+  return catsInfo;
+};
+
+export const getCategory = (slug: string): { [key: string]: string } | null => {
+  try {
+    return JSON.parse(
+      fs.readFileSync(join(POSTS_DIRECTORY, slug, '__info__.json'), 'utf8')
+    );
+  } catch {
+    return null;
+  }
+};
+
+export const getAllCategories = (): { [key: string]: string }[] => {
+  const dirs = fs.readdirSync(POSTS_DIRECTORY, { withFileTypes: true });
+  const catsInfo = dirs
+    .filter((folder) => !folder.isFile()) // only get folder
+    .map((folder) => {
+      const info: { [key: string]: string } = JSON.parse(
+        fs.readFileSync(
+          join(POSTS_DIRECTORY, folder.name, '__info__.json'),
+          'utf8'
+        )
+      );
+      return { ...info, slug: folder.name };
+    });
+
+  return catsInfo;
+};
+
 export type IPostEditorProps = {
+  listCategory: { [key: string]: string }[];
   title: string;
   description: string;
   date?: string;
@@ -12,6 +50,7 @@ export type IPostEditorProps = {
   content: string;
   slug: string;
   status?: number;
+  category?: string;
 };
 
 export interface IAppConfig {
@@ -70,19 +109,55 @@ export type PostItems = {
   [key: string]: string;
 };
 
-export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
+interface IPostSlug {
+  slug: string;
+  category?: string;
+}
+
+export function getPostSlugs(category: string | null | undefined = undefined) {
+  const childs = fs.readdirSync(postsDirectory, { withFileTypes: true });
+  let postsFound: IPostSlug[] = [];
+  childs.forEach((c) => {
+    if (
+      c.isFile() &&
+      (category === undefined || category === null) &&
+      c.name.endsWith('.md')
+    )
+      postsFound.push({ slug: c.name });
+    if (
+      !c.isFile() &&
+      (category === undefined || category === null || category === c.name)
+    ) {
+      const listPost = fs.readdirSync(join(postsDirectory, c.name), {
+        withFileTypes: true,
+      });
+      listPost.forEach((p) => {
+        postsFound.push({ category: c.name, slug: p.name });
+      });
+    }
+  });
+
+  postsFound = postsFound
+    .filter((p) => p.slug?.endsWith('.md'))
+    .map((p) => ({ ...p, slug: p.slug.replace('.md', '') }));
+  return postsFound;
 }
 
 export function getPostBySlug(
-  slug: string,
+  slug: IPostSlug,
   fields: string[] = [],
   onlyPublished = true
 ) {
-  const realSlug = slug.replace(/\.md$/, '');
-  const fullPath = join(postsDirectory, `${realSlug}.md`);
+  const realSlug = slug.slug;
+  let { category } = slug;
+
   let fileContents = '';
   try {
+    if (!category)
+      category = getPostSlugs().filter((p) => p.slug === realSlug)[0].category;
+    const fullPath = category
+      ? join(postsDirectory, category, `${realSlug}.md`)
+      : join(postsDirectory, `${realSlug}.md`);
     fileContents = fs.readFileSync(fullPath, 'utf8');
   } catch (err) {
     return null;
@@ -91,6 +166,8 @@ export function getPostBySlug(
   if (data.status !== 1 && onlyPublished) return null;
 
   const items: PostItems = {};
+
+  if (category) items.category = category;
 
   // Ensure only the minimal needed data is exposed
   fields.forEach((field) => {
@@ -107,6 +184,17 @@ export function getPostBySlug(
 
   return items;
 }
+
+export const getPostsByCategory = (
+  category: string,
+  fields: string[] = [],
+  onlyPublished = true
+) => {
+  const slugs = getPostSlugs(category);
+  return slugs
+    .map((slug) => getPostBySlug(slug, fields, onlyPublished))
+    .filter((p) => p !== null);
+};
 
 export function getAllPosts(fields: string[] = [], onlyPublished = true) {
   const slugs = getPostSlugs();

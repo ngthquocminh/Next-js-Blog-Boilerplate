@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from 'react';
 
-import { useRouter } from 'next/router';
-
 import { IAppConfig, IAppConfigLink } from '../../utils/Content';
 
 const SiteSettings = () => {
   const [config, setConfig] = useState<IAppConfig>();
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    if (config == null) {
-      (async () => {
-        const response = await fetch('/api/get-site-setting', {
-          method: 'GET',
-        });
-        const body = await response.json();
-        setConfig(body.data);
-        console.log(body.data);
-      })();
-    }
+    (async () => {
+      const response = await fetch('/api/siteSetting/get', {
+        method: 'GET',
+      });
+      const body = await response.json();
+      setConfig(body.data);
+      console.log(body.data);
+    })();
   }, []);
 
   function convertLinksData2Text(links: IAppConfigLink[]): string {
@@ -47,16 +42,16 @@ const SiteSettings = () => {
       object[key] = value.toString();
     });
     const json = JSON.stringify(object);
-    const response = await fetch('/api/save-setting', {
+    const response = await fetch('/api/siteSetting/update', {
       method: 'POST',
       body: json,
     });
 
     if (response.ok) {
-      router.reload();
-      setErrorMessage('');
+      // router.reload();
+      setErrorMessage('Saved!');
     } else setErrorMessage('Faild to save');
-
+    setTimeout(() => setErrorMessage(''), 3000);
     setLoading(false);
   };
 
@@ -301,7 +296,7 @@ const SiteSettings = () => {
               ></textarea>
             </div>
           </div>
-          <p className="text-sm text-red-500">{errorMessage}</p>
+          <p className="text-sm text-gray-600 py-4">{errorMessage}</p>
           <label
             htmlFor="form-submit"
             className="flex gap-2 items-center justify-center hover:cursor-pointer hover:shadow-form w-full rounded-md bg-indigo-600 py-2 px-8 text-center text-base font-semibold text-white outline-none"

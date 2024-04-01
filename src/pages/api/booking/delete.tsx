@@ -3,7 +3,7 @@ import path, { join } from 'path';
 
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { verifyJwtToken } from '../../admin/auth';
+import { verifyJwtToken } from '../../../admin/auth';
 
 const BOOKING_DIRECTORY = path.join(process.cwd(), '_data/booking/');
 

@@ -131,7 +131,7 @@ const AdminPanel = ({ children }: IAdminPanelProps) => {
             <div className="absolute bottom-0 my-10">
               <a
                 className="flex items-center py-2 px-8 text-gray-500 hover:text-gray-600"
-                href="#"
+                href='https://docs.google.com/document/d/1XvgKX1kD0hOfrDApP-S1F4HYFDH_tV4vO7MQWyr3H7E/edit#heading=h.ajm7mp4dmi0r'
               >
                 <svg
                   className="h-5 w-5"
@@ -146,7 +146,7 @@ const AdminPanel = ({ children }: IAdminPanelProps) => {
                     fill="currentColor"
                   />
                 </svg>
-                <span className="mx-4 font-medium">Support</span>
+                <span className="mx-4 font-medium">Hướng dẫn</span>
               </a>
             </div>
           </div>

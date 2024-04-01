@@ -21,7 +21,7 @@ export default async function handler(
         })
           .setProtectedHeader({ alg: 'HS256' })
           .setIssuedAt()
-          .setExpirationTime('3000s')
+          .setExpirationTime('4h')
           .sign(getJwtSecretKey());
 
         // const response = NextResponse.json(

@@ -3,14 +3,18 @@ import React from 'react';
 import { format } from 'date-fns';
 import { GetServerSideProps } from 'next';
 
-import { Content } from '../../content/Content';
-import { Meta } from '../../layout/Meta';
-import { Main } from '../../templates/Main';
-import { imageKitExtract, parseDateString } from '../../utils/Common';
-import { IAppConfig, getDataConfig, getPostBySlug } from '../../utils/Content';
+import { Content } from '../../../content/Content';
+import { Meta } from '../../../layout/Meta';
+import { Main } from '../../../templates/Main';
+import { imageKitExtract, parseDateString } from '../../../utils/Common';
+import {
+  IAppConfig,
+  getPostBySlug,
+  getDataConfig,
+} from '../../../utils/Content';
 
 type IPostUrl = {
-  slug: string;
+  slug: string[];
 };
 
 type IPostProps = {
@@ -65,15 +69,24 @@ export const getServerSideProps: GetServerSideProps<
   IPostProps,
   IPostUrl
 > = async ({ params }) => {
-  const post = getPostBySlug({ slug: params!.slug }, [
-    'title',
-    'description',
-    'date',
-    'modified_date',
-    'image',
-    'content',
-    'slug',
-  ]);
+  if (params!.slug.length !== 2) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const post = getPostBySlug(
+    { slug: params!.slug[1], category: params!.slug[0] },
+    [
+      'title',
+      'description',
+      'date',
+      'modified_date',
+      'image',
+      'content',
+      'slug',
+    ]
+  );
 
   if (!post) {
     return {
