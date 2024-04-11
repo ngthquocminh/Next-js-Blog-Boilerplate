@@ -10,7 +10,8 @@ export interface IBookingItem {
   name: string;
   phone: string;
   email: string;
-  date: string;
+  time: string;
+  mailSent: boolean;
   resolved: boolean;
 }
 
@@ -27,7 +28,14 @@ const loadBooking = (file: string): IBookingItem | null => {
 
 const getAllBookings = () => {
   const files = fs.readdirSync('_data/booking/');
-  return files.map((f) => loadBooking(f)).filter((b) => b != null);
+  return files
+    .map((f) => loadBooking(f))
+    .filter((b) => b != null)
+    .sort((b1, b2) => {
+      if (b1 && b2) return b1.time > b2.time ? -1 : 1;
+      if (b1) return -1;
+      return 1;
+    });
 };
 
 export default async function handler(

@@ -206,6 +206,7 @@ const BlogEditor2 = (props: IPostEditorProps) => {
             </label>
             <input
               type="text"
+              spellCheck={false}
               id="title"
               name="title"
               minLength={20}
@@ -224,6 +225,7 @@ const BlogEditor2 = (props: IPostEditorProps) => {
               Description
             </label>
             <textarea
+              spellCheck={false}
               id="description"
               name="description"
               onChange={(e) => setDescription(e.target.value)}

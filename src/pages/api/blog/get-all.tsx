@@ -21,7 +21,7 @@ export default async function handler(
       ['slug', 'title', 'date', 'modified_date', 'status'],
       false
     );
-    console.log(posts);
+    // console.log(posts);
     return res.status(200).json({ success: true, data: posts });
   } catch (err) {
     return res.status(500).send({ error: 'Failed to fetch data', data: [] });

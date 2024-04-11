@@ -3,6 +3,8 @@ import { join } from 'path';
 
 import matter from 'gray-matter';
 
+import { parseDateString } from './Common';
+
 export const POSTS_DIRECTORY = join(process.cwd(), '_data/posts');
 
 export const getAllCategoryIds = (): string[] => {
@@ -193,7 +195,12 @@ export const getPostsByCategory = (
   const slugs = getPostSlugs(category);
   return slugs
     .map((slug) => getPostBySlug(slug, fields, onlyPublished))
-    .filter((p) => p !== null);
+    .filter((p) => p !== null)
+    .sort((post1, post2) => {
+      const d1 = parseDateString(post1.date);
+      const d2 = parseDateString(post2.date);
+      return d1 > d2 ? -1 : 1; // newest on top
+    });
 };
 
 export function getAllPosts(fields: string[] = [], onlyPublished = true) {
@@ -201,11 +208,10 @@ export function getAllPosts(fields: string[] = [], onlyPublished = true) {
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields, onlyPublished))
     .filter((p) => p !== null)
-    // sort posts by date in descending order
     .sort((post1, post2) => {
-      if (post1 && post2) return post1.date > post2.date ? -1 : 1;
-      if (post1) return -1;
-      return 1;
+      const d1 = parseDateString(post1.date);
+      const d2 = parseDateString(post2.date);
+      return d1 > d2 ? -1 : 1; // newest on top
     });
   return posts;
 }

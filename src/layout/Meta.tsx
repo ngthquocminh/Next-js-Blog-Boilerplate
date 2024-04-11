@@ -93,6 +93,16 @@ const Meta = (props: IMetaProps) => {
           content={props.config.seo.site_name}
           key="og:site_name"
         />
+        {!props.post && (
+          <>
+            <meta property="og:type" content="website" key="og:type" />
+            <meta
+              property="og:image"
+              content={`${props.config.seo.url}/assets/images/tn7-header-image.jpg`}
+              key="og:image"
+            />
+          </>
+        )}
         {props.post && (
           <>
             <meta property="og:type" content="article" key="og:type" />

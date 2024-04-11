@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import Link from 'next/link';
+
 import { PostItems } from '../../utils/Content';
 
 enum BlogStatus {
@@ -51,7 +53,11 @@ const BlogPostPanel = () => {
         </div>
         <div className="bg-white pb-4 px-4 rounded-md w-full">
           <div className="flex justify-between w-full pt-6 ">
-            <p className="ml-3"></p>
+            <p className="ml-3">
+              <Link href="/blogs">
+                <a>blogs/</a>
+              </Link>
+            </p>
             {/* <svg width="14" height="4" viewBox="0 0 14 4" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g opacity="0.4">
                 <circle cx="2.19796" cy="1.80139" r="1.38611" fill="#222222" />

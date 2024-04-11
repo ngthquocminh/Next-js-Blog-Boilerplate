@@ -213,6 +213,7 @@ const BookingPanel = () => {
                   <th className="px-4 py-2 bg-gray-200 ">Email</th>
                   <th className="px-4 py-2 bg-gray-200 ">Phone</th>
                   <th className="px-4 py-2 ">Date</th>
+                  <th className="px-4 py-2 ">Mail Sent</th>
                   <th className="px-4 py-2 ">Status</th>
                   <th className="px-4 py-2 "></th>
                 </tr>
@@ -225,7 +226,7 @@ const BookingPanel = () => {
                   )
                   .map((booking) => (
                     <tr
-                      key={`${booking.name}_${booking.phone}_${booking.date}`}
+                      key={`${booking.id}`}
                       className="hover:bg-gray-100 border-b border-gray-200 py-10"
                     >
                       <td className="px-4 py-4">
@@ -233,7 +234,14 @@ const BookingPanel = () => {
                       </td>
                       <td className="px-4 py-4">{booking.email}</td>
                       <td className="px-4 py-4">{booking.phone}</td>
-                      <td className="px-4 py-4">{booking.date}</td>
+                      <td className="px-4 py-4">{booking.time}</td>
+                      <td
+                        className={`px-4 py-4${
+                          booking.mailSent ? '' : ' text-red-800'
+                        }`}
+                      >
+                        {booking.mailSent ? 'Đã gửi' : 'Chưa gửi'}
+                      </td>
                       <td className="px-4 py-4">
                         <BookingStatusToggle
                           booking={booking}

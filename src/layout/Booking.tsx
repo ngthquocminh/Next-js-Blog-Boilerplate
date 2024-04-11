@@ -1,8 +1,13 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 
 const Booking = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(0);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [status]);
+
   const bookingSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
@@ -30,7 +35,6 @@ const Booking = () => {
       setStatus(-1);
       // console.error(error)
     }
-    setLoading(false);
   };
 
   return (
@@ -93,7 +97,7 @@ const Booking = () => {
               >
                 <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
               </svg>
-              <p className="text-base text-center text-gray-300">
+              <p className="py-3 text-base text-center text-gray-300">
                 Chúng tôi đã nhận được thông tin của quý khách.
                 <br /> Đội ngũ tư vấn sẽ liên lạc với bạn trong thời gian sớm
                 nhất.{' '}
@@ -108,9 +112,15 @@ const Booking = () => {
               >
                 <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
               </svg>
-              <p className="text-base text-center text-gray-300">
+              <p className="py-3 text-base text-center text-gray-300">
                 Lỗi trong lúc xử lý. Vui lòng thử lại!
               </p>
+              <div
+                className="py-2 text-sm text-red-800 underline hover:cursor-pointer"
+                onClick={() => setStatus(0)}
+              >
+                Thử lại
+              </div>
             </>
           )}
         </div>

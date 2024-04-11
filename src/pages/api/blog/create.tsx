@@ -7,7 +7,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import slugify from 'slugify';
 
 import { verifyJwtToken } from '../../../admin/auth';
-import { imageKitCombine } from '../../../utils/Common';
+import { getCurrentDateString, imageKitCombine } from '../../../utils/Common';
 import {
   getAllCategoryIds,
   getPostBySlug,
@@ -56,7 +56,7 @@ function createPost(
   const content = fields.content ? fields.content[0] : '';
   const status = fields.status ? fields.status[0] : '0';
 
-  const dateStr = new Date().toLocaleDateString('vi-VN');
+  const dateStr = getCurrentDateString();
   const date = dateStr;
   const modifiedDate = date;
   const fullSlug = `${preSlug}-${slugify(`${dateStr}`)}`;

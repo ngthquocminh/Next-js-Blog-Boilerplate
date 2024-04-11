@@ -34,18 +34,6 @@ html {
   background-color: #f6f6f6;
 }
 
-.procedures-section-bg {
-  background-image: url('/assets/images/procedures-section-bg.png');
-  background-attachment: scroll;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  z-index: -1;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-}
-
 .menu-button,
 .menu-button::before,
 .menu-button::after {
@@ -69,6 +57,10 @@ html {
 }
 
 @media (max-width: 767px) {
+
+  .hide-on-phone {
+    display: none;
+  }
 
   #menu-toggle:checked + .menu-button-container .menu-button::before {
     margin-top: 0px;

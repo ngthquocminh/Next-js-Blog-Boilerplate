@@ -6,15 +6,48 @@ export const stringToSlug = (str: string) => {
     .replace(/^-+|-+$/g, '');
 };
 
-export function parseDateString(dateString: string) {
-  if (
-    dateString === undefined ||
-    dateString === null ||
-    dateString.length === 0
-  )
+export function dateTimeString(date: Date) {
+  // Extract date components
+  const day = date.getDate();
+  const month = date.getMonth() + 1; // Months are 0-based (January = 0)
+  const year = date.getFullYear();
+
+  // Create the formatted date string
+  const formattedDate = `${day}/${month}/${year}`;
+  return formattedDate;
+}
+
+export function dateString(date: Date) {
+  // Extract date components
+  const day = date.getDate();
+  const month = date.getMonth() + 1; // Months are 0-based (January = 0)
+  const year = date.getFullYear();
+
+  // Extract time components
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+
+  // Create the formatted date string
+  const formattedDate = `${day}/${month}/${year}, ${hours}:${minutes}:${seconds}`;
+  return formattedDate;
+}
+
+export function getCurrentDateString() {
+  const currentDate = new Date();
+  return dateTimeString(currentDate);
+}
+
+export function getCurrentDateTimeString() {
+  const currentDate = new Date();
+  return dateTimeString(currentDate);
+}
+
+export function parseDateString(dateStr: string) {
+  if (dateStr === undefined || dateStr === null || dateStr.length === 0)
     return new Date();
 
-  const parts = dateString.split('/'); // Split the string by '/'
+  const parts = dateStr.split('/'); // Split the string by '/'
   const day = parseInt(parts[0], 10); // Convert day to an integer
   const month = parseInt(parts[1], 10) - 1; // Convert month to 0-based index
   const year = parseInt(parts[2], 10);

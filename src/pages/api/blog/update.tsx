@@ -6,7 +6,11 @@ import ImageKit from 'imagekit';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { verifyJwtToken } from '../../../admin/auth';
-import { imageKitCombine, imageKitExtract } from '../../../utils/Common';
+import {
+  getCurrentDateTimeString,
+  imageKitCombine,
+  imageKitExtract,
+} from '../../../utils/Common';
 import {
   getAllCategoryIds,
   getPostBySlug,
@@ -81,7 +85,7 @@ function savePost(
   const content = fields.content ? fields.content[0] : post.content;
   const status = fields.status ? fields.status[0] : post.status;
   const { date } = post;
-  const modifiedDate = new Date().toLocaleDateString('vi-VN');
+  const modifiedDate = getCurrentDateTimeString();
 
   const fullBlogData = `---
 title: ${title}
