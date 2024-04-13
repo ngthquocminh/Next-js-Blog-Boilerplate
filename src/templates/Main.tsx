@@ -70,7 +70,7 @@ const Main = (props: IMainProps) => {
           <ul className="flex gap-7 items-right justify-center md:justify-end">
             <li className="social-icons__item">
               <a
-                className="h-5 w-5"
+                className="h-5 flex gap-1"
                 href="https://www.facebook.com/groups/dinhcunhanhgon"
                 aria-describedby="a11y-external-message"
               >
@@ -86,11 +86,12 @@ const Main = (props: IMainProps) => {
                     d="M18.05.811q.439 0 .744.305t.305.744v16.637q0 .439-.305.744t-.744.305h-4.732v-7.221h2.415l.342-2.854h-2.757v-1.83q0-.659.293-1t1.073-.342h1.488V3.762q-.976-.098-2.171-.098-1.634 0-2.635.964t-1 2.72V9.47H7.951v2.854h2.415v7.221H1.413q-.439 0-.744-.305t-.305-.744V1.859q0-.439.305-.744T1.413.81H18.05z"
                   ></path>
                 </svg>
+                <p className="text-black hover:decoration-none">Group</p>
               </a>
             </li>
             <li className="social-icons__item">
               <a
-                className="h-5 w-5"
+                className="h-5 flex gap-1"
                 href="https://www.facebook.com/TN7Solutions/"
                 aria-describedby="a11y-external-message"
               >
@@ -106,6 +107,7 @@ const Main = (props: IMainProps) => {
                     d="M18.05.811q.439 0 .744.305t.305.744v16.637q0 .439-.305.744t-.744.305h-4.732v-7.221h2.415l.342-2.854h-2.757v-1.83q0-.659.293-1t1.073-.342h1.488V3.762q-.976-.098-2.171-.098-1.634 0-2.635.964t-1 2.72V9.47H7.951v2.854h2.415v7.221H1.413q-.439 0-.744-.305t-.305-.744V1.859q0-.439.305-.744T1.413.81H18.05z"
                   ></path>
                 </svg>
+                <p className="text-black hover:decoration-none"> Fanpage </p>
               </a>
             </li>
           </ul>
