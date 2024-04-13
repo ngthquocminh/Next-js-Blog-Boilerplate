@@ -413,7 +413,7 @@ const Home = (props: IhomeProps) => {
               alt="Lộ trình định cư theo diện tại Canada"
             />
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1 text-center">
-              Lộ trình định cư theo diện tại Canada
+              Lộ trình định cư diện du học tại Canada
             </h4>
             <p className="text-gray-600 text-center h-24 text-base">
               Giải pháp du học và mang theo cả gia đình đi định cư tại Canada.
