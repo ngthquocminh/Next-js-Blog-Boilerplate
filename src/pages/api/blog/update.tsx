@@ -88,8 +88,8 @@ function savePost(
   const modifiedDate = getCurrentDateTimeString();
 
   const fullBlogData = `---
-title: ${title}
-description: ${description}
+title: "${title}"
+description: "${description}"
 date: ${date}
 modified_date: ${modifiedDate}
 image: ${imageStr}

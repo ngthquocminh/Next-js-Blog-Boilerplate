@@ -81,6 +81,15 @@ export const getServerSideProps: GetServerSideProps<
     };
   }
 
+  if (post.category) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/blogs/${post.category}/${post.slug}`,
+      },
+    };
+  }
+
   const config = getDataConfig();
 
   return {

@@ -63,8 +63,8 @@ function createPost(
   const createdFile = `${fullSlug}.md`;
 
   const fullBlogData = `---
-title: ${title}
-description: ${description}
+title: "${title}"
+description: "${description}"
 date: ${date}
 modified_date: ${modifiedDate}
 image: ${thumbnailPath}
