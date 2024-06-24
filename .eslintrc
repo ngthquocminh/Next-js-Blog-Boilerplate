@@ -11,7 +11,8 @@
       {
         "singleQuote": true
       }
-    ]
+    ],
+    "react/no-unescaped-entities": "off"
   },
   "overrides": [
     // Configuration for TypeScript files

@@ -31,7 +31,8 @@ function saveSetting(data: any) {
   const contact: IAppConfigContact = {
     phone: data['contact-phone'],
     email: data['contact-email'],
-    address: data['contact-address'],
+    address1: data['contact-address1'],
+    address2: data['contact-address2'],
   };
 
   const footer: IAppConfigFooter = {
@@ -44,12 +45,12 @@ function saveSetting(data: any) {
   };
 
   const navbar: IAppConfigNavbar = {
-    links: (data['navbar-links'] as string)
-      .split('\n')
-      .map((l) => l.toString().split('||'))
-      .map((l) => {
-        return { name: l[1], url: l[0] };
-      }),
+    links: data['navbar-links'] as string,
+    // .split('\n')
+    // .map((l) => l.toString().split('||'))
+    // .map((l) => {
+    //   return { name: l[1], url: l[0] };
+    // }),
   };
 
   const blogs: IAppConfigBlog = {

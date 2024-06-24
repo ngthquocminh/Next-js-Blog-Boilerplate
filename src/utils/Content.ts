@@ -85,7 +85,8 @@ export interface IAppConfigFooter {
 }
 
 export interface IAppConfigNavbar {
-  links: Array<IAppConfigLink>;
+  // links: Array<IAppConfigLink>;
+  links: string;
 }
 
 export interface IAppConfigBlog {
@@ -95,7 +96,8 @@ export interface IAppConfigBlog {
 export interface IAppConfigContact {
   phone: string;
   email: string;
-  address: string;
+  address1: string;
+  address2: string;
 }
 
 export function getDataConfig(): IAppConfig {

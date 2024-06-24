@@ -34,9 +34,9 @@ const Home = (props: IhomeProps) => {
         />
       }
     >
-      {/* Into */}
-      <div className="pt-16 pb-8 relative mt-12 mb-6">
-        <div className="absolute left-1/2 -translate-y-1/2 -translate-x-1/2 top-1/2 pointer-events-none -z-1">
+      {/* Intro */}
+      <div className="mt-12 pt-28 pb-24 relative mb-6 intro-has-bg">
+        <div className="absolute left-1/2 -translate-y-1/2 -translate-x-1/2 top-1/2 pointer-events-none z-1">
           <div className="relative w-1000px hide-on-phone">
             <div className="absolute left-2 -translate-y-3/5 top-1/2 pointer-events-none">
               <Canada
@@ -49,29 +49,31 @@ const Home = (props: IhomeProps) => {
             </div>
           </div>
         </div>
-        <h1 className="font-bold text-center text-gray-900">
-          <span className="text-3xl md:text-5xl font-extrabold">
-            {props.config.header.title.split('|')[0]}
-          </span>
-          <br />
-          <span className="text-4xl md:text-6xl bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text text-transparent font-extrabold leading-none">
-            {props.config.header.title.split('|')[1]}
-          </span>
-          <br />
-          <span className="text-xl md:text-3xl">
-            {props.config.header.title.split('|')[2]}
-          </span>
-        </h1>
-        <div className="text-xl text-center max-w-[600px] px-4 md:px-1 mx-auto my-10">
-          {/* {props.config.header.description.split('|')
-          .map(p => <p className='text-xl'>{p}</p>)} */}
-          <p>
-            Những chuyên gia, luật sư hàng đầu về di trú sẽ đánh giá hồ sơ của
-            bạn thật chi tiết và đưa ra những giải pháp{' '}
-            <span className="whitespace-nowrap">tốt nhất</span>,{' '}
-            <span className="whitespace-nowrap">hiệu quả </span>
-            cả về thời gian và tài chính.
-          </p>
+        <div className="bg-whitex bg-opacity-90 md:p-6 p-0 mx-auto max-w-[620px]">
+          <h1 className="font-bold text-center text-gray-900 px-2">
+            <span className="text-3xl md:text-5xl font-extrabold whitespace-nowrap">
+              {props.config.header.title.split('|')[0]}
+            </span>
+            <br />
+            <span className="text-4xl md:text-6xl text-[#9f2c13] bg-clip-text font-extrabold leading-none whitespace-nowrap">
+              {props.config.header.title.split('|')[1]}
+            </span>
+            <br />
+            <span className="text-lg md:text-3xl whitespace-nowrap">
+              {props.config.header.title.split('|')[2]}
+            </span>
+          </h1>
+          <div className="text-xl text-gray-900 text-center px-4 py-4 md:px-8 md:py-6 mx-auto my-10 bg-white bg-opacity-40">
+            {/* {props.config.header.description.split('|')
+            .map(p => <p className='text-xl'>{p}</p>)} */}
+            <p>
+              Những chuyên gia, luật sư hàng đầu về di trú sẽ đánh giá hồ sơ của
+              bạn thật chi tiết và đưa ra những giải pháp{' '}
+              <span className="whitespace-nowrap">tốt nhất</span>,{' '}
+              <span className="whitespace-nowrap">hiệu quả </span>
+              cả về thời gian và tài chính.
+            </p>
+          </div>
         </div>
       </div>
       {/* Advantages */}

@@ -19,7 +19,7 @@ export type IBlogGalleryProps = {
 const BlogGallery = (props: IBlogGalleryProps) => {
   return (
     <>
-      <h2 className="mx-auto max-w-screen-lg text-3xl font-bold text-center">
+      <h2 className="mt-24 mx-auto max-w-screen-lg text-3xl font-bold text-center">
         {props.title}
       </h2>
       <h3 className="mx-auto max-w-screen-lg text-xl text-center max-w-[750px]">

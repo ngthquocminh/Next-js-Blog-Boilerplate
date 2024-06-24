@@ -7,7 +7,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import slugify from 'slugify';
 
 import { verifyJwtToken } from '../../../admin/auth';
-import { getCurrentDateString, imageKitCombine } from '../../../utils/Common';
+import {
+  getCurrentDateString,
+  getCurrentDateTimeString,
+  imageKitCombine,
+} from '../../../utils/Common';
 import {
   getAllCategoryIds,
   getPostBySlug,
@@ -57,14 +61,14 @@ function createPost(
   const status = fields.status ? fields.status[0] : '0';
 
   const dateStr = getCurrentDateString();
-  const date = dateStr;
+  const date = getCurrentDateTimeString();
   const modifiedDate = date;
   const fullSlug = `${preSlug}-${slugify(`${dateStr}`)}`;
   const createdFile = `${fullSlug}.md`;
 
   const fullBlogData = `---
-title: "${title}"
-description: "${description}"
+title: '${title}'
+description: '${description}'
 date: ${date}
 modified_date: ${modifiedDate}
 image: ${thumbnailPath}

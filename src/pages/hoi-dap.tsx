@@ -293,12 +293,12 @@ const hoiDap = (props: IhomeProps) => {
         />
       }
     >
-      <section className="md:pt-5 my-5">
+      <section className="pt-20 md:pt-4 my-16">
         <div className="container flex flex-col justify-center p-4 mx-auto md:p-8">
-          <p className="p-2 text-base font-medium tracking-wider text-center uppercase">
+          <p className="p-2 text-large font-medium tracking-wider text-center uppercase">
             Giải đáp
           </p>
-          <h2 className="mb-20 text-3xl font-bold leading-none text-center sm:text-5xl">
+          <h2 className="mb-20 text-3xl font-bold leading-none text-center sm:text-4xl">
             Những câu hỏi thường gặp
           </h2>
           <div className="flex flex-col divide-y sm:px-16 lg:px-32 xl:px-48 dark:divide-gray-300">

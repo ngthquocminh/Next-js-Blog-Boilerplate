@@ -29,6 +29,8 @@ const PaginatePosts = (props: IBlogGalleryProps) => (
       posts={props.posts}
       pagination={props.pagination}
       config={props.config}
+      title={''}
+      description={''}
     />
   </Main>
 );
@@ -41,6 +43,15 @@ export const getServerSideProps: GetServerSideProps<
   const config = getDataConfig();
   const pages = convertTo2D(posts, paginationSize);
   const currentPage = Number(params!.page.replace('page-', ''));
+  if (
+    Number.isNaN(currentPage) ||
+    currentPage < 0 ||
+    currentPage >= pages.length
+  ) {
+    return {
+      notFound: true,
+    };
+  }
   const currentIndex = currentPage - 1;
 
   const pagination: IPaginationProps = {};
@@ -58,6 +69,8 @@ export const getServerSideProps: GetServerSideProps<
       posts: pages[currentIndex].filter((p) => p !== null),
       pagination,
       config,
+      title: '',
+      description: '',
     },
   };
 };

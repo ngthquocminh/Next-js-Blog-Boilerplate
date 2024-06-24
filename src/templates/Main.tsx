@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react';
 
+import Script from 'next/script';
+
 import { Navbar } from '../navigation/Navbar';
 import { IAppConfig } from '../utils/Content';
 
@@ -13,16 +15,16 @@ const Main = (props: IMainProps) => {
   return (
     <div className="antialiased w-full relative">
       <Navbar config={props.config}></Navbar>
-      <div className="w-full text-gray-700 px-3 md:px-0 pt-20">
+      <div className="w-full text-gray-700 px-3 md:px-0">
         {props.meta}
         <div className="mx-auto">
-          <div className="text-xl py-5">{props.children}</div>
+          <div className="text-xl">{props.children}</div>
         </div>
       </div>
 
-      <div className="w-full text-gray-700 px-3 md:px-0 footer-bg-color pt-6 pb-6">
+      <div className="w-full text-gray-700 px-3 md:px-0 footer-bg-color">
         <div className="max-w-screen-md mx-auto text-center py-8 text-sm text-right flex flex-col md:flex-row gap-16 md:gap-16">
-          <div className="md:w-2/5">
+          <div className="md:w-2/6">
             <img
               src="/logo_dark.png"
               className="ml-auto mr-auto h-12 mb-8 mt-8"
@@ -32,14 +34,20 @@ const Main = (props: IMainProps) => {
               Giải pháp định cư Canada & Hoa Kỳ <br /> qua du học hoặc đầu tư
             </p>
           </div>
-          <div className="md:w-3/5 text-center md:text-left justify-center flex flex-col">
+          <div className="md:w-4/6 text-center md:text-left justify-center flex flex-col">
             <div className="my-6 text-center md:text-left justify-center flex flex-col">
               <p className="text-lg">Liên hệ</p>
               <p className="leading-6">
                 <b>
-                  <u>Địa chỉ:</u>
+                  <u>Địa chỉ (trụ sở):</u>
                 </b>{' '}
-                {props.config.contact.address}
+                {props.config.contact.address1}
+              </p>
+              <p className="leading-6">
+                <b>
+                  <u>Địa chỉ (chi nhánh):</u>
+                </b>{' '}
+                {props.config.contact.address2}
               </p>
               <p className="leading-6">
                 <b>
@@ -111,8 +119,28 @@ const Main = (props: IMainProps) => {
               </a>
             </li>
           </ul>
-          <div className="mt-6 text-center md:text-right">
-            © Copyright {new Date().getFullYear()} {props.config.seo.site_name}.
+          <div className="mt-6 text-center md:text-right flex gap-5">
+            <a
+              href="//www.dmca.com/Protection/Status.aspx?ID=efbc5d8a-2a2c-4902-b40e-86ddbb56eb15"
+              title="DMCA.com Protection Status"
+              className="dmca-badge ml-auto"
+            >
+              {' '}
+              <img
+                src="https://images.dmca.com/Badges/dmca_protected_sml_120m.png?ID=efbc5d8a-2a2c-4902-b40e-86ddbb56eb15"
+                alt="DMCA.com Protection Status"
+              />
+            </a>{' '}
+            <Script
+              id="dmca-script"
+              src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"
+            >
+              {' '}
+            </Script>
+            <p>
+              © Copyright {new Date().getFullYear()}{' '}
+              {props.config.seo.site_name}.
+            </p>
           </div>
         </div>
       </div>

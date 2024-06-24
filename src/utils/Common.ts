@@ -6,7 +6,7 @@ export const stringToSlug = (str: string) => {
     .replace(/^-+|-+$/g, '');
 };
 
-export function dateTimeString(date: Date) {
+export function dateString(date: Date) {
   // Extract date components
   const day = date.getDate();
   const month = date.getMonth() + 1; // Months are 0-based (January = 0)
@@ -17,7 +17,7 @@ export function dateTimeString(date: Date) {
   return formattedDate;
 }
 
-export function dateString(date: Date) {
+export function dateTimeString(date: Date) {
   // Extract date components
   const day = date.getDate();
   const month = date.getMonth() + 1; // Months are 0-based (January = 0)
@@ -35,7 +35,7 @@ export function dateString(date: Date) {
 
 export function getCurrentDateString() {
   const currentDate = new Date();
-  return dateTimeString(currentDate);
+  return dateString(currentDate);
 }
 
 export function getCurrentDateTimeString() {

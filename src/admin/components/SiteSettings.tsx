@@ -221,22 +221,38 @@ const SiteSettings = () => {
             </div>
             <div className="mb-6">
               <label
-                htmlFor="contact-address"
+                htmlFor="contact-address1"
                 className="block text-base text-gray-800 mb-1"
               >
-                address
+                address (head quater)
               </label>
               <input
                 type="text"
-                id="contact-address"
-                name="contact-address"
-                defaultValue={config?.contact.address ?? ''}
+                id="contact-address1"
+                name="contact-address1"
+                defaultValue={config?.contact.address1 ?? ''}
+                className="w-full px-4 py-2 border text-sm text-gray-800 border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                required
+              />
+            </div>
+            <div className="mb-6">
+              <label
+                htmlFor="contact-address2"
+                className="block text-base text-gray-800 mb-1"
+              >
+                address (branch)
+              </label>
+              <input
+                type="text"
+                id="contact-address2"
+                name="contact-address2"
+                defaultValue={config?.contact.address2 ?? ''}
                 className="w-full px-4 py-2 border text-sm text-gray-800 border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
                 required
               />
             </div>
           </div>
-          <div>
+          <div className="hidden">
             <div className="text-lg font-bold my-4">Navbar</div>
             <div className="mb-6">
               <label
@@ -250,7 +266,7 @@ const SiteSettings = () => {
                 onKeyUp={(e) => textAreaAdjust(e)}
                 id="navbar-links"
                 name="navbar-links"
-                defaultValue={convertLinksData2Text(config?.navbar.links ?? [])}
+                defaultValue={config?.navbar.links ?? ''} // convertLinksData2Text(config?.navbar.links ?? [])
                 className="overflow-hidden w-full px-4 py-2 border text-sm text-gray-800 border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
                 required
               ></textarea>
