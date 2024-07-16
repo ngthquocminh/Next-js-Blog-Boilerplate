@@ -14,7 +14,7 @@ const SiteSettings = () => {
       });
       const body = await response.json();
       setConfig(body.data);
-      console.log(body.data);
+      // console.log(body.data);
     })();
   }, []);
 
@@ -35,7 +35,7 @@ const SiteSettings = () => {
     e.preventDefault();
     setLoading(true);
 
-    console.log('onSaveSetting');
+    // console.log('onSaveSetting');
     const formData = new FormData(e.currentTarget);
     const object: Record<string, string> = {};
     formData.forEach((value, key) => {

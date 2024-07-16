@@ -74,7 +74,7 @@ const sendEmail = async (
     });
     return true;
   } catch (e) {
-    console.log('Email send:', e);
+    // console.log('Email send:', e);
     return false;
   }
 };
@@ -100,7 +100,7 @@ export default async function handler(
       else res.status(500).json({ result: 'Failed' });
     } else res.status(500).send({ error: 'Unsuported method' });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).send({ error: 'Failed to fetch data' });
   }
 }

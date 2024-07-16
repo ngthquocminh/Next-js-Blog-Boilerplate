@@ -388,7 +388,11 @@ const hoiDap = (props: IhomeProps) => {
             </Link>
           </div>
           <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-lg border duration-300 ease-in-out">
-            <img className="h-20 m-4" src="/assets/icons/worker.png" />
+            <img
+              className="h-20 m-4"
+              src="/assets/icons/worker.png"
+              alt="icon worker"
+            />
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1 text-center">
               Quá trình định cư theo diện tay nghề Canada
             </h4>
@@ -424,7 +428,11 @@ const hoiDap = (props: IhomeProps) => {
             </Link>
           </div>
           <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-lg border duration-300 ease-in-out">
-            <img className="h-20 m-4" src="/assets/icons/services.png" />
+            <img
+              className="h-20 m-4"
+              src="/assets/icons/services.png"
+              alt="icon services"
+            />
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1 text-center">
               Các dịch vụ hỗ trợ đi kèm
             </h4>

@@ -126,11 +126,11 @@ const BlogEditor2 = (props: IPostEditorProps) => {
     e: React.SyntheticEvent<HTMLSelectElement, Event>
   ): void {
     e.preventDefault();
-    console.log(
-      'onChangeStatus',
-      e.currentTarget.value,
-      parseInt(e.currentTarget.value, 2)
-    );
+    // console.log(
+    //   'onChangeStatus',
+    //   e.currentTarget.value,
+    //   parseInt(e.currentTarget.value, 2)
+    // );
     setPublishStatus(parseInt(e.currentTarget.value, 2));
   }
 

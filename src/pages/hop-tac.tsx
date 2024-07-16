@@ -46,7 +46,7 @@ const HopTac = (props: IhomeProps) => {
       if (!formDict.subject || formDict.subject.length < 5) {
         checkDict.subject = 'Tên chủ đề không hợp lệ (>=5 ký tự)';
       }
-      console.log('>>', formDict.email);
+      // console.log('>>', formDict.email);
       if (!formDict.email || !isValidEmail(formDict.email)) {
         checkDict.email = 'Địa chỉ email không đúng định dạng';
       }

@@ -34,7 +34,7 @@ export default async function handler(
     if (!fs.existsSync(catPath))
       // category not exist
       return res.status(500).json({ message: 'Slug existed' });
-    console.log('catPath', catPath);
+    // console.log('catPath', catPath);
     if (keepFiles) {
       const files = fs.readdirSync(catPath, { withFileTypes: true });
       files.forEach((f) => {
@@ -48,7 +48,7 @@ export default async function handler(
           const imageId = imageKitExtract(p.image).id ?? '';
           imageKit.deleteFile(imageId);
         } catch (e) {
-          console.log(e);
+          // console.log(e);
         }
       });
     }

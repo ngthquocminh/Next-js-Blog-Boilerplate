@@ -38,10 +38,11 @@ const Booking = () => {
   };
 
   return (
-    <div className="w-full lg:w-2/5 lg:border-l border-gray-600 lg:pl-8 py-8">
+    <div className="w-full lg:w-2/5 lg:border-l border-gray-600 lg:pl-8 py-2">
       {status === 0 ? (
         <form className="w-full" onSubmit={bookingSubmit}>
-          <div className="flex flex-col justify-center max-w-xs mx-auto sm:max-w-md lg:mx-0 gap-3">
+          <div className="text-white text-3xl font-bold mb-2">Liên hệ</div>
+          <div className="flex flex-col justify-center mx-auto sm:max-w-md lg:mx-0 gap-3">
             <input
               type="text"
               name="name"

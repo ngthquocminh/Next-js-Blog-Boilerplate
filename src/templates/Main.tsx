@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 import Script from 'next/script';
 
 import { Navbar } from '../navigation/Navbar';
+import Messenger from '../svg/Messenger';
 import { IAppConfig } from '../utils/Content';
 
 type IMainProps = {
@@ -21,12 +22,11 @@ const Main = (props: IMainProps) => {
           <div className="text-xl">{props.children}</div>
         </div>
       </div>
-
       <div className="w-full text-gray-700 px-3 md:px-0 footer-bg-color">
         <div className="max-w-screen-md mx-auto text-center py-8 text-sm text-right flex flex-col md:flex-row gap-16 md:gap-16">
           <div className="md:w-2/6">
             <img
-              src="/logo_dark.png"
+              src="/tn7_logo.png"
               className="ml-auto mr-auto h-12 mb-8 mt-8"
               alt="tn7 solutions logo"
             />
@@ -144,6 +144,14 @@ const Main = (props: IMainProps) => {
           </div>
         </div>
       </div>
+      <a
+        className="shadow-lg hover:shadow-xl fixed bottom-6 right-6 w-16 h-16 bg-[#0084ff] rounded-full flex items-center justify-center cursor-pointer transition-transform transform hover:scale-110"
+        href="https://m.me/161702587034414"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <Messenger className="w-10 h-10 fill-current text-white" />
+      </a>
     </div>
   );
 };

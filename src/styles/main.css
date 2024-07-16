@@ -38,7 +38,7 @@ html {
 .menu-button::before,
 .menu-button::after {
   display: block;
-  background-color: #e9e9e9;
+  background-color: #003f4e;
   position: absolute;
   height: 2px;
   width: 30px;
@@ -100,7 +100,6 @@ html {
     margin: 0;
     padding: 0.5em 0;
     width: 100%;
-    color: white;
     background-color: #fff;
   }
   .menu > li:not(:last-child) {

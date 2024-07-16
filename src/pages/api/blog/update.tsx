@@ -59,11 +59,11 @@ const changeImage = async (
 ) => {
   const newFileStr = await saveImage(imageFile);
   if (newFileStr != null) {
-    console.log('delete', oldImage.id);
+    // console.log('delete', oldImage.id);
     try {
       imageKit.deleteFile(oldImage.id);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
     return newFileStr;
   }
@@ -77,7 +77,7 @@ function savePost(
   post: PostItems,
   imageStr: string
 ) {
-  console.log('category', category);
+  // console.log('category', category);
   const title = fields.title ? fields.title[0] : post.title;
   const description = fields.description
     ? fields.description[0]
@@ -136,7 +136,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     form.parse(req, async (err, fields, files) => {
       if (err) {
-        console.error('Error parsing form:', err);
+        // console.error('Error parsing form:', err);
         return res.status(500).json({ error: 'Error uploading file' });
       }
       // console.log(fields)

@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps<IProps> = async () => {
       to: 'ngthquoczinh@gmail.com',
       subject: 'testing emailjs',
     });
-    console.log('sentResult', sentResult);
+    // console.log('sentResult', sentResult);
     result = sentResult.text ?? '??';
   } catch (e) {
     result = `fail: ${e}`;

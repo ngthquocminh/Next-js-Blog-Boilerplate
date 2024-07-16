@@ -22,7 +22,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { cookies } = req;
   const token = cookies.token ?? null;
   const hasVerifiedToken = token && (await verifyJwtToken(token));
-  console.log('handler delete post');
+  // console.log('handler delete post');
 
   if (!hasVerifiedToken) {
     return res.status(403).send({ error: 'Unauthorized' });
@@ -31,21 +31,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const post = getPostBySlug({ slug }, ['image'], false);
   if (post) {
     try {
-      console.log('handler delete post2');
+      // console.log('handler delete post2');
       const path = post.category
         ? join(POSTS_DIRECTORY, post.category, `${slug}.md`)
         : join(POSTS_DIRECTORY, `${slug}.md`);
       fs.rmSync(path);
       // console.log('delete file compelte');
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       return res.status(400).json({ error: 'Failed' });
     }
     try {
       const imageId = imageKitExtract(post.image).id ?? '';
       imageKit.deleteFile(imageId);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
     return res.status(200).json({ message: 'OK' });
   }

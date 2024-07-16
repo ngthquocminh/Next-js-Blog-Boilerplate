@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import Link from 'next/link';
 
@@ -13,59 +13,17 @@ interface ILink {
   url: string;
 }
 
-function GroupPageLink({
-  show,
-  onToggle,
-  name,
-  urls,
-}: {
-  show: boolean;
-  onToggle: Function;
-  name: string;
-  urls: Array<ILink>;
-}) {
+function GroupPageLink({ name, urls }: { name: string; urls: Array<ILink> }) {
   const [visible, setVisible] = useState(false);
-  const dropdownMenuRef = useRef<HTMLDivElement>(null);
-  const visibleRef = useRef(visible);
-
-  useEffect(() => {
-    setVisible(show);
-    console.log(name, show);
-  }, [show]);
-
-  useEffect(() => {
-    visibleRef.current = visible;
-  }, [visible]);
-
-  const handleClickOutside = useCallback(
-    (event: MouseEvent) => {
-      if (visibleRef.current) {
-        if (
-          event.target &&
-          dropdownMenuRef.current &&
-          !dropdownMenuRef.current.contains(event.target as Node)
-        ) {
-          onToggle();
-        }
-      }
-    },
-    [dropdownMenuRef]
-  );
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   return (
-    <div className="flex flex-col" ref={dropdownMenuRef}>
-      <div>
-        <p
-          onClick={() => onToggle()}
-          className="text-gray-600 md:text-white w-full inline hover:underline hover:cursor-pointer select-none"
-        >
+    <div
+      className="flex flex-col"
+      onMouseEnter={() => setVisible(true)}
+      onMouseLeave={() => setVisible(false)}
+    >
+      <div className="py-1">
+        <p className="w-full inline hover:underline hover:cursor-pointer select-none">
           {name}
         </p>
         <svg
@@ -73,7 +31,7 @@ function GroupPageLink({
           focusable="false"
           role="presentation"
           fill="none"
-          className="fill-current md:text-white text-gray-600 icon icon-chevron-down h-[7px] w-[7px] inline ml-1"
+          className="fill-current text-gray-600 icon icon-chevron-down h-[7px] w-[7px] inline ml-1"
           viewBox="0 0 9 9"
         >
           <path d="M8.542 2.558a.625.625 0 0 1 0 .884l-3.6 3.6a.626.626 0 0 1-.884 0l-3.6-3.6a.625.625 0 1 1 .884-.884L4.5 5.716l3.158-3.158a.625.625 0 0 1 .884 0z"></path>
@@ -100,27 +58,13 @@ function GroupPageLink({
 }
 
 const Navbar = (props: INavbarProps) => {
-  const [menuDropdownId, setMenuDropdownId] = useState('');
-  const menuDropdownIdRef = useRef(menuDropdownId);
-
-  useEffect(() => {
-    console.log('menuDropdownId', menuDropdownId);
-    menuDropdownIdRef.current = menuDropdownId;
-  }, [menuDropdownId]);
-
-  const onToggleMenuDropdown = (id: string) => {
-    console.log('onToggleMenuDropdown', id, menuDropdownId);
-    if (menuDropdownIdRef.current !== id) setMenuDropdownId(id);
-    else setMenuDropdownId('');
-  };
-
   return (
-    <header className="fixed top-0 top-nav shadow-lg flex flex-row items-center justify-center w-full z-30 transition duration-300 ease-in-out bg-blue-600 py-4 md:py-6">
+    <header className="text-gray-800 fixed top-0 top-nav shadow-lg flex flex-row items-center justify-center w-full z-30 transition duration-300 ease-in-out bg-white py-4 md:py-6">
       <div className="h-10 shrink-0 ml-8 md:absolute md:left-4 md:top-1/2 md:-translate-y-2/4 flex items-center">
         <Link className="block" aria-label="Cruip" href="/">
           <a>
             <img
-              src="/logo_light.png"
+              src="/tn7_logo.png"
               className="md:h-8 h-10"
               alt="TN7 Solutions"
             />
@@ -149,56 +93,44 @@ const Navbar = (props: INavbarProps) => {
           </a>
         </li>
       ))} */}
-        <li className="mx-2 whitespace-nowrap md:inline-block overflow-hidden md:text-xs font-bold text-base">
+        <li className="py-1 mx-2 whitespace-nowrap md:inline-block overflow-hidden md:text-xs font-bold text-base">
           <Link href="/">
-            <a className="text-gray-600 md:text-white w-full">Trang chủ</a>
+            <a className="text-gray-800 w-full">Trang chủ</a>
           </Link>
         </li>
         <li className="mx-2 whitespace-nowrap md:inline-block flex flex-col overflow-hidden md:text-xs font-bold text-base">
           <GroupPageLink
-            show={menuDropdownId === 'du-hoc'}
-            onToggle={() => onToggleMenuDropdown('du-hoc')}
-            name={'Du học'}
+            name={'Canada'}
             urls={[
-              { name: 'Canada', url: '/blogs/category/du-hoc-canada' },
-              { name: 'Mỹ', url: '/blogs/category/du-hoc-my' },
-              // { name: 'Úc', url: '/blogs/category/du-hoc-uc' },
+              { name: 'Du học', url: '/blogs/category/du-hoc-canada' },
+              { name: 'Lao động', url: '/blogs/category/lao-dong-canada' },
+              {
+                name: 'Định cư & Đầu tư',
+                url: '/blogs/category/dinh-cu-dau-tu-canada',
+              },
             ]}
           />
         </li>
         <li className="mx-2 whitespace-nowrap md:inline-block flex flex-col overflow-hidden md:text-xs font-bold text-base">
           <GroupPageLink
-            show={menuDropdownId === 'lao-dong'}
-            onToggle={() => onToggleMenuDropdown('lao-dong')}
-            name={'Lao động'}
+            name={'Mỹ'}
             urls={[
-              { name: 'Canada', url: '/blogs/category/lao-dong-canada' },
-              { name: 'Mỹ', url: '/blogs/category/lao-dong-my' },
-              // { name: 'Úc', url: '/blogs/category/lao-dong-uc' },
+              { name: 'Du học', url: '/blogs/category/du-hoc-my' },
+              { name: 'Lao động', url: '/blogs/category/lao-dong-my' },
+              {
+                name: 'Định cư & Đầu tư',
+                url: '/blogs/category/dinh-cu-dau-tu-my',
+              },
             ]}
           />
         </li>
-        <li className="mx-2 whitespace-nowrap md:inline-block flex flex-col overflow-hidden md:text-xs font-bold text-base">
-          <GroupPageLink
-            show={menuDropdownId === 'dinh-cu'}
-            onToggle={() => onToggleMenuDropdown('dinh-cu')}
-            name={'Định cư & Đầu tư'}
-            urls={[
-              { name: 'Canada', url: '/blogs/category/dinh-cu-dau-tu-canada' },
-              { name: 'Mỹ', url: '/blogs/category/dinh-cu-dau-tu-my' },
-              // { name: 'Úc', url: '/blogs/category/dinh-cu-dau-tu-uc' },
-            ]}
-          />
-        </li>
-        <li className="mx-2 whitespace-nowrap md:inline-block overflow-hidden md:text-xs font-bold text-base">
+        <li className="py-1 mx-2 whitespace-nowrap md:inline-block overflow-hidden md:text-xs font-bold text-base">
           <Link href="/hoi-dap">
-            <a className="text-gray-600 md:text-white w-full">Hỏi đáp</a>
+            <a className="text-gray-800 w-full">Hỏi đáp</a>
           </Link>
         </li>
         <li className="mx-2 whitespace-nowrap md:inline-block flex flex-col overflow-hidden md:text-xs font-bold text-base">
           <GroupPageLink
-            show={menuDropdownId === 'tin-tuc'}
-            onToggle={() => onToggleMenuDropdown('tin-tuc')}
             name={'Tin tức'}
             urls={[
               { name: 'Canada', url: '/blogs/category/tin-tuc-canada' },
@@ -207,16 +139,16 @@ const Navbar = (props: INavbarProps) => {
             ]}
           />
         </li>
-        <li className="mx-2 whitespace-nowrap md:inline-block overflow-hidden md:text-xs font-bold text-base">
+        <li className="py-1 mx-2 whitespace-nowrap md:inline-block overflow-hidden md:text-xs font-bold text-base">
           <Link href="/hop-tac">
-            <a className="text-gray-600 md:text-white w-full">Hợp tác</a>
+            <a className="text-gray-800 w-full">Hợp tác</a>
           </Link>
         </li>
       </ul>
-      <div className="z-10 w0-hidden md:absolute md:right-4 md:top-1/2 md:-translate-y-2/4 text-xs font-bold md:flex flex-row">
+      <div className="z-10 w0-hidden md:absolute md:right-4 md:top-1/2 md:-translate-y-2/4 text-xs font-bold md:flex flex-row hover:scale-110 transform transition duration-300 ease-in-out">
         <a
           href="tel:0763771191"
-          className="hover:no-underline text-white bg-blue-600 border-l border-t border-b border-white p-2 flex flex-row items-center gap-2 rounded-tl-full rounded-bl-full pl-4"
+          className="hover:no-underline text-white bg-blue-600 p-2 flex flex-row items-center gap-2 rounded-tl-full rounded-bl-full pl-4"
         >
           <svg
             className="w-3 h-3"

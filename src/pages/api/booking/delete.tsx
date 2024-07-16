@@ -20,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
     const { id } = JSON.parse(req.body);
     try {
-      console.log(id);
+      // console.log(id);
       fs.rmSync(join(BOOKING_DIRECTORY, `${id}.json`));
       res.status(200).json({ success: true, message: 'OK' });
     } catch {

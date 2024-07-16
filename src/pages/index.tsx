@@ -55,7 +55,7 @@ const Home = (props: IhomeProps) => {
               {props.config.header.title.split('|')[0]}
             </span>
             <br />
-            <span className="text-4xl md:text-6xl text-[#9f2c13] bg-clip-text font-extrabold leading-none whitespace-nowrap">
+            <span className="text-4xl md:text-6xl text-[#d94e38] bg-clip-text font-extrabold leading-none whitespace-nowrap">
               {props.config.header.title.split('|')[1]}
             </span>
             <br />
@@ -73,6 +73,70 @@ const Home = (props: IhomeProps) => {
               <span className="whitespace-nowrap">hiệu quả </span>
               cả về thời gian và tài chính.
             </p>
+          </div>
+        </div>
+      </div>
+      {/* Why choose us */}
+      <div className="relative mx-auto max-w-screen-lg mx-auto px-4 sm:px-6 my-6">
+        <div className="pt-12 md:pt-20">
+          <div className="md:grid md:grid-cols-12 md:gap-6">
+            <div className="max-w-xl md:max-w-none md:w-full hide-on-phone mx-auto md:col-span-4 lg:col-span-5 mb-8 md:mb-0 flex">
+              <img
+                className="my-auto"
+                src="/assets/images/about-us.png"
+                alt="TN7 Solutions"
+              />
+            </div>
+            <div
+              className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-8 lg:col-span-7 aos-init aos-animate md:order-1 pl-4"
+              data-aos="fade-right"
+            >
+              <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
+                <h3 className="h3 mb-3 text-[60px] font-extrabold leading-none">
+                  Chúng tôi
+                  <br />
+                  là ai?
+                </h3>
+                <p className="text-lg text-gray-600 text-justify">
+                  TN7 Solutions cung cấp dịch vụ tư vấn miễn phí và giải quyết
+                  các vấn đề liên quan đến du học, lao động, và định cư tại
+                  Canada và Hoa Kỳ. Chúng tôi cam kết cung cấp giải pháp nhanh
+                  chóng, hiệu quả và tiết kiệm chi phí. Bên cạnh đó, chúng tôi
+                  còn cung cấp các dịch vụ bổ sung như luyện thi chứng chỉ ngoại
+                  ngữ, săn học bổng, thuê nhà, mua xe, và tìm việc làm để giúp
+                  bạn ổn định cuộc sống khi định cư ở nước ngoài. Hãy để TN7
+                  giúp bạn vượt qua mọi khó khăn và mang lại sự an tâm cho quyết
+                  định của bạn.
+                </p>
+              </div>
+              <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
+                <h3 className="h3 mb-3 text-3xl font-bold">
+                  Lý do chọn chúng tôi
+                </h3>
+                <p className="text-lg text-gray-600 text-justify">
+                  TN7 Solutions chuyên về visa định cư Canada và Mỹ, cung cấp
+                  dịch vụ từ đánh giá ban đầu đến chuẩn bị hồ sơ, hỗ trợ phỏng
+                  vấn và các thủ tục liên quan. Đội ngũ chuyên gia giàu kinh
+                  nghiệm cam kết giải quyết mọi vấn đề với tỷ lệ thành công lên
+                  đến 100%, giúp khách hàng đạt được mục tiêu định cư một cách
+                  suôn sẻ và thành công.
+                </p>
+              </div>
+              <a
+                href={`${props.config.seo.url}/#booking`}
+                className="hover:cursor-pointer text-white bg-red-400 p-2 flex flex-row items-center justify-center gap-2 rounded-full pr-5 border-red-400 w-56 text-base"
+              >
+                <p>Đăng ký tư vấn ngay</p>
+                <svg
+                  className="w-3 h-3"
+                  fill="rgba(255,255,255,1)"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                >
+                  <path d="M96 32V64H48C21.5 64 0 85.5 0 112v48H448V112c0-26.5-21.5-48-48-48H352V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H160V32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192H0V464c0 26.5 21.5 48 48 48H400c26.5 0 48-21.5 48-48V192z" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -186,7 +250,7 @@ const Home = (props: IhomeProps) => {
           </p>
         </div>
         <div className="max-w-sm mx-auto grid gap-4 lg:grid-cols-4 md:grid-cols-2 items-start md:max-w-2xl lg:max-w-none">
-          <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
+          <div className="relative flex flex-col h-56 items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
             <svg
               className="w-16 h-16 p-1 -mt-1 mb-2"
               viewBox="0 0 64 64"
@@ -228,7 +292,7 @@ const Home = (props: IhomeProps) => {
               Bạn sẽ được hỗ trợ bởi đội ngũ luật sư di trú đến từ Mỹ và Canada
             </p>
           </div>
-          <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
+          <div className="relative flex flex-col h-56 items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
             <svg
               className="w-16 h-16 p-1 -mt-1 mb-2"
               viewBox="0 0 64 64"
@@ -267,7 +331,7 @@ const Home = (props: IhomeProps) => {
               Thuộc các trường học TOP đầu của Mỹ và Canada
             </p>
           </div>
-          <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
+          <div className="relative flex flex-col h-56 items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
             <svg
               className="w-16 h-16 p-1 -mt-1 mb-2"
               viewBox="0 0 64 64"
@@ -309,7 +373,7 @@ const Home = (props: IhomeProps) => {
               Trang bị toàn bộ kỹ năng từ bước nộp hồ sơ tới phỏng vấn.
             </p>
           </div>
-          <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
+          <div className="relative flex flex-col h-56 items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
             <svg
               className="w-16 h-16 p-1 -mt-1 mb-2"
               viewBox="0 0 64 64"
@@ -356,10 +420,15 @@ const Home = (props: IhomeProps) => {
       {/* Booking */}
       <div id="booking" className="md:pt-20 my-6">
         <div className="">
-          <div className="relative bg-gray-900 py-8 px-8 md:py-28 md:px-12 shadow-2xl overflow-hidden aos-init aos-animate">
+          <div className="relative bg-gray-900 py-8 px-8 md:py-20 md:px-12 shadow-2xl overflow-hidden aos-init aos-animate">
             <div className="mx-auto max-w-screen-lg relative flex flex-col lg:flex-row justify-between items-center gap-4">
               <div className="text-center lg:text-left lg:w-3/5">
-                <h3 className="h3 text-white text-3xl font-bold mb-2">
+                <img
+                  src="/logo_light.png"
+                  className="mr-auto h-20 mb-4 mt-4"
+                  alt="tn7 solutions logo"
+                />
+                <h3 className="h3 text-[#ff5603] text-3xl font-bold mb-2">
                   Tư vấn tận tâm và hoàn toàn miễn phí
                 </h3>
                 <p className="text-gray-300 text-lg mb-6">
@@ -408,7 +477,10 @@ const Home = (props: IhomeProps) => {
           <h2 className="text-3xl font-bold">Dịch vụ của TN7 Solutions</h2>
         </div>
         <div className="max-w-sm mx-auto grid gap-4 lg:grid-cols-4 md:grid-cols-2 items-start md:max-w-2xl lg:max-w-none">
-          <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-lg border duration-300 ease-in-out">
+          <a
+            href="https://tn7solutions.com/blogs/lo-trinh-du-hoc-dinh-cu-tai-canada-412024/"
+            className="no-underline group relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-xl border duration-300 ease-in-out"
+          >
             <img
               className="h-20 m-4"
               src="/assets/icons/study.png"
@@ -417,51 +489,51 @@ const Home = (props: IhomeProps) => {
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1 text-center">
               Lộ trình định cư diện du học tại Canada
             </h4>
-            <p className="text-gray-600 text-center h-24 text-base">
+            <p className="text-gray-600 text-center h-24 text-base no-underline text-no-underline group-hover:text-no-underline">
               Giải pháp du học và mang theo cả gia đình đi định cư tại Canada.
             </p>
-            <Link
-              href={
-                'https://tn7solutions.com/blogs/lo-trinh-du-hoc-dinh-cu-tai-canada-412024/'
-              }
-            >
-              <a className="text-sm">Chi tiết</a>
-            </Link>
-          </div>
-          <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-lg border duration-300 ease-in-out">
-            <img className="h-20 m-4" src="/assets/icons/worker.png" />
+          </a>
+          <a
+            href="https://tn7solutions.com/blogs/qua-trinh-dinh-cu-theo-dien-tay-nghe-tai-canada-422024/"
+            className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-xl border duration-300 ease-in-out"
+          >
+            <img
+              className="h-20 m-4"
+              src="/assets/icons/worker.png"
+              alt="icon worker"
+            />
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1 text-center">
               Quá trình định cư theo diện tay nghề Canada
             </h4>
             <p className="text-gray-600 text-center h-24 text-base">
               Giải pháp định cư tay nghề phù hợp cho bạn và gia đình.
             </p>
-            <Link
-              href={
-                'https://tn7solutions.com/blogs/qua-trinh-dinh-cu-theo-dien-tay-nghe-tai-canada-422024/'
-              }
-            >
-              <a className="text-sm">Chi tiết</a>
-            </Link>
-          </div>
-          <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-lg border duration-300 ease-in-out">
-            <img className="h-20 m-4" src="/assets/icons/startup.png" />
+          </a>
+          <a
+            href="https://tn7solutions.com/blogs/quy-trinh-dinh-cu-theo-dien-start-up-422024/"
+            className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-xl border duration-300 ease-in-out"
+          >
+            <img
+              className="h-20 m-4"
+              src="/assets/icons/startup.png"
+              alt="startup"
+            />
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1 text-center">
               Quy trình định cư theo diện start-up
             </h4>
             <p className="text-gray-600 text-center h-24 text-base">
               Định cư cùng gia đình với ý tưởng khởi nghiệp sáng tạo.
             </p>
-            <Link
-              href={
-                'https://tn7solutions.com/blogs/quy-trinh-dinh-cu-theo-dien-start-up-422024/'
-              }
-            >
-              <a className="text-sm">Chi tiết</a>
-            </Link>
-          </div>
-          <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-lg border duration-300 ease-in-out">
-            <img className="h-20 m-4" src="/assets/icons/services.png" />
+          </a>
+          <a
+            href="https://tn7solutions.com/blogs/cac-dich-vu-ho-tro-di-kem-422024/"
+            className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-xl border duration-300 ease-in-out"
+          >
+            <img
+              className="h-20 m-4"
+              src="/assets/icons/services.png"
+              alt="icon service"
+            />
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1 text-center">
               Các dịch vụ hỗ trợ đi kèm
             </h4>
@@ -469,14 +541,7 @@ const Home = (props: IhomeProps) => {
               Ngoài những dịch vụ chính, TN7 còn có những hỗ trợ khác, cùng bạn
               an tâm định cư.
             </p>
-            <Link
-              href={
-                'https://tn7solutions.com/blogs/cac-dich-vu-ho-tro-di-kem-422024/'
-              }
-            >
-              <a className="text-sm">Chi tiết</a>
-            </Link>
-          </div>
+          </a>
         </div>
       </div>
       {/* Blogs */}

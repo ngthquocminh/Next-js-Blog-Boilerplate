@@ -106,7 +106,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     form.parse(req, async (err, fields, files) => {
       if (err) {
-        console.error('Error parsing form:', err);
+        // console.error('Error parsing form:', err);
         return res.status(500).json({ error: 'Error uploading file' });
       }
       // console.log(fields);
