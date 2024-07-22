@@ -153,7 +153,7 @@ const BookingPanel = () => {
   function onSearching(e: React.ChangeEvent<HTMLInputElement>): void {
     // if (e.target.value.length > 0)
     setSearchPosts((_bookings) =>
-      _bookings?.filter((b) => b.date.includes(e.target.value))
+      _bookings?.filter((b) => b.time.includes(e.target.value))
     );
   }
 

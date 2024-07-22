@@ -5,7 +5,7 @@ import { SMTPClient } from 'emailjs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import slugify from 'slugify';
 
-import { getCurrentDateString } from '../../../utils/Common';
+import { getCurrentDateString, getCurrentDateTimeString } from '../../../utils/Common';
 import { getDataConfig } from '../../../utils/Content';
 
 const bookingsDirectory = join(process.cwd(), '_data/booking');
@@ -42,6 +42,7 @@ const sendEmail = async (
   name: string,
   phone: string,
   email: string,
+  message: string,
   timeStr: string
 ) => {
   const client = new SMTPClient({
@@ -66,10 +67,10 @@ const sendEmail = async (
 
   try {
     await client.sendAsync({
-      text: `Thông tin đăng ký:\n  + Tên: ${name}\n  + Email: ${email}\n  + Phone: ${phone}\n\nLúc: ${timeStr}\nSite: ${senderSite}`,
+      text: `Thông tin đăng ký:\n  + Tên: ${name}\n  + Email: ${email}\n  + Điện thoại: ${phone}\n  + Nội dung: ${message}\n\nLúc: ${timeStr}\nSite: ${senderSite}`,
       from: process.env.EMAIL_ADDRESS!,
-      to: 'support@tn7solutions.com',
-      // to: 'ngthquoczinh@gmail.com',
+      // to: 'support@tn7solutions.com',
+      to: 'ngthquoczinh@gmail.com',
       subject: `[${senderName}] Thông báo khách hàng đăng ký tư vấn lúc ${timeStr}`,
     });
     return true;
@@ -83,11 +84,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { name, phone, email } = JSON.parse(req.body);
+  const { name, phone, email, message } = JSON.parse(req.body);
   try {
     if (req.method === 'POST') {
-      const timeStr = getCurrentDateString();
-      const sendOk = await sendEmail(name, phone, email, timeStr);
+      const timeStr = getCurrentDateTimeString();
+      const sendOk = await sendEmail(name, phone, email, message, timeStr);
       const saveOk = await handleFormInputAsync(
         name,
         phone,

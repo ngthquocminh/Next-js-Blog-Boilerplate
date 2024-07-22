@@ -66,6 +66,12 @@ const Booking = () => {
               placeholder="Địa chỉ email"
               aria-label="Địa chỉ email"
             />
+            <textarea
+              name="message"
+              className="form-input text-base w-full appearance-none bg-gray-800 rounded border-gray-600 focus:border-gray-600 border-l-4 px-6 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-gray-500"
+              placeholder="Nội dung"
+              aria-label="Nội dung"
+            ></textarea>
             <label
               htmlFor="booking-form-submit"
               className="btn ml-0 md:mx-auto mt-4 text-center text-base w-40 text-white bg-blue-600 hover:bg-blue-700 shadow py-3 rounded-full flex gap-2 items-center justify-center"
@@ -76,7 +82,7 @@ const Booking = () => {
                   Đang gửi
                 </>
               ) : (
-                'Submit'
+                'Gửi thông tin'
               )}
             </label>
             <input
