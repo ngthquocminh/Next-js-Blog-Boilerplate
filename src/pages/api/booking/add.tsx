@@ -5,7 +5,7 @@ import { SMTPClient } from 'emailjs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import slugify from 'slugify';
 
-import { getCurrentDateString, getCurrentDateTimeString } from '../../../utils/Common';
+import { getCurrentDateTimeString } from '../../../utils/Common';
 import { getDataConfig } from '../../../utils/Content';
 
 const bookingsDirectory = join(process.cwd(), '_data/booking');
