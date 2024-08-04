@@ -120,7 +120,7 @@ const HopTac = (props: IhomeProps) => {
                       type="text"
                       name="name"
                       id="name"
-                      placeholder="Full Name"
+                      placeholder="Tên công ty"
                       className="w-full border border-[#e0e0e0] bg-white py-2 px-3 text-base text-gray-700 outline-none focus:border-blue-600 focus:shadow-md"
                     />
                   </div>
@@ -160,7 +160,7 @@ const HopTac = (props: IhomeProps) => {
                       type="text"
                       name="subject"
                       id="subject"
-                      placeholder="Enter your subject"
+                      placeholder="Chủ đề"
                       className="w-full border border-[#e0e0e0] bg-white py-2 px-3 text-base text-gray-700 outline-none focus:border-blue-600 focus:shadow-md"
                     />
                   </div>
@@ -175,7 +175,7 @@ const HopTac = (props: IhomeProps) => {
                       rows={4}
                       name="message"
                       id="message"
-                      placeholder="Type your message"
+                      placeholder="Nội dung"
                       className="w-full resize-none border border-[#e0e0e0] bg-white py-2 px-4 text-base text-gray-700 outline-none focus:border-blue-600 focus:shadow-md"
                     ></textarea>
                   </div>

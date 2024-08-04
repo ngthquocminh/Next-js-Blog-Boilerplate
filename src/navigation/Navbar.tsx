@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Link from 'next/link';
 
@@ -22,8 +22,8 @@ function GroupPageLink({ name, urls }: { name: string; urls: Array<ILink> }) {
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
     >
-      <div className="py-1">
-        <p className="w-full inline hover:underline hover:cursor-pointer select-none">
+      <div className="py-1 flex row items-center">
+        <p className="w-full inline hover:underline hover:cursor-pointer select-none text-base font-medium">
           {name}
         </p>
         <svg
@@ -31,7 +31,7 @@ function GroupPageLink({ name, urls }: { name: string; urls: Array<ILink> }) {
           focusable="false"
           role="presentation"
           fill="none"
-          className="fill-current text-gray-600 icon icon-chevron-down h-[7px] w-[7px] inline ml-1"
+          className="fill-current text-gray-600 icon icon-chevron-down h-[10px] w-[10px] inline ml-1"
           viewBox="0 0 9 9"
         >
           <path d="M8.542 2.558a.625.625 0 0 1 0 .884l-3.6 3.6a.626.626 0 0 1-.884 0l-3.6-3.6a.625.625 0 1 1 .884-.884L4.5 5.716l3.158-3.158a.625.625 0 0 1 .884 0z"></path>
@@ -47,7 +47,7 @@ function GroupPageLink({ name, urls }: { name: string; urls: Array<ILink> }) {
             key={u.name}
             className="md:text-start text-center block w-full overflow-hidden cursor-pointer select-none px-4 leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900"
           >
-            <a href={u.url} className="no-underline text-gray-700">
+            <a href={u.url} className="no-underline text-gray-700 text-base">
               {u.name}
             </a>
           </li>
@@ -58,9 +58,36 @@ function GroupPageLink({ name, urls }: { name: string; urls: Array<ILink> }) {
 }
 
 const Navbar = (props: INavbarProps) => {
+  const navbarRef = useRef<HTMLHeadElement>(null);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (navbarRef.current === null) return;
+      if (window.innerWidth < 768) {
+        navbarRef.current.classList.add('py-4');
+        navbarRef.current.classList.remove('py-[2px]');
+        return;
+      }
+      if (window.scrollY > 50) {
+        navbarRef.current.classList.add('py-[2px]');
+        navbarRef.current.classList.remove('py-4');
+      } else {
+        navbarRef.current.classList.add('py-4');
+        navbarRef.current.classList.remove('py-[2px]');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup function to remove the event listener
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []); // Empty dependency array means this effect runs once on mount
+
   return (
-    <header className="text-gray-800 fixed top-0 top-nav shadow-lg flex flex-row items-center justify-center w-full z-30 transition duration-300 ease-in-out bg-white py-4 md:py-6">
-      <div className="h-10 shrink-0 ml-8 md:absolute md:left-4 md:top-1/2 md:-translate-y-2/4 flex items-center">
+    <header
+      ref={navbarRef}
+      className="text-gray-800 fixed top-0 top-nav shadow-lg flex flex-row items-center justify-center w-full z-30 duration-300 ease bg-white py-4"
+    >
+      <div className="h-10 shrink-0 md:ml-8 md:absolute md:left-4 md:top-1/2 md:-translate-y-2/4 flex items-center">
         <Link className="block" aria-label="Cruip" href="/">
           <a>
             <img
@@ -93,12 +120,14 @@ const Navbar = (props: INavbarProps) => {
           </a>
         </li>
       ))} */}
-        <li className="py-1 mx-2 whitespace-nowrap md:inline-block overflow-hidden md:text-xs font-bold text-base">
+        <li className="py-1 mx-4 whitespace-nowrap md:inline-block overflow-hidden">
           <Link href="/">
-            <a className="text-gray-800 w-full">Trang chủ</a>
+            <a className="text-gray-800 w-full text-base font-medium">
+              Trang chủ
+            </a>
           </Link>
         </li>
-        <li className="mx-2 whitespace-nowrap md:inline-block flex flex-col overflow-hidden md:text-xs font-bold text-base">
+        <li className="mx-4 whitespace-nowrap md:inline-block flex flex-col overflow-hidden">
           <GroupPageLink
             name={'Canada'}
             urls={[
@@ -111,7 +140,7 @@ const Navbar = (props: INavbarProps) => {
             ]}
           />
         </li>
-        <li className="mx-2 whitespace-nowrap md:inline-block flex flex-col overflow-hidden md:text-xs font-bold text-base">
+        <li className="mx-4 whitespace-nowrap md:inline-block flex flex-col overflow-hidden">
           <GroupPageLink
             name={'Mỹ'}
             urls={[
@@ -124,12 +153,14 @@ const Navbar = (props: INavbarProps) => {
             ]}
           />
         </li>
-        <li className="py-1 mx-2 whitespace-nowrap md:inline-block overflow-hidden md:text-xs font-bold text-base">
+        <li className="py-1 mx-4 whitespace-nowrap md:inline-block overflow-hidden">
           <Link href="/hoi-dap">
-            <a className="text-gray-800 w-full">Hỏi đáp</a>
+            <a className="text-gray-800 w-full text-base font-medium">
+              Hỏi đáp
+            </a>
           </Link>
         </li>
-        <li className="mx-2 whitespace-nowrap md:inline-block flex flex-col overflow-hidden md:text-xs font-bold text-base">
+        <li className="mx-4 whitespace-nowrap md:inline-block flex flex-col overflow-hidden">
           <GroupPageLink
             name={'Tin tức'}
             urls={[
@@ -139,9 +170,18 @@ const Navbar = (props: INavbarProps) => {
             ]}
           />
         </li>
-        <li className="py-1 mx-2 whitespace-nowrap md:inline-block overflow-hidden md:text-xs font-bold text-base">
+        <li className="py-1 mx-2 whitespace-nowrap md:inline-block overflow-hidden">
           <Link href="/hop-tac">
-            <a className="text-gray-800 w-full">Hợp tác</a>
+            <a className="text-gray-800 w-full text-[16px] md:text-base font-medium">
+              Hợp tác
+            </a>
+          </Link>
+        </li>
+        <li className="py-1 mx-2 whitespace-nowrap md:inline-block overflow-hidden">
+          <Link href="/about-us">
+            <a className="text-gray-800 w-full text-[16px] md:text-base font-medium">
+              Về chúng tôi
+            </a>
           </Link>
         </li>
       </ul>

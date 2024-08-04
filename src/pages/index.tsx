@@ -250,7 +250,7 @@ const Home = (props: IhomeProps) => {
           </p>
         </div>
         <div className="max-w-sm mx-auto grid gap-4 lg:grid-cols-4 md:grid-cols-2 items-start md:max-w-2xl lg:max-w-none">
-          <div className="relative flex flex-col h-56 items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
+          <div className="relative flex flex-col h-64 items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
             <svg
               className="w-16 h-16 p-1 -mt-1 mb-2"
               viewBox="0 0 64 64"
@@ -292,7 +292,7 @@ const Home = (props: IhomeProps) => {
               Bạn sẽ được hỗ trợ bởi đội ngũ luật sư di trú đến từ Mỹ và Canada
             </p>
           </div>
-          <div className="relative flex flex-col h-56 items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
+          <div className="relative flex flex-col h-64 items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
             <svg
               className="w-16 h-16 p-1 -mt-1 mb-2"
               viewBox="0 0 64 64"
@@ -331,7 +331,7 @@ const Home = (props: IhomeProps) => {
               Thuộc các trường học TOP đầu của Mỹ và Canada
             </p>
           </div>
-          <div className="relative flex flex-col h-56 items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
+          <div className="relative flex flex-col h-64 items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
             <svg
               className="w-16 h-16 p-1 -mt-1 mb-2"
               viewBox="0 0 64 64"
@@ -373,7 +373,7 @@ const Home = (props: IhomeProps) => {
               Trang bị toàn bộ kỹ năng từ bước nộp hồ sơ tới phỏng vấn.
             </p>
           </div>
-          <div className="relative flex flex-col h-56 items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
+          <div className="relative flex flex-col h-64 items-center p-6 bg-white rounded shadow-md border duration-300 ease-in-out hover:shadow-lg">
             <svg
               className="w-16 h-16 p-1 -mt-1 mb-2"
               viewBox="0 0 64 64"
@@ -412,7 +412,7 @@ const Home = (props: IhomeProps) => {
             </h4>
             <p className="text-gray-600 text-center h-30 text-base">
               Hỗ trợ các dịch vụ tìm nhà ở, trường học, thuê xe và các vấn đề
-              phát sinh tại Canada khi khách hàng đi định cư
+              phát sinh khi khách hàng định cư
             </p>
           </div>
         </div>
@@ -479,7 +479,7 @@ const Home = (props: IhomeProps) => {
         <div className="max-w-sm mx-auto grid gap-4 lg:grid-cols-4 md:grid-cols-2 items-start md:max-w-2xl lg:max-w-none">
           <a
             href="https://tn7solutions.com/blogs/lo-trinh-du-hoc-dinh-cu-tai-canada-412024/"
-            className="no-underline group relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-xl border duration-300 ease-in-out"
+            className="h-80 no-underline group relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-xl border duration-300 ease-in-out"
           >
             <img
               className="h-20 m-4"
@@ -489,13 +489,13 @@ const Home = (props: IhomeProps) => {
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1 text-center">
               Lộ trình định cư diện du học tại Canada
             </h4>
-            <p className="text-gray-600 text-center h-24 text-base no-underline text-no-underline group-hover:text-no-underline">
+            <p className="text-gray-600 text-center text-base no-underline text-no-underline group-hover:text-no-underline">
               Giải pháp du học và mang theo cả gia đình đi định cư tại Canada.
             </p>
           </a>
           <a
             href="https://tn7solutions.com/blogs/qua-trinh-dinh-cu-theo-dien-tay-nghe-tai-canada-422024/"
-            className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-xl border duration-300 ease-in-out"
+            className="h-80 relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-xl border duration-300 ease-in-out"
           >
             <img
               className="h-20 m-4"
@@ -505,13 +505,13 @@ const Home = (props: IhomeProps) => {
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1 text-center">
               Quá trình định cư theo diện tay nghề Canada
             </h4>
-            <p className="text-gray-600 text-center h-24 text-base">
+            <p className="text-gray-600 text-center text-base">
               Giải pháp định cư tay nghề phù hợp cho bạn và gia đình.
             </p>
           </a>
           <a
             href="https://tn7solutions.com/blogs/quy-trinh-dinh-cu-theo-dien-start-up-422024/"
-            className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-xl border duration-300 ease-in-out"
+            className="h-80 relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-xl border duration-300 ease-in-out"
           >
             <img
               className="h-20 m-4"
@@ -521,13 +521,13 @@ const Home = (props: IhomeProps) => {
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1 text-center">
               Quy trình định cư theo diện start-up
             </h4>
-            <p className="text-gray-600 text-center h-24 text-base">
+            <p className="text-gray-600 text-center text-base">
               Định cư cùng gia đình với ý tưởng khởi nghiệp sáng tạo.
             </p>
           </a>
           <a
             href="https://tn7solutions.com/blogs/cac-dich-vu-ho-tro-di-kem-422024/"
-            className="relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-xl border duration-300 ease-in-out"
+            className="h-80 relative flex flex-col items-center p-6 bg-white rounded shadow-md hover:shadow-xl border duration-300 ease-in-out"
           >
             <img
               className="h-20 m-4"
@@ -537,7 +537,7 @@ const Home = (props: IhomeProps) => {
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1 text-center">
               Các dịch vụ hỗ trợ đi kèm
             </h4>
-            <p className="text-gray-600 text-center h-28 text-base">
+            <p className="text-gray-600 text-center text-base">
               Ngoài những dịch vụ chính, TN7 còn có những hỗ trợ khác, cùng bạn
               an tâm định cư.
             </p>

@@ -69,8 +69,8 @@ const sendEmail = async (
     await client.sendAsync({
       text: `Thông tin đăng ký:\n  + Tên: ${name}\n  + Email: ${email}\n  + Điện thoại: ${phone}\n  + Nội dung: ${message}\n\nLúc: ${timeStr}\nSite: ${senderSite}`,
       from: process.env.EMAIL_ADDRESS!,
-      // to: 'support@tn7solutions.com',
-      to: 'ngthquoczinh@gmail.com',
+      to: 'support@tn7solutions.com',
+      // to: 'ngthquoczinh@gmail.com',
       subject: `[${senderName}] Thông báo khách hàng đăng ký tư vấn lúc ${timeStr}`,
     });
     return true;
