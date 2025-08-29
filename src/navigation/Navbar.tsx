@@ -109,7 +109,7 @@ const Navbar = (props: INavbarProps) => {
         ></div>
       </label>
 
-      <ul className="menu list-none md:mx-80 w-full text-center shadow-lg md:shadow-none">
+      <ul className="menu list-none md:mx-60 w-full text-center shadow-lg md:shadow-none">
         {/* {props.config.navbar.links.map(({ name, url }) => (
         <li
           key={name}

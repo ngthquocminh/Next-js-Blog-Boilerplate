@@ -35,7 +35,7 @@ const sendEmail = async (
     await client.sendAsync({
       text: `Thông tin đăng ký:\n  + Tên Công Ty: ${name}\n  + Email liên hệ: ${email}\n  + Chủ đề: ${subject}\n  + Chi tiết: ${message}\n\nLúc: ${timeStr}\nSite: ${senderSite}`,
       from: process.env.EMAIL_ADDRESS!,
-      to: 'support@tn7solutions.com',
+      to: 'contact@tn7.vn',
       // to: 'ngthquoczinh@gmail.com',
       subject: `[${senderName}] Thông báo có đăng ký hợp tác mới lúc ${timeStr}`,
     });

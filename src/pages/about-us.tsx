@@ -71,16 +71,18 @@ const AboutUs = (props: IhomeProps) => {
         />
       }
     >
-      <div className="mt-0 md:mt-10 md:pt-24 pt-12 pb-6">
+      <div className="mt-0 pt-8 pb-0">
         <div
           id="container"
-          className="container flex flex-col justify-center p-4 mx-auto md:p-8 max-w-[850px] bg-white"
+          className="flex flex-col justify-center mx-auto p-0 md:p-0 w-full lg:w-[75vw] bg-white"
         >
-          <div className="transition duration-300 ease-in-out hover:shadow-xl relative border-b-[1px]">
+          <div className="transition duration-300 ease-in-out hover:shadow-xl relative">
             <img
               src="/assets/profile/1.png"
               alt="tn7-business-profile-intro"
-            ></img>
+              width="100%"
+              loading="lazy"
+            />
             <div className="absolute top-[20%] left-[10%]">
               <p className="xtext-5xl text-black">TN7-SOLUTIONS</p>
               <p className="xtext-7xl font-extrabold text-[#d36631] leading-[1em] mb-[14%]">
@@ -93,7 +95,7 @@ const AboutUs = (props: IhomeProps) => {
               </span>
             </div>
             <div className="absolute bottom-[4%] left-[4%] w-[35%]">
-              <p className="xtext-xl font-bold text-white mb-6">
+              <p className="xtext-xl font-bold text-white mb-[8%]">
                 THE BEST SOLUTIONS
               </p>
               <p className="xtext-xl text-justify text-white">
@@ -111,8 +113,10 @@ const AboutUs = (props: IhomeProps) => {
             <img
               src="/assets/profile/2.png"
               alt="tn7-business-profile-welcome"
-            ></img>
-            <div className="absolute top-[40%] left-[50%] w-[100%] -translate-x-[50%] py-[3%] px-[10%]">
+              width="100%"
+              loading="lazy"
+            />
+            <div className="absolute top-[38%] left-[50%] w-[100%] -translate-x-[50%] py-[3%] px-[10%]">
               <p className="xtext-xl text-justify text-white">
                 Chào mừng bạn đến với TN7 Solutions và bắt đầu cuộc hành trình
                 tìm kiếm con đường đi định cư ở các nước phát triển như Hoa Kỳ,
@@ -122,22 +126,28 @@ const AboutUs = (props: IhomeProps) => {
               </p>
             </div>
           </div>
-          <div className="hover:shadow-xl relative border-b-[1px]">
+          <div className="hover:shadow-xl relative">
             <img
               src="/assets/profile/3.png"
               alt="tn7-business-profile-after-welcome"
+              width="100%"
+              loading="lazy"
             />
           </div>
-          <div className="hover:shadow-xl relative border-b-[1px]">
+          <div className="hover:shadow-xl relative">
             <img
               src="/assets/profile/4.png"
               alt="tn7-business-profile-table-content"
+              width="100%"
+              loading="lazy"
             />
           </div>
-          <div className="hover:shadow-xl relative border-b-[1px]">
+          <div className="hover:shadow-xl relative">
             <img
               src="/assets/profile/5.png"
               alt="tn7-business-profile-about-company"
+              width="100%"
+              loading="lazy"
             />
             <div className="absolute top-[55%] left-[50%] w-[100%] -translate-x-[50%] py-[3%] px-[10%]">
               <p className="xtext-xl text-justify text-white">
@@ -148,10 +158,12 @@ const AboutUs = (props: IhomeProps) => {
               </p>
             </div>
           </div>
-          <div className="hover:shadow-xl relative border-b-[1px]">
+          <div className="hover:shadow-xl relative">
             <img
               src="/assets/profile/6.png"
               alt="tn7-business-profile-welcome-message"
+              width="100%"
+              loading="lazy"
             />
             <div className="absolute top-[52%] left-[50%] w-[100%] -translate-x-[50%] py-[3%] px-[10%]">
               <p className="xtext-xl text-justify text-white pb-[6%]">
@@ -174,13 +186,15 @@ const AboutUs = (props: IhomeProps) => {
               </p>
             </div>
           </div>
-          <div className="hover:shadow-xl relative border-b-[1px]">
+          <div className="hover:shadow-xl relative">
             <img
               src="/assets/profile/7.png"
               alt="tn7-business-profile-our-vision"
+              width="100%"
+              loading="lazy"
             />
-            <div className="absolute top-[30%] left-[50%] w-[100%] -translate-x-[50%] py-[3%] px-[10%]">
-              <p className="xtext-2xl text-center text-black pb-10">
+            <div className="absolute top-[40%] left-[50%] w-[100%] -translate-x-[50%] py-[3%] px-[10%]">
+              <p className="xtext-2xl text-center text-black pb-[6%]">
                 TN7-Solutions định hướng phát triển thành công ty tư vấn và đưa
                 ra giải pháp Visa uy tín, chất lượng hàng đầu Việt Nam
               </p>
@@ -190,22 +204,24 @@ const AboutUs = (props: IhomeProps) => {
               </p>
             </div>
           </div>
-          <div className="hover:shadow-xl relative border-b-[1px]">
+          <div className="hover:shadow-xl relative">
             <img
               src="/assets/profile/8.png"
               alt="tn7-business-profile-our-mission"
+              width="100%"
+              loading="lazy"
             />
             <div className="absolute top-[37%] left-[50%] w-[100%] -translate-x-[50%] py-[3%] px-[10%]">
-              <p className="xtext-2xl text-left font-bold text-black pb-10 pr-12">
+              <p className="xtext-2xl text-left font-bold text-black pb-[10%] pr-[12%]">
                 Mang đến cuộc sống tốt đẹp hơn cho người Việt ở đất nước mới.
               </p>
-              <p className="xtext-xl text-justify text-black pl-20 pb-4">
+              <p className="xtext-xl text-justify text-black pl-[20%] pb-[4%]">
                 Chúng tôi mong muốn mang đến cho những khách hàng lựa chọn TN7
                 những giải pháp tiết kiệm và tối ưu nhất. Giúp khách hàng hiện
                 thực hóa ước mơ của họ và tiến gần hơn đến với những cuộc sống
                 tốt đẹp mà bạn hằng mong ước.
               </p>
-              <p className="xtext-xl text-justify text-black pl-20">
+              <p className="xtext-xl text-justify text-black pl-[20%]">
                 Hiểu được vai trò của việc đến 1 quốc gia khác luôn là một lựa
                 chọn mang tính chất rất quan trọng, chúng tôi luôn dành mọi tâm
                 huyết của mình vào từng trường hợp của khách hàng. Đây không chỉ
@@ -215,12 +231,14 @@ const AboutUs = (props: IhomeProps) => {
               </p>
             </div>
           </div>
-          <div className="hover:shadow-xl relative border-b-[1px]">
+          <div className="hover:shadow-xl relative">
             <img
               src="/assets/profile/9.png"
               alt="tn7-business-profile-our-service"
+              width="100%"
+              loading="lazy"
             />
-            <div className="absolute top-[40%] left-[50%] w-[100%] -translate-x-[50%] py-[3%] px-[10%]">
+            <div className="absolute top-[45%] left-[50%] w-[100%] -translate-x-[50%] py-[3%] px-[10%]">
               <ol className="text-justify xtext-xl">
                 <li>
                   <b>1. Tư vấn du học:</b> Hướng dẫn và hỗ trợ trong việc chọn
@@ -271,10 +289,12 @@ const AboutUs = (props: IhomeProps) => {
               </ol>
             </div>
           </div>
-          <div className="hover:shadow-xl relative border-b-[1px]">
+          <div className="hover:shadow-xl relative">
             <img
               src="/assets/profile/10.png"
               alt="tn7-business-profile-our-project"
+              width="100%"
+              loading="lazy"
             />
             <div className="absolute top-[36%] left-[50%] w-[100%] -translate-x-[50%] py-[3%] px-[10%]">
               <p className="xtext-xl text-justify text-white">
@@ -291,11 +311,13 @@ const AboutUs = (props: IhomeProps) => {
               </p>
             </div>
           </div>
-          <div className="hover:shadow-xl relative border-b-[1px] border-b-[1px]">
+          <div className="hover:shadow-xl relative">
             <img
               src="/assets/profile/11.png"
               alt="tn7-business-profile-team-p1"
-            ></img>
+              width="100%"
+              loading="lazy"
+            />
             <div className="absolute top-[35%] left-0 w-[100%] p-[10%]">
               <p className="xtext-4xl font-bold text-black mb-[8%]">
                 Nguyễn Thị Phương Trang
@@ -349,12 +371,14 @@ const AboutUs = (props: IhomeProps) => {
               </div>
             </div>
           </div>
-          <div className="hover:shadow-xl relative border-b-[1px]">
+          <div className="hover:shadow-xl relative">
             <img
               src="/assets/profile/12.png"
               alt="tn7-business-profile-team-p2"
+              width="100%"
+              loading="lazy"
             />
-            <div className="absolute top-[36%] left-[25%] w-[60%] p-[4%]">
+            <div className="absolute top-[37%] left-[25%] w-[60%] p-[4%]">
               <p className="xtext-2xl font-bold text-[#9f2c0f] mb-[2%]">
                 Thục Ái_Chuyên viên tư vấn
               </p>
@@ -367,7 +391,7 @@ const AboutUs = (props: IhomeProps) => {
                 khách hàng an tâm và tin tưởng.
               </p>
             </div>
-            <div className="absolute top-[62%] left-[25%] w-[60%] p-[4%]">
+            <div className="absolute top-[63%] left-[25%] w-[60%] p-[4%]">
               <p className="xtext-2xl font-bold text-[#9f2c0f] mb-[2%]">
                 Minh Trung_Nhân viên Marketing
               </p>
@@ -385,16 +409,18 @@ const AboutUs = (props: IhomeProps) => {
             <img
               src="/assets/profile/13.png"
               alt="tn7-business-profile-contact"
+              width="100%"
+              loading="lazy"
             />
             <div className="absolute top-[55%] left-[18%] w-[70%] p-4">
               <ul className="text-[#9f2c0f] flex flex-col gap-[1.78em] xtext-lg font-medium">
-                <li className="pb-[3%]">0763771191 (WHATSAPP/ZALO)</li>
-                <li className="pb-[3%]">https://tn7solutions.com/</li>
-                <li className="pb-[3%]">support@tn7solutions.com</li>
-                <li className="pb-[3%]">
+                <li className="pb-[4%]">0763771191 (WHATSAPP/ZALO)</li>
+                <li className="pb-[4%]">https://tn7solutions.com/</li>
+                <li className="pb-[4%]">support@tn7solutions.com</li>
+                <li className="pb-[4%]">
                   19 Cao Thang, Ward 2, District 3, Ho Chi Minh City
                 </li>
-                <li className="pb-[3%]">
+                <li className="pb-[4%]">
                   20 Street No. 43, Binh Thuan Ward, District 7, Ho Chi Minh
                   City
                 </li>
